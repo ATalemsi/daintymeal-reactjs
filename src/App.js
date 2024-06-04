@@ -4,6 +4,7 @@ import HomePage from './components/HomePage';
 import Navbar from './components/Navbar';
 import 'slick-carousel/slick/slick.css'; // Import slick carousel CSS
 import 'slick-carousel/slick/slick-theme.css'; // Import slick carousel theme CSS
+import FilterDetaille from './components/FilterDetailles';
 
 function App() {
   useEffect(() => {
@@ -20,11 +21,19 @@ function App() {
 
     const loadScripts = async () => {
       try {
-        await loadScript('/vendor/jquery/jquery.min.js');
-        await loadScript('/vendor/bootstrap/js/bootstrap.bundle.min.js');
-        await loadScript('/vendor/slick/slick.min.js');
-        await loadScript('/vendor/sidebar/hc-offcanvas-nav.js');
-        await loadScript('/vendor/build/js/intlTelInput.min.js');
+         // Load jQuery first
+      await loadScript('/vendor/jquery/jquery.min.js');
+      
+      // Check if jQuery is loaded
+      if (typeof window.$ === 'undefined') {
+        throw new Error('jQuery did not load');
+      }
+
+      // Load other scripts sequentially
+      await loadScript('/vendor/bootstrap/js/bootstrap.bundle.min.js');
+      await loadScript('/vendor/slick/slick.min.js');
+      await loadScript('/vendor/sidebar/hc-offcanvas-nav.js');
+      await loadScript('/vendor/build/js/intlTelInput.min.js');
 
         if (window.$) {
           window.$('[data-toggle="tooltip"]').tooltip();
@@ -176,6 +185,7 @@ function App() {
     <div className="App">
       <HomePage />
       <Navbar />
+      <FilterDetaille />
     </div>
   );
 }
