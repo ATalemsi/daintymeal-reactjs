@@ -34,7 +34,7 @@ const Filter = () => {
     ));
 
     return (
-        <div className="scrolling-wrapper mx-10">
+        <div className="scrolling-wrapper">
             {englishNames}
         </div>
     );

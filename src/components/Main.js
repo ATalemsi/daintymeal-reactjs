@@ -14,6 +14,10 @@ const Main = () => {
             <Categories />
             <Filter />
             <Publicity />
+            <div className="px-3 pt-4 pb-3 title d-flex align-items-center">
+                <h6 className="m-0 font-weight-bold">Reastaurant</h6>
+                <a className="font-weight-bold ml-auto" href="most_popular.html">More <i className="feather-chevrons-right" /></a>
+            </div>
             <Restos />
             <div className="px-3 pt-3 title d-flex align-items-center">
                 <h6 className="m-0 font-weight-bold">Trending this week</h6>
