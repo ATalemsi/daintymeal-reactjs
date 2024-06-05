@@ -28,7 +28,7 @@ const Restos = () => {
                             <div className="favourite-heart position-absolute"><a href="#"><i className="feather-bookmark" /></a></div>
                             <div className="member-plan position-absolute"><span className="badge badge-danger">HOT</span></div>
                             <a href="restaurant.html">
-                                <img src={resto.image[0]} className="img-fluid item-img " style={{width: '200px', height: '100px'}}  />
+                                <img src={resto.image[0]} className="img-fluid item-img " style={{width: '280px', height: '100px'}}  />
                             </a>
                         </div>
                         <div className="p-3 position-relative">

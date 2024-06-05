@@ -248,6 +248,8 @@ h22 {
 .scrolling-wrapper, .scrolling-wrapper-flexbox {
   height: 34px;
   margin: 12px;
+  display: flex;
+  gap: 1rem;
   width: 100%;
   -webkit-overflow-scrolling: touch;
   &::-webkit-scrollbar {
@@ -258,8 +260,8 @@ h22 {
 
 .carte {
 
-  width: 180px;
-  height: 180px;
+  width: 280px;
+  height: 190px;
 
 }
 
