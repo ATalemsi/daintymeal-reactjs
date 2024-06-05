@@ -17,7 +17,7 @@ const Categories = ({ onCategorySelect }) => {
     }, []);
 
     return (
-        <div className="relative">
+        <div className="cat-slider border-bottom ml-16">
             <div className="px-1 py-3 cursor-pointer" onClick={() => onCategorySelect(null)}>
                 <div className="d-block text-center">
                     <div style={{ width: 60, height: 60, overflow: 'hidden', display: 'block', margin: '0px auto' }}>
@@ -26,7 +26,7 @@ const Categories = ({ onCategorySelect }) => {
                     <p className="m-0 small">All</p>
                 </div>
             </div>
-            <div className="cat-slider border-bottom ml-16"> {/* Adjust the margin-left based on the width of the "ALL" button */}
+             {/* Adjust the margin-left based on the width of the "ALL" button */}
                 {categories && categories.map((category, index) => (
                     <div key={index} className="cat-item px-1 py-3 cursor-pointer" onClick={() => onCategorySelect(category.name)}>
                         <div className="d-block text-center">
@@ -38,7 +38,6 @@ const Categories = ({ onCategorySelect }) => {
                     </div>
                 ))}
             </div>
-        </div>
     );
 };
 
