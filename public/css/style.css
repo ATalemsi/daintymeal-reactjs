@@ -215,8 +215,8 @@ h22 {
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
-  -ms-overflow-style: none; /* for Internet Explorer, Edge */
-  scrollbar-width: none; /* for Firefox */
+  -ms-overflow-style: none; 
+  scrollbar-width: none;
   
   .card {
     display: inline-block;
