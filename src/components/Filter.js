@@ -27,10 +27,8 @@ const Filter = () => {
     return (
         <div className="scrolling-wrapper">
             {filters.length > 0 && filters[0].en.map((item, index) => (
-                <div key={index} className="card rounded-lg mx-2 w-24 h-7">
-                    <center>
-                        <h22>{item.name}</h22>
-                    </center>
+                <div key={index} className="cardfilter bg-gray-300 rounded-lg mx-2 w-38 h-7 px-9 ">
+                        <h22 className='text-x5'>{item.name}</h22>
                 </div>
             ))}
         </div>

@@ -1,7 +1,4 @@
-// src/components/Main.js
 import React from 'react';
-
-
 const Footer = () => {
     return (
         <div className="osahan-menu-fotter border rounded shadow fixed-bottom bg-white m-3 px-3 py-2 text-center">

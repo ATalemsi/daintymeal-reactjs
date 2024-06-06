@@ -224,6 +224,19 @@ h22 {
 	}
 }
 
+.cardfilter {
+	position: relative;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	word-wrap: break-word;
+	background-color: #fff;
+	background-clip: border-box;
+	border: 1px solid rgba(0, 0, 0, 0.125);
+	border-radius: 0.25rem;
+  }
+
 .scrolling-wrapper::-webkit-scrollbar {
 	display: none;
 }
