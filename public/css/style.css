@@ -649,23 +649,17 @@ p {
 
 .osahan-menu-fotter {
 	padding: 0 1rem;
-	/* Adjust padding */
 	border-top: 1px solid #dee2e6;
 	text-align: center;
-	/* Align center */
 	position: fixed;
-	left: 50%;
-	transform: translateX(-50%);
-	
-	/* Adjust bottom spacing */
+	left: 48%;
+	transform: translateX(-48%);
+	width: 50%;
 	z-index: 999;
-	/* Ensure it's above other content */
 }
 
 .osahan-menu-fotter .row {
 	margin: 0;
-	justify-content: center;
-	/* Align items center */
 }
 
 .osahan-menu-fotter .col {
@@ -674,11 +668,8 @@ p {
 
 .osahan-menu-fotter .col a {
 	padding: 8px 12px;
-	/* Increase padding for larger buttons */
 	display: inline-block;
-	/* Display inline */
 	font-size: 10px !important;
-	/* Increase font size */
 	text-transform: uppercase;
 	border-radius: 10px;
 }
@@ -703,20 +694,17 @@ p {
 
 .osahan-menu-logo img {
 	width: 50px;
-	/* Increase logo size */
 	margin: -14px 0 0 0;
-	/* Adjust logo margin */
 	min-width: 50px;
 	max-width: 50px;
 }
 
 @media (max-width: 768px) {
 	.osahan-menu-fotter {
-		padding: 0;
+		width: 94%;
 		left: 0;
 		transform: none;
-		width: 100%;
-	}
+	  }
 
 	.osahan-menu-fotter .row {
 		justify-content: space-around;
