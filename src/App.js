@@ -2,8 +2,8 @@ import './App.css';
 import React, { useEffect } from 'react';
 import HomePage from './components/HomePage';
 import Navbar from './components/Navbar';
-import 'slick-carousel/slick/slick.css'; // Import slick carousel CSS
-import 'slick-carousel/slick/slick-theme.css'; // Import slick carousel theme CSS
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css'; 
 import FilterDetaille from './components/FilterDetailles';
 
 function App() {
