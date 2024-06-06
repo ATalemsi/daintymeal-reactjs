@@ -24,17 +24,16 @@ const Filter = () => {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message}</p>;
 
-    // Extract English names
-    const englishNames = filters.length > 0 && filters[0].en.map((item, index) => (
-        <div key={index} className="inline-block border-2 border-gray-500 rounded-lg w-20 h-8 bg-gray-200 flex items-center justify-center ">
-            <h2 className="m-0 font-weight-bold text-center text-sm">{item.name}</h2>
+    return (
+        <div className="scrolling-wrapper">
+            {filters.length > 0 && filters[0].en.map((item, index) => (
+                <div key={index} className="card rounded-lg mx-2 w-24 h-7">
+                    <center>
+                        <h22>{item.name}</h22>
+                    </center>
+                </div>
+            ))}
         </div>
-    ));
-
-    return ( 
-            <div className="scrolling-wrapper flex justify-center">
-                {englishNames}
-            </div>
     );
 };
 
