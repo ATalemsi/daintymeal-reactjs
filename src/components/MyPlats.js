@@ -24,11 +24,6 @@ const Myplats = () => {
                     <div key={index} className="px-2 py-2">
                         <div className="list-card bg-white h-full rounded overflow-hidden relative shadow-lg">
                             <div className="list-card-image relative">
-                                <div className="star absolute top-2 left-2">
-                                    <span className="badge badge-success">
-                                        <i className="feather-star" />{myplat.rating}
-                                    </span>
-                                </div>
                                 <div className="favourite-heart absolute top-2 right-2">
                                     <a href="#"><i className="feather-bookmark" /></a>
                                 </div>

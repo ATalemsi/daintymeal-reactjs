@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import RestoInfo from "./RestoInfo";
+import RestoInfo from "../components/restos/RestoInfo";
 
 
-const Resto= () => {
+const RestoShow = () => {
     return (
         <div className="osahan-restaurant">
             <RestoInfo />
@@ -13,4 +13,4 @@ const Resto= () => {
 
 };
 
-export default Resto;
+export default RestoShow;

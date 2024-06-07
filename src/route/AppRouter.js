@@ -6,6 +6,7 @@ import Profile from '../pages/Profile';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import FilterDetaille from '../components/FilterDetailles';
+import RestoShow from '../pages/RestoShow';
 
 const AppRouter = () => {
     return (
@@ -15,6 +16,7 @@ const AppRouter = () => {
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/profile" element={<Profile />} />
+                    <Route path="/restaurant" element={<RestoShow />} /> {/* Add the new route */}
                     {/* Add other routes if needed */}
                 </Routes>
                 <FilterDetaille />
