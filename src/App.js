@@ -1,4 +1,4 @@
-import './App.css';
+
 import React, { useEffect } from 'react';
 import AppRouter from './route/AppRouter';
 import 'slick-carousel/slick/slick.css';
