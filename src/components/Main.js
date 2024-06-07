@@ -95,9 +95,6 @@ const Main = () => {
                     </div>
                 </div>
             </div>
-
-
-
             <div className="px-3 pt-4 pb-3 title d-flex align-items-center">
                 <h6 className="m-0 font-weight-bold text-2xl">Most sales</h6>
                 <a className="font-weight-bold ml-auto" href="most_popular.html">View all<i className="feather-chevrons-right" /></a>

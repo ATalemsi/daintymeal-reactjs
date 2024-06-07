@@ -1,10 +1,8 @@
 import './App.css';
 import React, { useEffect } from 'react';
-import HomePage from './components/HomePage';
-import Navbar from './components/Navbar';
+import AppRouter from './route/AppRouter';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css'; 
-import FilterDetaille from './components/FilterDetailles';
 
 function App() {
   useEffect(() => {
@@ -183,9 +181,7 @@ function App() {
   }, []);
   return (
     <div className="App">
-      <HomePage />
-      <Navbar />
-      <FilterDetaille />
+      <AppRouter />
     </div>
   );
 }
