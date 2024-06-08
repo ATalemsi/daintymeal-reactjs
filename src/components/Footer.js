@@ -18,7 +18,7 @@ const Footer = () => {
                 </div>
                 <div className="col osahan-menu-logo">
                     <Link to="/checkout" className="text-white small font-weight-bold text-decoration-none">
-                        <img src="img/nav-logo.png" className="img-fluid" />
+                        <img src="https://res.cloudinary.com/dz4pww2qv/image/upload/v1717849293/ufimygjz6fokrysvbrp6.png" className="img-fluid" />
                     </Link>
                 </div>
                 <div className="col">

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Restos = ({ selectedCategory }) => {
     const [restos, setRestos] = useState([]);
@@ -36,7 +37,11 @@ const Restos = ({ selectedCategory }) => {
                             </div>
                             <div className="p-3 position-relative">
                                 <div className="list-card-body">
-                                    <h6 className="mb-1"><a href="restaurant.html" className="text-black">{resto.name}</a></h6>
+                                    <h6 className="mb-1">
+                                        <Link to={`/restaurant/${resto.resto_code}`} className="text-black">
+                                            {resto.name}
+                                        </Link>
+                                    </h6>
                                     <p className="text-gray mb-3"><span className="text-gray-500">{resto.address[0].country}</span>,{resto.address[0].city},{resto.address[0].street}</p>
                                     <p className="text-gray mb-3 time"><span className="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"><i className="feather-clock" />{resto.workingTime}</span> <span className="float-right text-black-50"> $350 FOR TWO</span></p>
                                 </div>
