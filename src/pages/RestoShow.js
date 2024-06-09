@@ -6,8 +6,6 @@ const RestoShow = () => {
     return (
         <div className="osahan-restaurant">
             <RestoInfo />
-              
-
         </div>
     );
 
