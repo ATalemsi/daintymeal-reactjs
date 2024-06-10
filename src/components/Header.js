@@ -1,18 +1,21 @@
-// src/components/Header.js
 import React from 'react';
 
-const Header = () => {
+const Header = ({ onLanguageChange }) => {
   return (
     <div className="shadow p-3 homepage-osahan-header bg-white">
       <div className="title d-flex align-items-center">
         <div className="mr-auto">
           <a className="text-dark d-flex align-items-center" href="location.html">
             <i className="feather-map-pin fs-18 mr-2" />
-            <h6 className="m-0 border-dashed-bottom">Casablanca, Sidi Maârouf 20100
-            </h6>
+            <h6 className="m-0 border-dashed-bottom">Casablanca, Sidi Maârouf 20100</h6>
           </a>
         </div>
         <div className="ml-auto d-flex align-items-center">
+          {/* Language selection buttons */}
+          <button className="btn btn-link mx-2 text-dark" onClick={() => onLanguageChange('en')}>English</button>
+          <button className="btn btn-link mx-2 text-dark" onClick={() => onLanguageChange('ar')}>Arabic</button>
+          <button className="btn btn-link mx-2 text-dark" onClick={() => onLanguageChange('fr')}>French</button>
+          {/* Add other language buttons here */}
           <a className="text-dark mx-2 fs-18 top-nav-btn-cart position-relative" data-toggle="modal" data-target="#exampleModal" href="#"><i className="feather-filter" /></a>
           <a className="toggle ml-2 text-dark hc-nav-trigger hc-nav-1" href="#" role="button" aria-controls="hc-nav-1">
             <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} fill="currentColor" className="bi bi-list" viewBox="0 0 16 16">
@@ -28,7 +31,6 @@ const Header = () => {
         <input type="text" className="shadow-none border-0 form-control pl-0" placeholder="Search for restaurants or dishes" aria-label aria-describedby="basic-addon1" />
       </div>
     </div>
-
   );
 };
 

@@ -8,7 +8,7 @@ import TrendingPlat from './TrendingPlat';
 import MostSales from './MostSales';
 import Myplats from './MyPlats';
 
-const Main = () => {
+const Main = ({ selectedLanguage }) => {
     const [selectedCategory, setSelectedCategory] = useState(null);
 
     const handleCategorySelect = (category) => {
@@ -17,7 +17,7 @@ const Main = () => {
 
     return (
         <div className="osahan-main">
-            <Categories onCategorySelect={handleCategorySelect} />
+            <Categories selectedLanguage={selectedLanguage} onCategorySelect={handleCategorySelect} />
             <Filter />
             <Publicity />
             <div className="px-3 pt-4 pb-3 title d-flex align-items-center">

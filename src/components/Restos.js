@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const Restos = ({ selectedCategory }) => {
+const Restos = ({ selectedCategory, selectedLanguage }) => {
     const [restos, setRestos] = useState([]);
 
     useEffect(() => {
@@ -17,8 +17,22 @@ const Restos = ({ selectedCategory }) => {
         fetchRestos();
     }, []);
 
+    // Function to translate category names based on the selected language
+    const translateCategory = (resto, selectedLanguage) => {
+        let translatedName = resto.name; 
+        
+        if (selectedLanguage && selectedLanguage in resto) {
+            translatedName = resto.selectedLanguage.name || resto.name;
+        }
+        
+        return translatedName;
+    };
+    // Filter restos based on selected category
     const filteredRestos = selectedCategory
-        ? restos.filter(resto => resto.categories[0].name && resto.categories[0].name.includes(selectedCategory))
+        ? restos.filter(resto => {
+            const translatedCategory = translateCategory(resto.categories[0], selectedLanguage); // Translate category
+            return translatedCategory === selectedCategory;
+        })
         : restos;
 
     return (
@@ -39,7 +53,7 @@ const Restos = ({ selectedCategory }) => {
                                 <div className="list-card-body">
                                     <h6 className="mb-1">
                                         <Link to={`/restaurant/${resto.resto_code}`} className="text-black">
-                                            {resto.name}
+                                            {translateCategory(resto, selectedLanguage)} {/* Translate resto name */}
                                         </Link>
                                     </h6>
                                     <p className="text-gray mb-3"><span className="text-gray-500">{resto.address[0].country}</span>,{resto.address[0].city},{resto.address[0].street}</p>
