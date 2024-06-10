@@ -4,6 +4,7 @@ import AppRouter from './route/AppRouter';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css'; 
 
+
 function App() {
   useEffect(() => {
     const loadScript = (src) => {

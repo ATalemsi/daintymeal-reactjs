@@ -4,6 +4,8 @@ import PaymentCard from '../components/profile/PaymentCard';
 import AdressDetailles from '../components/profile/AdressDetailles';
 import HistoricTrans from '../components/profile/HistoricTrans';
 import Navbar from '../components/Navbar';
+import Footer from "../components/Footer";
+
 
 
 const Profile = () => {
@@ -104,8 +106,8 @@ const Profile = () => {
             <PaymentCard />
             <AdressDetailles />
             <HistoricTrans />
-
             <Navbar />
+            <Footer />
         </>
 
     );

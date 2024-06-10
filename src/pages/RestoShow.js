@@ -2,8 +2,7 @@ import React from "react";
 import RestoInfo from "../components/restos/RestoInfo";
 import DetailsMenu from "../components/restos/DetailsMenu";
 import Navbar from '../components/Navbar';
-import Review from "../components/restos/Review";
-
+import Footer from "../components/Footer";
 
 const RestoShow = () => {
     return (
@@ -11,7 +10,7 @@ const RestoShow = () => {
             <RestoInfo />
             <DetailsMenu />            
             <Navbar />
-        </div>
+                    </div>
     );
 
 };

@@ -3,7 +3,6 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from '../pages/HomePage';
 import Profile from '../pages/Profile';
-import Footer from '../components/Footer';
 import FilterDetaille from '../components/FilterDetailles';
 import RestoShow from '../pages/RestoShow';
 
@@ -19,7 +18,7 @@ const AppRouter = () => {
                     {/* Add other routes if needed */}
                 </Routes>
                 <FilterDetaille />
-                <Footer />
+                
             </div>
         </Router>
     );

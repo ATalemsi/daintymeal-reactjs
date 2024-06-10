@@ -1,17 +1,18 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 
 const RestoHeader = () => {
     return (
         <div className="p-3 osahan-inner-header bg-primary">
             <div className="d-flex align-items-center">
-                <a className="font-weight-bold text-white text-back text-decoration-none d-flex" href="home.html">
+                <Link className="font-weight-bold text-white text-back text-decoration-none d-flex" to="/">
                     <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} fill="currentColor" className="back-page bi bi-chevron-left" viewBox="0 0 16 16">
                         <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z">
                         </path>
                     </svg>
                     <span className="pl-2">Back</span>
-                </a>
+                </Link>
                 <div className="ml-auto d-flex align-items-center">
                     <a className="text-white mx-2 top-nav-btn top-nav-btn-cart fs-18 position-relative" href="#ratings-and-reviews"><i className="feather-message-square" /> <span className="border">3</span></a>
                     <a className="text-white mx-2 top-nav-btn top-nav-btn-cart fs-18 position-relative" href="#ratings-and-reviews"><i className="feather-star" /></a>
