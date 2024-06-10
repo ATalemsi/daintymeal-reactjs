@@ -3,6 +3,7 @@ import ProfilHeader from '../components/profile/Profilheader';
 import PaymentCard from '../components/profile/PaymentCard';
 import AdressDetailles from '../components/profile/AdressDetailles';
 import HistoricTrans from '../components/profile/HistoricTrans';
+import Navbar from '../components/Navbar';
 
 
 const Profile = () => {
@@ -103,6 +104,8 @@ const Profile = () => {
             <PaymentCard />
             <AdressDetailles />
             <HistoricTrans />
+
+            <Navbar />
         </>
 
     );
