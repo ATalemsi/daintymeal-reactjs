@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Slider from 'react-slick';
 
 const Restos = ({ selectedCategory, selectedLanguage }) => {
     const [restos, setRestos] = useState([]);
@@ -17,23 +18,28 @@ const Restos = ({ selectedCategory, selectedLanguage }) => {
         fetchRestos();
     }, []);
 
-    // Function to translate category names based on the selected language
     const translateCategory = (resto, selectedLanguage) => {
-        let translatedName = resto.name; 
-        
+        let translatedName = resto.name;
         if (selectedLanguage && selectedLanguage in resto) {
             translatedName = resto.selectedLanguage.name || resto.name;
         }
-        
         return translatedName;
     };
-    // Filter restos based on selected category
+
     const filteredRestos = selectedCategory
         ? restos.filter(resto => {
-            const translatedCategory = translateCategory(resto.categories[0], selectedLanguage); // Translate category
+            const translatedCategory = translateCategory(resto.categories[0], selectedLanguage);
             return translatedCategory === selectedCategory;
         })
         : restos;
+
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+    };
 
     return (
         <div className="scrolling-wrapper2">
@@ -45,22 +51,26 @@ const Restos = ({ selectedCategory, selectedLanguage }) => {
                                 <div className="star position-absolute"><span className="badge badge-success"><i className="feather-star" />{resto.rating}</span></div>
                                 <div className="favourite-heart position-absolute"><a href="#"><i className="feather-bookmark" /></a></div>
                                 <div className="member-plan position-absolute"><span className="badge badge-danger">HOT</span></div>
-                                <a href="restaurant.html">
-                                    <img src={resto.image[0]} className="img-fluid item-img" style={{ width: '280px', height: '100px' }} />
-                                </a>
+                                <Slider {...settings}>
+                                    {resto.image.map((imgSrc, imgIndex) => (
+                                        <div key={imgIndex}>
+                                            <img src={imgSrc} className="img-fluid item-img" style={{ width: '280px', height: '100px' }} alt="Restaurant" />
+                                        </div>
+                                    ))}
+                                </Slider>
                             </div>
                             <div className="p-3 position-relative">
                                 <div className="list-card-body">
                                     <h6 className="mb-1">
                                         <Link to={`/restaurant/${resto.resto_code}`} className="text-black">
-                                            {translateCategory(resto, selectedLanguage)} {/* Translate resto name */}
+                                            {translateCategory(resto, selectedLanguage)}
                                         </Link>
                                     </h6>
-                                    <p className="text-gray mb-3"><span className="text-gray-500">{resto.address[0].country}</span>,{resto.address[0].city},{resto.address[0].street}</p>
-                                    <p className="text-gray mb-3 time"><span className="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"><i className="feather-clock" />{resto.workingTime}</span> <span className="float-right text-black-50"> $350 FOR TWO</span></p>
+                                    <p className="text-gray mb-3"><span className="text-gray-500">{resto.address[0].country}</span>, {resto.address[0].city}, {resto.address[0].street}</p>
+                                    <p className="text-gray mb-3 time"><span className="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"><i className="feather-clock" />{resto.workingTime}</span> <span className="float-right text-black-50">$350 FOR TWO</span></p>
                                 </div>
                                 <div className="list-card-badge d-flex align-items-center">
-                                    <span className="badge badge-danger mr-2">OFFER</span> <small> Use Coupon</small>
+                                    <span className="badge badge-danger mr-2">OFFER</span> <small>Use Coupon</small>
                                 </div>
                             </div>
                         </div>
