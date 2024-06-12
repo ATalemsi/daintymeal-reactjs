@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 
-Modal.setAppElement('#root'); // Make sure to set the root element for accessibility
+Modal.setAppElement('#root');
 
 const Header = ({ onLanguageChange }) => {
   const [locationName, setLocationName] = useState('Location not available');
   const [showModal, setShowModal] = useState(false);
   const [permissionGranted, setPermissionGranted] = useState(false);
+  const { t,i18n } = useTranslation();
 
   const customStyles = {
     content: {
@@ -46,6 +48,14 @@ const Header = ({ onLanguageChange }) => {
       setLocationName('Geolocation not supported by this browser');
     }
   }, []);
+
+  const handelchangeLanguage = (lng) => {
+    console.log('====================================');
+    console.log(lng);
+    console.log('====================================');
+    i18n.changeLanguage(lng);
+    onLanguageChange(lng);
+  }
 
   const fetchLocationName = async (latitude, longitude) => {
     try {
@@ -101,7 +111,7 @@ const Header = ({ onLanguageChange }) => {
         <button onClick={handleAllowLocation} className="btn btn-primary">Allow</button>
         <button onClick={handleDenyLocation} className="btn btn-secondary">Deny</button>
       </Modal>
-      
+
       <div className="title d-flex align-items-center">
         <div className="mr-auto">
           <a className="text-dark d-flex align-items-center" href="#">
@@ -110,10 +120,9 @@ const Header = ({ onLanguageChange }) => {
           </a>
         </div>
         <div className="ml-auto d-flex align-items-center">
-          <button className="btn bg-pink-600 rounded-lg btn-sm mx-1 text-gray-200" onClick={() => onLanguageChange('en')}>EN</button>
-          <button className="btn bg-pink-600 rounded-lg btn-sm mx-1 text-gray-200" onClick={() => onLanguageChange('ar')}>AR</button>
-          <button className="btn bg-pink-600 rounded-lg btn-sm mx-1 text-gray-200" onClick={() => onLanguageChange('fr')}>FR</button>
-          <a className="text-dark mx-2 fs-18 top-nav-btn-cart position-relative" data-toggle="modal" data-target="#exampleModal" href="#"><i className="feather-filter" /></a>
+          <button className="btn border-2 border-pink-600 text-pink-600 rounded-lg btn-sm mx-1 text-gray-200" onClick={() => { handelchangeLanguage('en') }}>EN</button>
+          <button className="btn border-2 border-pink-600 text-pink-600 rounded-lg btn-sm mx-1 text-gray-200" onClick={() => { handelchangeLanguage('ar') }}>AR</button>
+          <button className="btn border-2 border-pink-600 text-pink-600 rounded-lg btn-sm mx-1 text-gray-200" onClick={() => { handelchangeLanguage('fr') }}>FR</button>
           <a className="toggle ml-2 text-dark hc-nav-trigger hc-nav-1" href="#" role="button" aria-controls="hc-nav-1">
             <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} fill="currentColor" className="bi bi-list" viewBox="0 0 16 16">
               <path fillRule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
@@ -125,7 +134,7 @@ const Header = ({ onLanguageChange }) => {
         <div className="input-group-prepend">
           <button className="border-0 btn btn-outline-secondary text-primary bg-white btn-block"><i className="feather-search" /></button>
         </div>
-        <input type="text" className="shadow-none border-0 form-control pl-0" placeholder="Search for restaurants or dishes" aria-label aria-describedby="basic-addon1" />
+        <input type="text" className="shadow-none border-0 form-control pl-0" placeholder={t('searchPlaceholder')} aria-label aria-describedby="basic-addon1" />
       </div>
     </div>
   );

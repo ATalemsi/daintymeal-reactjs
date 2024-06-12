@@ -1,19 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import i18n from '../i18n';
+
 const Footer = () => {
+    const { t } = useTranslation();
+    const isRTL = i18n.language === 'ar';
     return (
-        <div className="osahan-menu-fotter border rounded shadow fixed-bottom bg-white m-3 px-3 py-2 text-center">
+        <div className={`osahan-menu-fotter border rounded shadow fixed-bottom bg-white m-3 px-3 py-2 text-center ${isRTL ? 'text-right' : 'text-left'}`}>
             <div className="row">
                 <div className="col selected">
                     <Link to="/" className="text-danger small font-weight-bold text-decoration-none">
                         <p className="h4 m-0"><i className="feather-home text-danger" /></p>
-                        Home
+                        {t('home')}
                     </Link>
                 </div>
                 <div className="col">
                     <Link to="/most_popular" className="text-dark small font-weight-bold text-decoration-none">
                         <p className="h4 m-0"><i className="feather-map-pin" /></p>
-                        Trending
+                        {t('trending')}
                     </Link>
                 </div>
                 <div className="col osahan-menu-logo">
@@ -24,13 +29,13 @@ const Footer = () => {
                 <div className="col">
                     <Link to="/favorites" className="text-dark small font-weight-bold text-decoration-none">
                         <p className="h4 m-0"><i className="feather-heart" /></p>
-                        Favorites
+                        {t('favorites')}
                     </Link>
                 </div>
                 <div className="col">
                     <Link to="/profile" className="text-dark small font-weight-bold text-decoration-none">
                         <p className="h4 m-0"><i className="feather-user" /></p>
-                        Profile
+                        {t('profile')}
                     </Link>
                 </div>
             </div>

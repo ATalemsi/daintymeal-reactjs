@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
+
 
 
 const MostSales = () => {
     const [mostsaleplats, setMostSalesPlats] = useState([]);
+    const { t } = useTranslation();
 
     useEffect(() => {
         const fetchMostSalesPlats = async () => {
@@ -37,15 +40,15 @@ const MostSales = () => {
                                     <h6 className="mb-1"><a href="restaurant.html" className="text-black">{mostsaleplat.name}
                                     </a>
                                     </h6>
-                                    <p className="text-gray mb-3 time"><span className="bg-light text-dark font-bold rounded-sm pl-2 pb-1 pt-1 pr-2">Price: </span> {mostsaleplat.plat_price} {mostsaleplat.currency} <span className="float-right text-black-50"> $500 FOR TWO</span></p>
+                                    <p className="text-gray mb-3 time"><span className="bg-light text-dark font-bold rounded-sm pl-2 pb-1 pt-1 pr-2"> </span> {mostsaleplat.plat_price} {mostsaleplat.currency} <span className="float-right text-black-50"></span>  :{t('price')}</p>
                                 </div>
                                 <div className="list-card-badge d-flex align-items-center">
                                 {mostsaleplat.discount ? (
-                                        <span className="badge badge-danger mr-2">OFFER</span>
+                                        <span className="badge badge-danger mr-2"> {t('offer')}</span>
                                     ) : (
-                                        <span className="badge badge-secondary mr-2">NO OFFER</span>
+                                        <span className="badge badge-secondary mr-2">{t('noOffer')}</span>
                                     )}
-                                    <small>{mostsaleplat.discount ? '60% NEW50' : 'No Discount'}</small>
+                                    <small>{mostsaleplat.discount ? '-60% ' : 'No Discount'}</small>
                                 </div>
                             </div>
                         </div>

@@ -1,0 +1,21 @@
+{
+    "welcome": "Welcome",
+    "searchPlaceholder": "Search for restaurants or dishes",
+    "restaurant": "Restaurant",
+    "myPlats": "My Plats",
+    "offer": "OFFER",
+    "trendingPlat": "Trending Plat",
+    "popularRestaurant": "Popular Restaurant",
+    "timeWork": "Time Work",
+    "mostSales": "Most sales",
+    "noOffer": "NO OFFER",
+    "hot":"HOT",
+    "Viewall": "View all",
+    "home":"HOME",
+    "trending":"TRENDING",
+    "favorites":"FAVORITES",
+    "profile":"PROFILE",
+    "price":"Price",
+    "address":"Adresse"
+    
+}

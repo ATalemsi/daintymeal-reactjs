@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
+import './slick-custom.css';
+import { useTranslation } from 'react-i18next';
 
 const Restos = ({ selectedCategory, selectedLanguage }) => {
     const [restos, setRestos] = useState([]);
+    const { t, i18n } = useTranslation();
 
     useEffect(() => {
         const fetchRestos = async () => {
@@ -18,18 +21,10 @@ const Restos = ({ selectedCategory, selectedLanguage }) => {
         fetchRestos();
     }, []);
 
-    const translateCategory = (resto, selectedLanguage) => {
-        let translatedName = resto.name;
-        if (selectedLanguage && selectedLanguage in resto) {
-            translatedName = resto.selectedLanguage.name || resto.name;
-        }
-        return translatedName;
-    };
 
     const filteredRestos = selectedCategory
         ? restos.filter(resto => {
-            const translatedCategory = translateCategory(resto.categories[0], selectedLanguage);
-            return translatedCategory === selectedCategory;
+            return resto.categories.some(category => category.name === selectedCategory);
         })
         : restos;
 
@@ -41,8 +36,10 @@ const Restos = ({ selectedCategory, selectedLanguage }) => {
         slidesToScroll: 1,
     };
 
+    const direction = i18n.dir();
+
     return (
-        <div className="scrolling-wrapper2">
+        <div className="scrolling-wrapper2" style={{ direction }}>
             {filteredRestos && filteredRestos.map((resto, index) => (
                 <div key={index} className="carte rounded-lg">
                     <div className="osahan-slider-item py-3 px-1">
@@ -50,11 +47,10 @@ const Restos = ({ selectedCategory, selectedLanguage }) => {
                             <div className="list-card-image">
                                 <div className="star position-absolute"><span className="badge badge-success"><i className="feather-star" />{resto.rating}</span></div>
                                 <div className="favourite-heart position-absolute"><a href="#"><i className="feather-bookmark" /></a></div>
-                                <div className="member-plan position-absolute"><span className="badge badge-danger">HOT</span></div>
                                 <Slider {...settings}>
                                     {resto.image.map((imgSrc, imgIndex) => (
                                         <div key={imgIndex}>
-                                            <img src={imgSrc} className="img-fluid item-img" style={{ width: '280px', height: '100px' }} alt="Restaurant" />
+                                            <img src={imgSrc} className="img-fluid item-img" style={{ width: '300px', height: '130px' }} alt="Restaurant" />
                                         </div>
                                     ))}
                                 </Slider>
@@ -63,14 +59,14 @@ const Restos = ({ selectedCategory, selectedLanguage }) => {
                                 <div className="list-card-body">
                                     <h6 className="mb-1">
                                         <Link to={`/restaurant/${resto.resto_code}`} className="text-black">
-                                            {translateCategory(resto, selectedLanguage)}
+                                            {resto.name}
                                         </Link>
                                     </h6>
                                     <p className="text-gray mb-3"><span className="text-gray-500">{resto.address[0].country}</span>, {resto.address[0].city}, {resto.address[0].street}</p>
-                                    <p className="text-gray mb-3 time"><span className="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"><i className="feather-clock" />{resto.workingTime}</span> <span className="float-right text-black-50">$350 FOR TWO</span></p>
+                                    <p className="text-gray text-xs mb-3 time"><span className="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"> {resto.workingTime}</span> : {t('timeWork')} </p>
                                 </div>
                                 <div className="list-card-badge d-flex align-items-center">
-                                    <span className="badge badge-danger mr-2">OFFER</span> <small>Use Coupon</small>
+                                    <span className="badge badge-danger mr-2"> {t('offer')} </span> 
                                 </div>
                             </div>
                         </div>

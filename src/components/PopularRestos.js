@@ -2,10 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import StarRating from './startRating/StarRating';
+import { useTranslation } from 'react-i18next';
+
 
 
 const PopularRestos = () => {
     const [popularestos, setPopularRestos] = useState([]);
+    const { t } = useTranslation();
 
     useEffect(() => {
         const fetchPopularRestos = async () => {
@@ -30,7 +33,7 @@ const PopularRestos = () => {
                                     <a href="#"><i className="feather-bookmark" /></a>
                                 </div>
                                 <div className="member-plan absolute bottom-2 left-2">
-                                    <span className="badge badge-danger">HOT</span>
+                                    <span className="badge badge-danger">{t('hot')}</span>
                                 </div>
                                 <a href="restaurant.html">
                                     <div className="w-full h-48 overflow-hidden">
@@ -45,10 +48,10 @@ const PopularRestos = () => {
                                     </h6>
                                     <p className="text-gray mb-1 text-lg">{popularesto.categories[0].name}</p>
                                     <StarRating rating={popularesto.rating} />
-                                    <p className="text-gray mb-1 text-sm font-bold">Address: {popularesto.address[0].street} ,{popularesto.address[0].city}, {popularesto.address[0].country}</p> {/* Add the price here */}
+                                    <p className="text-gray mb-1 text-sm font-bold">{popularesto.address[0].street} ,{popularesto.address[0].city}, {popularesto.address[0].country}</p>
                                 </div>
                                 <div className="list-card-badge flex items-center">        
-                                        <span className="badge badge-danger mr-2">Time Work</span>                           
+                                        <span className="badge badge-danger mr-2"> {t('timeWork')} </span>                           
                                         <span className="badge badge-secondary mx-2">{popularesto.workingTime}</span>
                                 </div>
                             </div>

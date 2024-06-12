@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import StarRating from './startRating/StarRating';
+import { useTranslation } from 'react-i18next';
+
 
 const Myplats = () => {
     const [myplats, setMyplats] = useState([]);
+    const { t } = useTranslation();
 
     useEffect(() => {
         const fetchTwoPlats = async () => {
@@ -28,7 +31,7 @@ const Myplats = () => {
                                     <a href="#"><i className="feather-bookmark" /></a>
                                 </div>
                                 <div className="member-plan absolute bottom-2 left-2">
-                                    <span className="badge badge-danger">HOT</span>
+                                    <span className="badge badge-danger">{t('hot')}</span>
                                 </div>
                                 <a href="restaurant.html">
                                     <div className="w-full h-48 overflow-hidden">
@@ -43,15 +46,15 @@ const Myplats = () => {
                                     </h6>
                                     <p className="text-gray mb-1 text-lg">{myplat.category[0].name}</p>
                                     <StarRating rating={myplat.rating} />
-                                    <p className="text-gray mb-1 text-sm font-bold">Price: {myplat.plat_price} {myplat.currency}</p> {/* Add the price here */}
+                                    <p className="text-gray mb-1 text-sm font-bold">{myplat.plat_price} {myplat.currency}</p> 
                                 </div>
                                 <div className="list-card-badge flex items-center">
                                     {myplat.discount ? (
-                                        <span className="badge badge-danger mr-2">OFFER</span>
+                                        <span className="badge badge-danger mr-2">{t('offer')}</span>
                                     ) : (
-                                        <span className="badge badge-secondary mr-2">NO OFFER</span>
+                                        <span className="badge badge-secondary mr-2">{t('noOffer')}</span>
                                     )}
-                                    <small>{myplat.discount ? '60% NEW50' : 'No Discount'}</small>
+                                    <small>{myplat.discount ? '-60% ' : ''}</small>
                                 </div>
                             </div>
                         </div>
