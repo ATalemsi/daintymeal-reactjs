@@ -3,10 +3,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import StarRating from './startRating/StarRating';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 
 
-const PopularRestos = () => {
+const PopularRestos = ({ selectedLanguage }) => {
     const [popularestos, setPopularRestos] = useState([]);
     const { t } = useTranslation();
 
@@ -21,6 +22,27 @@ const PopularRestos = () => {
         };
         fetchPopularRestos();
     }, []);
+
+    const getName = (popularesto) => {
+        switch (selectedLanguage) {
+            case 'ar':
+                return popularesto.ar.name;
+            case 'fr':
+                return popularesto.fr.name;
+            default:
+                return popularesto.en.name;
+        }
+    };
+    const getAddress = (address) => {
+        switch (selectedLanguage) {
+            case 'ar':
+                return `${address.translations.ar.street}, ${address.translations.ar.city}, ${address.translations.ar.state}, ${address.translations.ar.country}`;
+            case 'fr':
+                return `${address.translations.fr.street}, ${address.translations.fr.city}, ${address.translations.fr.state}, ${address.translations.fr.country}`;
+            default:
+                return `${address.street}, ${address.city}, ${address.state}, ${address.country}`;
+        }
+    };
 
     return (
         <div className="most_popular px-3">
@@ -37,22 +59,23 @@ const PopularRestos = () => {
                                 </div>
                                 <a href="restaurant.html">
                                     <div className="w-full h-48 overflow-hidden">
-                                        <img src={popularesto.image[0]} alt={popularesto.en.name} className="img-fluid w-full h-full object-cover" />
+                                        <img src={popularesto.image[0]} alt={getName(popularesto)} className="img-fluid w-full h-full object-cover" />
                                     </div>
                                 </a>
                             </div>
                             <div className="p-3 relative">
                                 <div className="list-card-body">
                                     <h6 className="mb-1 text-3xl text-gray-600">
-                                        <a href="restaurant.html">{popularesto.en.name}</a>
+                                        <Link to={`/restaurant/${popularesto.resto_code}`} className="text-black">
+                                            {getName(popularesto)}
+                                        </Link>
                                     </h6>
-                                    <p className="text-gray mb-1 text-lg">{popularesto.categories[0].name}</p>
                                     <StarRating rating={popularesto.rating} />
-                                    <p className="text-gray mb-1 text-sm font-bold">{popularesto.address[0].street} ,{popularesto.address[0].city}, {popularesto.address[0].country}</p>
+                                    <p className="text-gray mb-1 text-sm font-bold">{getAddress(popularesto.address[0])}</p>
                                 </div>
-                                <div className="list-card-badge flex items-center">        
-                                        <span className="badge badge-danger mr-2"> {t('timeWork')} </span>                           
-                                        <span className="badge badge-secondary mx-2">{popularesto.workingTime}</span>
+                                <div className="list-card-badge flex items-center">
+                                    <span className="badge badge-danger mr-2"> {t('timeWork')} </span>
+                                    <span className="badge badge-secondary mx-2">{popularesto.workingTime}</span>
                                 </div>
                             </div>
                         </div>

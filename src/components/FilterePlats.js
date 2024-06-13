@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
+import StarRating from './startRating/StarRating';
 import './slick-custom.css';
 
 const FilteredPlats = ({ selectedCategory }) => {
@@ -10,7 +11,7 @@ const FilteredPlats = ({ selectedCategory }) => {
     useEffect(() => {
         const fetchPlats = async () => {
             try {
-                const response = await axios.get(` https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/plats?category=${selectedCategory}`);
+                const response = await axios.get(` https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/plats/filter?category=${selectedCategory}`);
                 setPlats(response.data);
             } catch (error) {
                 console.error('Error fetching plats:', error);
@@ -22,37 +23,59 @@ const FilteredPlats = ({ selectedCategory }) => {
     }, [selectedCategory]);
 
     return (
-        <div className="scrolling-wrapper2">
-            {plats.map((plat, index) => (
-                <div key={index} className="carte rounded-lg">
-                    <div className="osahan-slider-item py-3 px-1">
-                        <div className="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-lg">
-                            <div className="list-card-image">
-                                <div className="star position-absolute"><span className="badge badge-success"><i className="feather-star" />{plat.rating}</span></div>
-                                <div className="favourite-heart position-absolute"><a href="#"><i className="feather-bookmark" /></a></div>
-                                <img src={plat.image[0]} className="img-fluid item-img" style={{ width: '300px', height: '130px' }} alt="Plat" />
+        
+        <div className="most_popular px-3">
+            <div className="title d-flex align-items-center">
+            <h6 className="m-0 font-weight-bold text-2xl">
+                    {plats.filter(plat => plat.category[0].category_code === selectedCategory).length} {t('filteredPlats')}
+                </h6>
+                <a className="font-weight-bold ml-auto" href="trending.html">{t('Viewall')} <i className="feather-chevrons-right" /></a>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {plats && plats.map((plat, index) => (
+                    <div key={index} className="px-2 py-2">
+                        <div className="list-card bg-white h-full rounded overflow-hidden relative shadow-lg">
+                            <div className="list-card-image relative">
+                                <div className="favourite-heart absolute top-2 right-2">
+                                    <a href="#"><i className="feather-bookmark" /></a>
+                                </div>
+                                <div className="member-plan absolute bottom-2 left-2">
+                                    <span className="badge badge-danger">{t('hot')}</span>
+                                </div>
+                                <a href="restaurant.html">
+                                    <div className="w-full h-48 overflow-hidden">
+                                        <img src={plat.image[0]} alt={plat.name} className="img-fluid w-full h-full object-cover" />
+                                    </div>
+                                </a>
                             </div>
-                            <div className="p-3 position-relative">
+                            <div className="p-3 relative">
                                 <div className="list-card-body">
-                                    <h6 className="mb-1">{plat.name}</h6>
-                                    <p className="text-muted card-text">{t('platPrice', { price: plat.plat_price, currency: plat.currency })}</p>
-                                    <p className="text-muted card-text">{t('rating', { rating: plat.rating })}</p>
-                                    <div className="d-flex align-items-center">
-                                        <span className="badge badge-success">{t('category')}: {plat.category.map(cat => cat.translation?.fr?.name).join(', ')}</span>
-                                    </div>
-                                    <div className="d-flex align-items-center mt-2">
-                                        <span className="badge badge-success">{t('status')}: {plat.status}</span>
-                                    </div>
-                                    <div className="mt-2">
-                                        <button className="btn btn-outline-primary">{t('addToCart')}</button>
-                                    </div>
+                                    <h6 className="mb-1 text-3xl text-gray-600">
+                                        <a href="restaurant.html">{plat.name}</a>
+                                    </h6>
+                                    <p className="text-gray mb-1 text-lg">{plat.category[0].name}</p>
+                                    <StarRating rating={plat.rating} />
+                                    <p className="text-gray mb-1 text-sm font-bold">{plat.plat_price} {plat.currency}</p> {/* Add the price here */}
+                                </div>
+                                <div className="list-card-badge flex items-center">
+                                    {plat.discount ? (
+                                        <span className="badge badge-danger mr-2">{t('offer')}</span>
+                                    ) : (
+                                        <span className="badge badge-secondary mr-2">{t('noOffer')}</span>
+                                    )}
+                                    <small>{plat.discount ? '60%' : ''}</small>
+                                </div>
+                                <div className="mt-2">
+                                    <button className="btn btn-outline-primary">Add To Cart</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            ))}
+                ))}
+            </div>
+
         </div>
+
     );
 };
 

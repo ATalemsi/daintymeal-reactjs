@@ -33,6 +33,28 @@ const Restos = ({ selectedCategory, selectedLanguage }) => {
         slidesToScroll: 1,
     };
 
+    const getName = (resto) => {
+        switch (selectedLanguage) {
+            case 'ar':
+                return resto.ar.name;
+            case 'fr':
+                return resto.fr.name;
+            default:
+                return resto.en.name;
+        }
+    };
+
+    const getAddress = (address) => {
+        switch (selectedLanguage) {
+            case 'ar':
+                return `${address.translations.ar.street}, ${address.translations.ar.city}, ${address.translations.ar.state}, ${address.translations.ar.country}`;
+            case 'fr':
+                return `${address.translations.fr.street}, ${address.translations.fr.city}, ${address.translations.fr.state}, ${address.translations.fr.country}`;
+            default:
+                return `${address.street}, ${address.city}, ${address.state}, ${address.country}`;
+        }
+    };
+
     const direction = i18n.dir();
 
     return (
@@ -58,11 +80,11 @@ const Restos = ({ selectedCategory, selectedLanguage }) => {
                                 <div className="list-card-body">
                                     <h6 className="mb-1">
                                         <Link to={`/restaurant/${resto.resto_code}`} className="text-black">
-                                            {resto.name}
+                                            {getName(resto)}
                                         </Link>
                                     </h6>
                                     <p className="text-gray mb-3">
-                                        <span className="text-gray-500">{resto.address[0].country}</span>, {resto.address[0].city}, {resto.address[0].street}
+                                        <span className="text-gray-500">{getAddress(resto.address[0])}</span>
                                     </p>
                                     <p className="text-gray text-xs mb-3 time">
                                         <span className="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"> {resto.workingTime}</span> : {t('timeWork')}

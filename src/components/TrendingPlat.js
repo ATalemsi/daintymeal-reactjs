@@ -23,6 +23,7 @@ const TrendingPlat = () => {
     }, []);
 
     return (
+        
         <div className="most_popular px-3">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {trendingplats && trendingplats.map((trendingplat, index) => (
@@ -56,14 +57,17 @@ const TrendingPlat = () => {
                                     ) : (
                                         <span className="badge badge-secondary mr-2">{t('noOffer')}</span>
                                     )}
-                                    <small>{trendingplat.discount ? '-60% ' : ''}</small>
+                                    <small>{trendingplat.discount ? '60%' : ''}</small>
+                                </div>
+                                <div className="mt-2">
+                                    <button className="btn btn-outline-primary">Add To Cart</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 ))}
             </div>
-            
+
         </div>
 
     );

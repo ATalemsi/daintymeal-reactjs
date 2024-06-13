@@ -14,8 +14,7 @@ const AppRouter = () => {
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/profile" element={<Profile />} />
-                    <Route path="/restaurant/:resto_code" element={<RestoShow />} /> {/* Add the new route */}
-                    {/* Add other routes if needed */}
+                    <Route path="/restaurant/:resto_code" element={<RestoShow />} /> 
                 </Routes>
                 <FilterDetaille />
                 
