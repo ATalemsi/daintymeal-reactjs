@@ -61,5 +61,4 @@ const Categories = ({ onCategorySelect, selectedLanguage }) => {
         </div>
     );
 };
-
 export default Categories;
