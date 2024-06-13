@@ -16,6 +16,7 @@
     "favorites":"FAVORITES",
     "profile":"PROFILE",
     "price":"Price",
-    "address":"Adresse"
+    "address":"Adresse",
+    "filteredPlats":"Filtere Plats"
     
 }

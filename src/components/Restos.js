@@ -21,11 +21,8 @@ const Restos = ({ selectedCategory, selectedLanguage }) => {
         fetchRestos();
     }, []);
 
-
     const filteredRestos = selectedCategory
-        ? restos.filter(resto => {
-            return resto.categories.some(category => category.name === selectedCategory);
-        })
+        ? restos.filter((resto) => resto.categories.some((category) => category.category_code === selectedCategory))
         : restos;
 
     const settings = {
@@ -45,7 +42,9 @@ const Restos = ({ selectedCategory, selectedLanguage }) => {
                     <div className="osahan-slider-item py-3 px-1">
                         <div className="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-lg">
                             <div className="list-card-image">
-                                <div className="star position-absolute"><span className="badge badge-success"><i className="feather-star" />{resto.rating}</span></div>
+                                <div className="star position-absolute">
+                                    <span className="badge badge-success"><i className="feather-star" />{resto.rating}</span>
+                                </div>
                                 <div className="favourite-heart position-absolute"><a href="#"><i className="feather-bookmark" /></a></div>
                                 <Slider {...settings}>
                                     {resto.image.map((imgSrc, imgIndex) => (
@@ -62,11 +61,15 @@ const Restos = ({ selectedCategory, selectedLanguage }) => {
                                             {resto.name}
                                         </Link>
                                     </h6>
-                                    <p className="text-gray mb-3"><span className="text-gray-500">{resto.address[0].country}</span>, {resto.address[0].city}, {resto.address[0].street}</p>
-                                    <p className="text-gray text-xs mb-3 time"><span className="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"> {resto.workingTime}</span> : {t('timeWork')} </p>
+                                    <p className="text-gray mb-3">
+                                        <span className="text-gray-500">{resto.address[0].country}</span>, {resto.address[0].city}, {resto.address[0].street}
+                                    </p>
+                                    <p className="text-gray text-xs mb-3 time">
+                                        <span className="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"> {resto.workingTime}</span> : {t('timeWork')}
+                                    </p>
                                 </div>
                                 <div className="list-card-badge d-flex align-items-center">
-                                    <span className="badge badge-danger mr-2"> {t('offer')} </span> 
+                                    <span className="badge badge-danger mr-2"> {t('offer')} </span>
                                 </div>
                             </div>
                         </div>

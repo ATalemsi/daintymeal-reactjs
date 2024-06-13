@@ -16,6 +16,7 @@
     "favorites":"FAVORIT",
     "profile":"PROFILE",
     "price":"Prix",
-    "address":"Adresse"
+    "address":"Adresse",
+    "filteredPlats":"Les Playts Filtrer"
 
 }

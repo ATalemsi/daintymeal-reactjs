@@ -16,5 +16,6 @@
     "favorites":"المفضلة",
     "profile":"الملف الشخصي",
     "price": "الثمن",
-    "address":"العنوان"
+    "address":"العنوان",
+    "filteredPlats":"الاطباق"
 }

@@ -9,7 +9,7 @@ const Header = ({ onLanguageChange }) => {
   const [locationName, setLocationName] = useState('Location not available');
   const [showModal, setShowModal] = useState(false);
   const [permissionGranted, setPermissionGranted] = useState(false);
-  const { t,i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const customStyles = {
     content: {
@@ -49,13 +49,11 @@ const Header = ({ onLanguageChange }) => {
     }
   }, []);
 
-  const handelchangeLanguage = (lng) => {
-    console.log('====================================');
-    console.log(lng);
-    console.log('====================================');
+  const handleLanguageChange = (event) => {
+    const lng = event.target.value;
     i18n.changeLanguage(lng);
     onLanguageChange(lng);
-  }
+  };
 
   const fetchLocationName = async (latitude, longitude) => {
     try {
@@ -120,9 +118,12 @@ const Header = ({ onLanguageChange }) => {
           </a>
         </div>
         <div className="ml-auto d-flex align-items-center">
-          <button className="btn border-2 border-pink-600 text-pink-600 rounded-lg btn-sm mx-1 text-gray-200" onClick={() => { handelchangeLanguage('en') }}>EN</button>
-          <button className="btn border-2 border-pink-600 text-pink-600 rounded-lg btn-sm mx-1 text-gray-200" onClick={() => { handelchangeLanguage('ar') }}>AR</button>
-          <button className="btn border-2 border-pink-600 text-pink-600 rounded-lg btn-sm mx-1 text-gray-200" onClick={() => { handelchangeLanguage('fr') }}>FR</button>
+          <select className="btn border-2 border-pink-600 text-pink-600 rounded-lg btn-sm mx-1 text-gray-200" onChange={handleLanguageChange} value={i18n.language}>
+            <option value="en">EN</option>
+            <option value="ar">AR</option>
+            <option value="fr">FR</option>
+          </select>
+          <a className="text-dark mx-2 fs-18 top-nav-btn-cart position-relative" data-toggle="modal" data-target="#exampleModal" href="#"><i className="feather-filter" /></a>
           <a className="toggle ml-2 text-dark hc-nav-trigger hc-nav-1" href="#" role="button" aria-controls="hc-nav-1">
             <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} fill="currentColor" className="bi bi-list" viewBox="0 0 16 16">
               <path fillRule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
