@@ -17,6 +17,7 @@
     "profile":"PROFILE",
     "price":"Price",
     "address":"Adresse",
-    "filteredPlats":"Filtere Plats"
+    "filteredPlats":"Filtere Plats",
+    "noRestosForCategory":"restaurant not found"
     
 }

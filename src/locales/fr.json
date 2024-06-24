@@ -17,6 +17,7 @@
     "profile":"PROFILE",
     "price":"Prix",
     "address":"Adresse",
-    "filteredPlats":"Les Playts Filtrer"
+    "filteredPlats":"Les Playts Filtrer",
+    "noRestosForCategory":"restaurant non trouver"
 
 }

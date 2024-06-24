@@ -16,7 +16,7 @@ const Footer = () => {
                     </Link>
                 </div>
                 <div className="col">
-                    <Link to="/most_popular" className="text-dark small font-weight-bold text-decoration-none">
+                    <Link to="/trending" className="text-dark small font-weight-bold text-decoration-none">
                         <p className="h4 m-0"><i className="feather-map-pin" /></p>
                         {t('trending')}
                     </Link>
@@ -27,7 +27,7 @@ const Footer = () => {
                     </Link>
                 </div>
                 <div className="col">
-                    <Link to="/favorites" className="text-dark small font-weight-bold text-decoration-none">
+                    <Link to="/favourite" className="text-dark small font-weight-bold text-decoration-none">
                         <p className="h4 m-0"><i className="feather-heart" /></p>
                         {t('favorites')}
                     </Link>

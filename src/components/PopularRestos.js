@@ -4,6 +4,8 @@ import axios from 'axios';
 import StarRating from './startRating/StarRating';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import Slider from 'react-slick';
+import './slick-custom.css';
 
 
 
@@ -22,6 +24,13 @@ const PopularRestos = ({ selectedLanguage }) => {
         };
         fetchPopularRestos();
     }, []);
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+    };
 
     const getName = (popularesto) => {
         switch (selectedLanguage) {
@@ -57,11 +66,22 @@ const PopularRestos = ({ selectedLanguage }) => {
                                 <div className="member-plan absolute bottom-2 left-2">
                                     <span className="badge badge-danger">{t('hot')}</span>
                                 </div>
-                                <a href="restaurant.html">
+                                <p>
                                     <div className="w-full h-48 overflow-hidden">
-                                        <img src={popularesto.image[0]} alt={getName(popularesto)} className="img-fluid w-full h-full object-cover" />
+                                        <Slider {...settings}>
+                                            {popularesto.image.map((imgSrc, imgIndex) => (
+                                                <div key={imgIndex}>
+                                                    <img
+                                                        src={imgSrc}
+                                                        className="img-fluid w-full h-full object-cover"
+                                                        alt={getName(popularesto)}
+                                                    />
+                                                </div>
+                                            ))}
+                                        </Slider>
                                     </div>
-                                </a>
+                                </p>
+
                             </div>
                             <div className="p-3 relative">
                                 <div className="list-card-body">

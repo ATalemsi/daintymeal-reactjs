@@ -59,45 +59,52 @@ const Restos = ({ selectedCategory, selectedLanguage }) => {
 
     return (
         <div className="scrolling-wrapper2" style={{ direction }}>
-            {filteredRestos && filteredRestos.map((resto, index) => (
-                <div key={index} className="carte rounded-lg">
-                    <div className="osahan-slider-item py-3 px-1">
-                        <div className="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-lg">
-                            <div className="list-card-image">
-                                <div className="star position-absolute">
-                                    <span className="badge badge-success"><i className="feather-star" />{resto.rating}</span>
+            {filteredRestos.length > 0 ? (
+                filteredRestos.map((resto, index) => (
+                    <div key={index} className="carte rounded-lg">
+                        <div className="osahan-slider-item py-3 px-1">
+                            <div className="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-lg">
+                                <div className="list-card-image">
+                                    <div className="star position-absolute">
+                                        <span className="badge badge-success"><i className="feather-star" />{resto.rating}</span>
+                                    </div>
+                                    <div className="favourite-heart position-absolute"><a href="#"><i className="feather-bookmark" /></a></div>
+                                    <Slider {...settings}>
+                                        {resto.image.map((imgSrc, imgIndex) => (
+                                            <div key={imgIndex}>
+                                                <img src={imgSrc} className="img-fluid item-img" style={{ width: '300px', height: '130px' }} alt="Restaurant" />
+                                            </div>
+                                        ))}
+                                    </Slider>
                                 </div>
-                                <div className="favourite-heart position-absolute"><a href="#"><i className="feather-bookmark" /></a></div>
-                                <Slider {...settings}>
-                                    {resto.image.map((imgSrc, imgIndex) => (
-                                        <div key={imgIndex}>
-                                            <img src={imgSrc} className="img-fluid item-img" style={{ width: '300px', height: '130px' }} alt="Restaurant" />
-                                        </div>
-                                    ))}
-                                </Slider>
-                            </div>
-                            <div className="p-3 position-relative">
-                                <div className="list-card-body">
-                                    <h6 className="mb-1">
-                                        <Link to={`/restaurant/${resto.resto_code}`} className="text-black">
-                                            {getName(resto)}
-                                        </Link>
-                                    </h6>
-                                    <p className="text-gray mb-3">
-                                        <span className="text-gray-500">{getAddress(resto.address[0])}</span>
-                                    </p>
-                                    <p className="text-gray text-xs mb-3 time">
-                                        <span className="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"> {resto.workingTime}</span> : {t('timeWork')}
-                                    </p>
-                                </div>
-                                <div className="list-card-badge d-flex align-items-center">
-                                    <span className="badge badge-danger mr-2"> {t('offer')} </span>
+                                <div className="p-3 position-relative">
+                                    <div className="list-card-body">
+                                        <h6 className="mb-1">
+                                            <Link to={`/restaurant/${resto.resto_code}`} className="text-black">
+                                                {getName(resto)}
+                                            </Link>
+                                        </h6>
+                                        <p className="text-gray mb-3">
+                                            <span className="text-gray-500">{getAddress(resto.address[0])}</span>
+                                        </p>
+                                        <p className="text-gray text-xs mb-3 time">
+                                            <span className="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"> {resto.workingTime}</span> : {t('timeWork')}
+                                        </p>
+                                    </div>
+                                    <div className="list-card-badge d-flex align-items-center">
+                                        <span className="badge badge-danger mr-2"> {t('offer')} </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                ))
+            ) : (
+                <div className="no-restos">
+                    <img src="https://res.cloudinary.com/dz4pww2qv/image/upload/v1719225646/kt3uezwvl66oifbmnlpy.png" alt="No Restaurants" className="img-fluid" />
+                    <p>{t('noRestosForCategory')}</p>
                 </div>
-            ))}
+            )}
         </div>
     );
 };

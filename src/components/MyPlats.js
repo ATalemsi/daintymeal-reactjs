@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import StarRating from './startRating/StarRating';
 import { useTranslation } from 'react-i18next';
+import Slider from 'react-slick';
+import './slick-custom.css';
 
 
 const Myplats = () => {
@@ -20,6 +22,15 @@ const Myplats = () => {
         fetchTwoPlats();
     }, []);
 
+
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+    };
+
     return (
         <div className="most_popular px-3">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -28,16 +39,26 @@ const Myplats = () => {
                         <div className="list-card bg-white h-full rounded overflow-hidden relative shadow-lg">
                             <div className="list-card-image relative">
                                 <div className="favourite-heart absolute top-2 right-2">
-                                    <a href="#"><i className="feather-bookmark" /></a>
+                                    <a href="#"><i className="feather-bookmark"/></a>
                                 </div>
                                 <div className="member-plan absolute bottom-2 left-2">
                                     <span className="badge badge-danger">{t('hot')}</span>
                                 </div>
-                                <a href="restaurant.html">
+                                <p>
                                     <div className="w-full h-48 overflow-hidden">
-                                        <img src={myplat.image[0]} alt={myplat.name} className="img-fluid w-full h-full object-cover" />
+                                        <Slider {...settings}>
+                                            {myplat.image.map((imgSrc, imgIndex) => (
+                                                <div key={imgIndex}>
+                                                    <img
+                                                        src={imgSrc}
+                                                        className="img-fluid w-full h-48 object-cover"
+                                                        alt={myplat.name}
+                                                    />
+                                                </div>
+                                            ))}
+                                        </Slider>
                                     </div>
-                                </a>
+                                </p>
                             </div>
                             <div className="p-3 relative">
                                 <div className="list-card-body">
@@ -46,7 +67,7 @@ const Myplats = () => {
                                     </h6>
                                     <p className="text-gray mb-1 text-lg">{myplat.category[0].name}</p>
                                     <StarRating rating={myplat.rating} />
-                                    <p className="text-gray mb-1 text-sm font-bold">{myplat.plat_price} {myplat.currency}</p> 
+                                    <p className="text-gray mb-1 text-sm font-bold">{myplat.plat_price} {myplat.currency}</p>
                                 </div>
                                 <div className="list-card-badge flex items-center">
                                     {myplat.discount ? (

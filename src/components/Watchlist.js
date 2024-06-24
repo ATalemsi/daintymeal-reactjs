@@ -8,7 +8,7 @@ import './slick-custom.css';
 
 
 
-const TrendingPlat = () => {
+const Watchlist = () => {
     const [trendingplats, setTrandingPlats] = useState([]);
     const { t } = useTranslation();
 
@@ -92,4 +92,4 @@ const TrendingPlat = () => {
     );
 };
 
-export default TrendingPlat;
+export default Watchlist;

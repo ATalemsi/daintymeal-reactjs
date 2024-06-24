@@ -17,5 +17,6 @@
     "profile":"الملف الشخصي",
     "price": "الثمن",
     "address":"العنوان",
-    "filteredPlats":"الاطباق"
+    "filteredPlats":"الاطباق",
+    "noRestosForCategory":"لا يوجد مطاعم"
 }
