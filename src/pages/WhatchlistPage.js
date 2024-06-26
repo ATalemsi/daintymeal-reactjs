@@ -3,6 +3,7 @@ import React from "react";
 import Navbar from '../components/Navbar';
 import Footer from "../components/Footer";
 import Watchlist from "../components/Watchlist";
+import { Link } from "react-router-dom";
 
 
 const WatchlistPage = () => {
@@ -12,11 +13,11 @@ const WatchlistPage = () => {
             <div class="osahan-favorites">
                 <div class="p-3 osahan-inner-header bg-white shadow-sm">
                     <div class="d-flex align-items-center">
-                        <a class="font-weight-bold text-dark text-back text-decoration-none " href="home.html">
+                        <Link  class="font-weight-bold text-dark text-back text-decoration-none " to="/">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="back-page bi bi-chevron-left" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path>
                             </svg>
-                        </a>
+                        </Link>
                         <span class="ml-3 h6 mb-0">Favorites</span>
                         <div class="ml-auto d-flex align-items-center">
                             <a class="text-dark mx-2 top-nav-btn top-nav-btn-cart fs-18 position-relative" href="checkout.html"><i class="feather-shopping-bag"></i> <span>3</span></a>

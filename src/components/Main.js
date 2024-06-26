@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { FaSpinner } from 'react-icons/fa'; // Import the spinner icon from react-icons
+import { FaSpinner } from 'react-icons/fa';
 import Categories from './Categories';
 import Filter from './Filter';
 import Publicity from './Publicity';
@@ -9,54 +9,83 @@ import PopularRestos from './PopularRestos';
 import TrendingPlat from './TrendingPlat';
 import MostSales from './MostSales';
 import Myplats from './MyPlats';
-import FilteredPlats from './FilterePlats'// Import the new component
+import FilteredPlats from './FilterePlats';
 import { useTranslation } from 'react-i18next';
 import i18n from '../i18n';
 
 const Main = ({ selectedLanguage }) => {
     const [selectedCategory, setSelectedCategory] = useState(null);
-    const [isLoading, setIsLoading] = useState(true); // Loading state
+    const [isLoadingInitial, setIsLoadingInitial] = useState(true);
+    const [isLoadingAdditional, setIsLoadingAdditional] = useState(false);
+    const [additionalDataLoaded, setAdditionalDataLoaded] = useState(false);
     const { t } = useTranslation();
     const direction = i18n.dir();
+
+    const fetchInitialData = async () => {
+        try {
+            await Promise.all([
+                axios.get('https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/categories'),
+                axios.get('https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/filters'),
+                axios.get('https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/restos'),
+            ]);
+            setIsLoadingInitial(false);
+        } catch (error) {
+            console.error('Error fetching initial data:', error);
+            setIsLoadingInitial(false);
+        }
+    };
+
+    const fetchAdditionalData = async () => {
+        setIsLoadingAdditional(true);
+        try {
+            await Promise.all([
+                axios.get('https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/plats/two'),
+                axios.get('https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/plats/trending'),
+                axios.get('https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/restos/popular'),
+                axios.get('https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/plats/two'),
+            ]);
+            setIsLoadingAdditional(false);
+            setAdditionalDataLoaded(true);
+        } catch (error) {
+            console.error('Error fetching additional data:', error);
+            setIsLoadingAdditional(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchInitialData();
+    }, []);
+
+    const observerRef = useRef();
+
+    useEffect(() => {
+        if (!isLoadingInitial && !additionalDataLoaded) {
+            observerRef.current = new IntersectionObserver(
+                (entries) => {
+                    if (entries[0].isIntersecting) {
+                        fetchAdditionalData();
+                        observerRef.current.disconnect();
+                    }
+                },
+                { threshold: 0.1 }
+            );
+
+            if (document.querySelector('#load-trigger')) {
+                observerRef.current.observe(document.querySelector('#load-trigger'));
+            }
+        }
+    }, [isLoadingInitial, additionalDataLoaded]);
 
     const handleCategorySelect = (category) => {
         setSelectedCategory(category);
     };
 
-    useEffect(() => {
-        // Simulate fetching data or any async operations
-        const fetchData = async () => {
-            try {
-                // Fetch your data here
-                await Promise.all([
-                    // Replace these with actual API calls or async operations
-                    axios.get('https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/categories'),
-                    axios.get('https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/filters'),
-                    axios.get('https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/restos'),
-                    axios.get('https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/plats/two'),
-                    axios.get('https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/plats/trending'),
-                    axios.get('https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/restos/popular'),
-                    axios.get('https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/plats/two'),
-                ]);
-
-                // Set loading to false once all data is fetched successfully
-                setIsLoading(false);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-                setIsLoading(false); // Handle error case
-            }
-        };
-
-        fetchData();
-    }, []); // Empty dependency array ensures this runs only once on mount
-
     return (
         <div className="osahan-main">
-            {isLoading ? (
+            {isLoadingInitial ? (
                 <div className="flex items-center justify-center h-screen">
                     <div className="text-center">
                         <FaSpinner className="animate-spin text-4xl text-gray-500" />
-                        {/* You can style the spinner using CSS classes */}
                         <h3 className="mt-2">Loading...</h3>
                     </div>
                 </div>
@@ -78,7 +107,6 @@ const Main = ({ selectedLanguage }) => {
                         </>
                     ) : (
                         <>
-                           
                             <div className="px-3 pt-3 title d-flex align-items-center">
                                 <h6 className="m-0 font-weight-bold text-2xl"> {t('myPlats')} </h6>
                                 <a className="font-weight-bold ml-auto" href="trending.html">{t('Viewall')}<i className="feather-chevrons-right" /></a>
@@ -148,6 +176,14 @@ const Main = ({ selectedLanguage }) => {
                             </div>
                             <MostSales />
                         </>
+                    )}
+                    {/* Add a hidden element that will trigger the fetching of additional data */}
+                    <div id="load-trigger" className="w-full h-1"></div>
+                    {isLoadingAdditional && (
+                        <div className="flex items-center justify-center py-4">
+                            <FaSpinner className="animate-spin text-4xl text-gray-500" />
+                            <h3 className="ml-2">Loading...</h3>
+                        </div>
                     )}
                 </>
             )}

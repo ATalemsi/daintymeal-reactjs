@@ -1,23 +1,33 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import i18n from '../i18n';
 
 const Footer = () => {
     const { t } = useTranslation();
     const isRTL = i18n.language === 'ar';
+    const location = useLocation();
+
+    const getLinkClass = (path) => {
+        return location.pathname === path ? 'text-danger' : 'text-dark';
+    };
+
+    const getIconClass = (path) => {
+        return location.pathname === path ? 'feather-home text-danger' : 'feather-home';
+    };
+
     return (
         <div className={`osahan-menu-fotter border rounded shadow fixed-bottom bg-white m-3 px-3 py-2 text-center ${isRTL ? 'text-right' : 'text-left'}`}>
             <div className="row">
-                <div className="col selected">
-                    <Link to="/" className="text-danger small font-weight-bold text-decoration-none">
-                        <p className="h4 m-0"><i className="feather-home text-danger" /></p>
+                <div className="col">
+                    <Link to="/" className={`${getLinkClass('/')} small font-weight-bold text-decoration-none`}>
+                        <p className="h4 m-0"><i className={`feather-home ${location.pathname === '/' ? 'text-danger' : ''}`} /></p>
                         {t('home')}
                     </Link>
                 </div>
                 <div className="col">
-                    <Link to="/trending" className="text-dark small font-weight-bold text-decoration-none">
-                        <p className="h4 m-0"><i className="feather-map-pin" /></p>
+                    <Link to="/trending" className={`${getLinkClass('/trending')} small font-weight-bold text-decoration-none`}>
+                        <p className="h4 m-0"><i className={`feather-map-pin ${location.pathname === '/trending' ? 'text-danger' : ''}`} /></p>
                         {t('trending')}
                     </Link>
                 </div>
@@ -27,14 +37,14 @@ const Footer = () => {
                     </Link>
                 </div>
                 <div className="col">
-                    <Link to="/favourite" className="text-dark small font-weight-bold text-decoration-none">
-                        <p className="h4 m-0"><i className="feather-heart" /></p>
+                    <Link to="/favourite" className={`${getLinkClass('/favourite')} small font-weight-bold text-decoration-none`}>
+                        <p className="h4 m-0"><i className={`feather-heart ${location.pathname === '/favourite' ? 'text-danger' : ''}`} /></p>
                         {t('favorites')}
                     </Link>
                 </div>
                 <div className="col">
-                    <Link to="/profile" className="text-dark small font-weight-bold text-decoration-none">
-                        <p className="h4 m-0"><i className="feather-user" /></p>
+                    <Link to="/profile" className={`${getLinkClass('/profile')} small font-weight-bold text-decoration-none`}>
+                        <p className="h4 m-0"><i className={`feather-user ${location.pathname === '/profile' ? 'text-danger' : ''}`} /></p>
                         {t('profile')}
                     </Link>
                 </div>

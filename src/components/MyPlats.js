@@ -4,6 +4,7 @@ import StarRating from './startRating/StarRating';
 import { useTranslation } from 'react-i18next';
 import Slider from 'react-slick';
 import './slick-custom.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 const Myplats = () => {
@@ -39,7 +40,7 @@ const Myplats = () => {
                         <div className="list-card bg-white h-full rounded overflow-hidden relative shadow-lg">
                             <div className="list-card-image relative">
                                 <div className="favourite-heart absolute top-2 right-2">
-                                    <a href="#"><i className="feather-bookmark"/></a>
+                                <p className="cursor-pointer"><FontAwesomeIcon icon="fa-regular fa-star" /></p>
                                 </div>
                                 <div className="member-plan absolute bottom-2 left-2">
                                     <span className="badge badge-danger">{t('hot')}</span>
