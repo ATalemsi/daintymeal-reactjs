@@ -7,6 +7,9 @@ import FilterDetaille from '../components/FilterDetailles';
 import RestoShow from '../pages/RestoShow';
 import TrendingPage from '../pages/TrendingPage';
 import WatchlistPage from '../pages/WhatchlistPage';
+import Landing from '../pages/Landing';
+import Location from '../pages/Location';
+import SelectLocation from '../pages/SelectLocaltion';
 
 const AppRouter = () => {
     return (
@@ -18,6 +21,9 @@ const AppRouter = () => {
                     <Route path="/restaurant/:resto_code" element={<RestoShow />} /> 
                     <Route path="/trending" element={<TrendingPage />} />
                     <Route path="/favourite" element={<WatchlistPage />} />
+                    <Route path="/landing" element={<Landing />} />
+                    <Route path="/location" element={<Location />} />
+                    <Route path="/select_country" element={<SelectLocation />} />
                 </Routes>
                 <FilterDetaille />
                 

@@ -29,7 +29,7 @@ const Profile = () => {
                             <h6 className="m-0 ml-auto text-primary text-sm font-semibold">$52.25</h6>
                         </div>
                     </div>
-                    {/* profile-details */}
+                    
                     <div className="bg-white shadow mt-3 profile-details">
                         <a data-toggle="modal" data-target="#paycard" className="d-flex w-100 align-items-center border-bottom p-3">
                             <div className="left mr-3">
