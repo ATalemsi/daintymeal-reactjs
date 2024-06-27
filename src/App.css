@@ -27,7 +27,15 @@
 .App-link {
   color: #61dafb;
 }
-
+.Map {
+  height: 100vh;
+  width: 100vw;
+}
+/* map container height and width to be provided to GoogleMaps Component */
+.map_container {
+  height: 100%;
+  width: 100%;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
+import { Navigate } from 'react-router-dom'; // Import Navigate for navigation
 
 Modal.setAppElement('#root');
 
@@ -31,28 +32,38 @@ const Header = ({ onLanguageChange }) => {
 
   useEffect(() => {
     if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          fetchLocationName(latitude, longitude);
-        },
-        (error) => {
-          if (error.code === error.PERMISSION_DENIED) {
-            setShowModal(true);
+      navigator.permissions.query({ name: 'geolocation' })
+        .then((permissionStatus) => {
+          if (permissionStatus.state === 'granted') {
+            setPermissionGranted(true);
+            fetchLocation();
           } else {
-            setLocationName('Geolocation not available');
+            setPermissionGranted(false);
+            setLocationName('Geolocation permission denied');
+            return <Navigate to="/landing" replace />;
           }
-        }
-      );
+        })
+        .catch((error) => {
+          console.error('Error checking geolocation permission:', error);
+          setPermissionGranted(false);
+          setLocationName('Geolocation not available');
+        });
     } else {
+      setPermissionGranted(false);
       setLocationName('Geolocation not supported by this browser');
     }
   }, []);
 
-  const handleLanguageChange = (event) => {
-    const lng = event.target.value;
-    i18n.changeLanguage(lng);
-    onLanguageChange(lng);
+  const fetchLocation = () => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        fetchLocationName(latitude, longitude);
+      },
+      (error) => {
+        setLocationName('Geolocation not available');
+      }
+    );
   };
 
   const fetchLocationName = async (latitude, longitude) => {
@@ -72,9 +83,16 @@ const Header = ({ onLanguageChange }) => {
     }
   };
 
+  const handleLanguageChange = (event) => {
+    const lng = event.target.value;
+    i18n.changeLanguage(lng);
+    onLanguageChange(lng);
+  };
+
   const handleAllowLocation = () => {
     setPermissionGranted(true);
     setShowModal(false);
+    fetchLocation();
   };
 
   const handleDenyLocation = () => {
@@ -82,19 +100,11 @@ const Header = ({ onLanguageChange }) => {
     setShowModal(false);
   };
 
-  useEffect(() => {
-    if (permissionGranted) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          fetchLocationName(latitude, longitude);
-        },
-        (error) => {
-          setLocationName('Geolocation permission denied');
-        }
-      );
-    }
-  }, [permissionGranted]);
+  const handleUseCurrentLocation = () => {
+    if (!permissionGranted) {
+      return <Navigate to="/landing" replace />;
+    } 
+  };
 
   return (
     <div className="shadow p-3 homepage-osahan-header bg-white">

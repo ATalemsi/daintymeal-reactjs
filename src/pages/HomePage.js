@@ -12,7 +12,7 @@ const HomePage = () => {
 
   const handleLanguageChange = (languageCode) => {
       setSelectedLanguage(languageCode);
-      // Store selected language in local storage
+     
       localStorage.setItem('selectedLanguage', languageCode);
   };
   const direction = i18n.dir();

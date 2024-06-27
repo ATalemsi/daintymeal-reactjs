@@ -1,15 +1,30 @@
 import React from "react";
 import { useLoadScript } from "@react-google-maps/api";
-import SelectCountry from "../components/SelectCountry";
+import Maps from "../components/Maps";
+import Search from "../components/Search";
+
+const libraries = ["places"];
 
 const SelectLocation = () => {
-    const { isLoaded } = useLoadScript({
-        googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-        libraries: ["places"],
-      } );
-      if (!isLoaded) return <div>Loading...</div>;
-      return <SelectCountry />;
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: 'AIzaSyBYo-N_FzEPsdTeydQFbFRfxeLzs1y9yEM',
+    libraries,
+  });
 
+  if (loadError) return <div>Error loading maps</div>;
+  if (!isLoaded) return <div>Loading Maps...</div>;
+
+  return (
+    <>
+      <div class="osahan-country">
+        <Search />
+        <Maps />
+      </div>
+
+
+
+    </>
+  );
 };
 
 export default SelectLocation;
