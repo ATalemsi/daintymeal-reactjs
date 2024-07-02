@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
-import { Navigate } from 'react-router-dom'; // Import Navigate for navigation
+import { Navigate ,useNavigate } from 'react-router-dom'; // Import Navigate for navigation
 
 Modal.setAppElement('#root');
 
@@ -11,6 +11,8 @@ const Header = ({ onLanguageChange }) => {
   const [showModal, setShowModal] = useState(false);
   const [permissionGranted, setPermissionGranted] = useState(false);
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate(); 
+
 
   const customStyles = {
     content: {
@@ -39,8 +41,9 @@ const Header = ({ onLanguageChange }) => {
             fetchLocation();
           } else {
             setPermissionGranted(false);
+            navigate('/landing') 
             setLocationName('Geolocation permission denied');
-            return <Navigate to="/landing" replace />;
+            return  navigate('/landing') 
           }
         })
         .catch((error) => {

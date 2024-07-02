@@ -29,45 +29,49 @@ const LoginWithPhone = () => {
             />
           </div>
           <button type="submit" className="w-full py-3 mt-3 bg-pink-700 text-white text-lg rounded-full">Send OTP</button>
-          <div className="or-osahan text-center my-4 border-bottom">
-            <span>OR</span>
-          </div>
-          <div className="mb-3">
-            <Link className="btn btn-lg btn-light btn-block" to="/login-email">
-              <img src="img/envelope.svg" alt="Email" className="inline-block mr-2" /> Continue with Email
-            </Link>
-          </div>
-          <div className="mb-3">
-            <button className="btn btn-lg btn-light btn-block">
-              <img src="img/apple-logo.svg" alt="Apple" className="inline-block mr-2" /> Continue with Apple
-            </button>
-          </div>
-          <div className="mb-3">
-            <div className="grid grid-cols-2 gap-1">
-              <button className="btn btn-lg btn-light">
-                <img src="img/facebook.svg" alt="Facebook" className="inline-block mr-2" /> Facebook
-              </button>
-              <button className="btn btn-lg btn-light">
-                <img src="img/search.svg" alt="Google" className="inline-block mr-2" /> Google
-              </button>
+          </form>
+          {/* Alternative login options */}
+          <div className="or-osahan text-center my-4 border-bottom text-xl">
+                    <span>OR</span>
+                </div>
+                <div className="mb-3">
+                    <Link className="btn btn-lg btn-light btn-block text-lg" to="/login-email">
+                        <img src="img/envelope.svg" alt="Envelope" className="inline-block mr-2" /> Continue with Email
+                    </Link>
+                </div>
+                <div className="mb-3">
+                    <button className="btn btn-lg btn-light btn-block text-lg">
+                        <img src="img/apple-logo.svg" alt="Apple" className="inline-block mr-2" /> Continue with Apple
+                    </button>
+                </div>
+                <div className="mb-3">
+                    <div className="grid grid-cols-2 gap-1">
+                        <button className="btn btn-lg btn-light  text-lg">
+                            <img src="img/facebook.svg" alt="Facebook" className="inline-block mr-2" /> Facebook
+                        </button>
+                        <button className="btn btn-lg btn-light  text-lg">
+                            <img src="img/search.svg" alt="Google" className="inline-block mr-2" /> Google
+                        </button>
+                    </div>
+                </div>
+                <div className="mb-3 d-flex align-items-center justify-content-center p-3">
+                    <Link to="/register-phone">
+                        <p className="text-center text-white text-xs"> Create account?<span className='cursor-pointer ml-1 text-pink-500'>Sign up</span></p>
+                    </Link>
+                </div>
+               
             </div>
-          </div>
-        </form>
-      </div>
-      <div className="fixed-bottom text-center p-3">
-        <p className="text-white mb-1">By continuing, you agree to our</p>
-        <div className="new-acc fixed-bottom d-flex align-items-center justify-content-center p-3">
-          <Link to="/register-phone">
-            <p className="text-center text-white">Create Account? Sign up</p>
-          </Link>
+
+            {/* Footer with links */}
+            <div className="absolute bottom-0 w-full text-center p-3">
+                <p className="text-white mb-1 text-xm">By continuing, you agree to our</p>
+                <p className="small">
+                    <a className="text-white opacity-75 border-b border-white-50 text-xs" href="terms.html">Terms of Service</a>
+                    <a className="text-white opacity-75 border-b border-white-50 mx-3 text-xs" href="privacy.html">Privacy Policy</a>
+                    <a className="text-white opacity-75 border-b border-white-50 text-xs" href="terms.html">Content Policies</a>
+                </p>
+            </div>
         </div>
-        <p className="small">
-          <a className="text-white-50 border-bottom" href="terms.html">Terms of Service</a>
-          <a className="text-white-50 border-bottom mx-3" href="privacy.html">Privacy Policy</a>
-          <a className="text-white-50 border-bottom" href="terms.html">Content Policies</a>
-        </p>
-      </div>
-    </div>
   );
 };
 export default LoginWithPhone;
