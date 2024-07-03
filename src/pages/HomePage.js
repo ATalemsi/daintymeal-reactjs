@@ -8,7 +8,7 @@ import i18n from '../i18n';
 
 const HomePage = () => {
   
-  const [selectedLanguage, setSelectedLanguage] = useState(localStorage.getItem('selectedLanguage') || 'en'); // Default language code
+  const [selectedLanguage, setSelectedLanguage] = useState(localStorage.getItem('selectedLanguage') || 'en'); 
 
   const handleLanguageChange = (languageCode) => {
       setSelectedLanguage(languageCode);
@@ -18,7 +18,7 @@ const HomePage = () => {
   const direction = i18n.dir();
 
   return (
-    <div className="osahan-home-page" style={{ direction }}>
+    <div className="osahan-home-page text-left" style={{ direction }}>
       <Header selectedLanguage={selectedLanguage} onLanguageChange={handleLanguageChange} />
       <Main selectedLanguage={selectedLanguage} />
       <Navbar />

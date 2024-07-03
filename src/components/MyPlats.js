@@ -5,10 +5,12 @@ import { useTranslation } from 'react-i18next';
 import Slider from 'react-slick';
 import './slick-custom.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import { faStar as faSolidStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar as faRegularStar } from '@fortawesome/free-regular-svg-icons';
 
 const Myplats = () => {
     const [myplats, setMyplats] = useState([]);
+    const [favorites, setFavorites] = useState({});
     const { t } = useTranslation();
 
     useEffect(() => {
@@ -16,6 +18,12 @@ const Myplats = () => {
             try {
                 const response = await axios.get('https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/plats/two');
                 setMyplats(response.data);
+                // Initialize favorites state
+                const initialFavorites = {};
+                response.data.forEach(plat => {
+                    initialFavorites[plat.plat_code] = plat.isFavorite || false;
+                });
+                setFavorites(initialFavorites);
             } catch (error) {
                 console.error('Error fetching myplats:', error);
             }
@@ -23,6 +31,23 @@ const Myplats = () => {
         fetchTwoPlats();
     }, []);
 
+    const handleFavorite = async (plat_code) => {
+        try {
+            const newFavoriteStatus = !favorites[plat_code];
+            setFavorites({ ...favorites, [plat_code]: newFavoriteStatus });
+
+            // Assuming you have an API endpoint to update the favorite status
+            await axios.post(`https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/plats/${plat_code}/favorite`, {
+                isFavorite: newFavoriteStatus,
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+                }
+            });
+        } catch (error) {
+            console.error('Error updating favorite status:', error);
+        }
+    };
 
     const settings = {
         dots: true,
@@ -40,26 +65,26 @@ const Myplats = () => {
                         <div className="list-card bg-white h-full rounded overflow-hidden relative shadow-lg">
                             <div className="list-card-image relative">
                                 <div className="favourite-heart absolute top-2 right-2">
-                                <p className="cursor-pointer"><FontAwesomeIcon icon="fa-regular fa-star" /></p>
+                                    <p className="cursor-pointer" onClick={() => handleFavorite(myplat.plat_code)}>
+                                        <FontAwesomeIcon icon={favorites[myplat.plat_code] ? faSolidStar : faRegularStar} />
+                                    </p>
                                 </div>
                                 <div className="member-plan absolute bottom-2 left-2">
                                     <span className="badge badge-danger">{t('hot')}</span>
                                 </div>
-                                <p>
-                                    <div className="w-full h-48 overflow-hidden">
-                                        <Slider {...settings}>
-                                            {myplat.image.map((imgSrc, imgIndex) => (
-                                                <div key={imgIndex}>
-                                                    <img
-                                                        src={imgSrc}
-                                                        className="img-fluid w-full h-48 object-cover"
-                                                        alt={myplat.name}
-                                                    />
-                                                </div>
-                                            ))}
-                                        </Slider>
-                                    </div>
-                                </p>
+                                <div className="w-full h-48 overflow-hidden">
+                                    <Slider {...settings}>
+                                        {myplat.image.map((imgSrc, imgIndex) => (
+                                            <div key={imgIndex}>
+                                                <img
+                                                    src={imgSrc}
+                                                    className="img-fluid w-full h-48 object-cover"
+                                                    alt={myplat.name}
+                                                />
+                                            </div>
+                                        ))}
+                                    </Slider>
+                                </div>
                             </div>
                             <div className="p-3 relative">
                                 <div className="list-card-body">
