@@ -62,8 +62,8 @@ const Restos = ({ selectedCategory, selectedLanguage }) => {
         <div className="scrolling-wrapper2" style={{ direction }}>
             {filteredRestos.length > 0 ? (
                 filteredRestos.map((resto, index) => (
-                    <div key={index} className="carte rounded-lg">
-                        <div className="osahan-slider-item py-3 px-1">
+                    <div key={index} className="carte rounded-lg ">
+                        <div className="osahan-slider-item py-3 px-1 mx-2">
                             <div className="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-lg">
                                 <div className="list-card-image">
                                     <div className="star position-absolute">
