@@ -4,6 +4,8 @@ import StarRating from './startRating/StarRating';
 import { useTranslation } from 'react-i18next';
 import Slider from 'react-slick';
 import Modal from 'react-modal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBookmark, faBookmark as faBookmarkOutline } from '@fortawesome/free-solid-svg-icons';
 
 // React-Modal setup
 Modal.setAppElement('#root');
@@ -16,21 +18,21 @@ const Myplats = () => {
     const { t } = useTranslation();
     const customStyles = {
         content: {
-          top: '50%',
-          left: '50%',
-          right: 'auto',
-          bottom: 'auto',
-          marginRight: '-50%',
-          transform: 'translate(-50%, -50%)',
-          padding: '20px',
-          borderRadius: '10px',
-          border: '1px solid #ccc',
-          background: '#fff',
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+            padding: '20px',
+            borderRadius: '10px',
+            border: '1px solid #ccc',
+            background: '#fff',
         },
         overlay: {
-          backgroundColor: 'rgba(0, 0, 0, 0.75)',
+            backgroundColor: 'rgba(0, 0, 0, 0.75)',
         },
-      };
+    };
 
     useEffect(() => {
         const fetchTwoPlats = async () => {
@@ -57,26 +59,31 @@ const Myplats = () => {
                 return;
             }
 
-
             const newFavoriteStatus = !favorites[plat_code];
             setFavorites({ ...favorites, [plat_code]: newFavoriteStatus });
 
+            const url = `https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/watchlist`;
+            const method = newFavoriteStatus ? 'POST' : 'DELETE';
+            const data = { user_code: userCode, plat_code: plat_code };
 
-            const response = await axios.post(
-                `https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/watchlist`,
-                { user_code: userCode, plat_code: plat_code },
-                { headers: { 'Authorization': `Bearer ${localStorage.getItem('access_token')}` } }
-            );
+            const response = await axios({
+                url,
+                method,
+                data,
+                headers: { 'Authorization': `Bearer ${localStorage.getItem('access_token')}` }
+            });
 
             if (response.status === 409) {
                 setModalMessage(t('Plat is already in watchlist'));
-            } else {
+            } else if (newFavoriteStatus) {
                 setModalMessage(t('Plat added to watchlist!'));
+            } else {
+                setModalMessage(t('Plat removed from watchlist!'));
             }
             setIsModalOpen(true);
         } catch (error) {
-            console.error('Error adding plat to watchlist:', error);
-            setModalMessage(t('Plat is already in watchlist'));
+            console.error('Error updating watchlist:', error);
+            setModalMessage(t('Error updating watchlist'));
             setIsModalOpen(true);
         }
     };
@@ -127,14 +134,17 @@ const Myplats = () => {
                                 </Slider>
                                 <div className="favourite-heart absolute top-2 right-2">
                                     <p
-                                        className="cursor-pointer"
+                                        className="cursor-pointer text-2xl "
                                         onClick={() => handleBookmarkClick(myplat.plat_code)}
                                     >
-                                        <i className={`feather ${favorites[myplat.plat_code] ? 'feather-bookmark ' : 'feather-bookmark '}`}></i>
+                                        <FontAwesomeIcon
+                                            icon={favorites[myplat.plat_code] ? faBookmark : faBookmarkOutline}
+                                            className={favorites[myplat.plat_code] ? 'text-red-500' : 'text-slate-50'}
+                                        />
                                     </p>
                                 </div>
                                 <div className="member-plan absolute bottom-2 left-2">
-                                    <span className="bg-red-500 text-white text-xs px-2 py-1 rounded">{t('hot')}</span>
+                                    <span className="bg-green-500 text-white text-xs px-2 py-1 rounded">{t('hot')}</span>
                                 </div>
                             </div>
                             <div className="p-3 relative">
@@ -159,7 +169,6 @@ const Myplats = () => {
                     </div>
                 ))}
             </div>
-
         </div>
     );
 };

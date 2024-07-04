@@ -6,38 +6,44 @@ import { useTranslation } from 'react-i18next';
 import Slider from 'react-slick';
 import './slick-custom.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import Modal from 'react-modal';
+
+// React-Modal setup
+Modal.setAppElement('#root');
 
 const Watchlist = () => {
     const [watchlistplats, setWatchlistPlats] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalMessage, setModalMessage] = useState('');
     const { t } = useTranslation();
 
     useEffect(() => {
-        const fetchWatchlistPlats = async () => {
-            try {
-                const userCode = localStorage.getItem('user_code');
-                if (!userCode) {
-                    console.error('User code not found in local storage');
-                    return;
-                }
-
-                const response = await axios.get(`https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/watchlist/${userCode}`);
-
-
-                console.log('Watchlist response:', response.data);
-
-
-                if (Array.isArray(response.data)) {
-                    setWatchlistPlats(response.data);
-                } else {
-                    console.error('Response data is not an array:', response.data);
-                }
-            } catch (error) {
-                console.error('Error fetching watchlist plats:', error);
-            }
-        };
-
         fetchWatchlistPlats();
     }, []);
+
+    const fetchWatchlistPlats = async () => {
+        try {
+            const userCode = localStorage.getItem('user_code');
+            if (!userCode) {
+                console.error('User code not found in local storage');
+                return;
+            }
+
+            const response = await axios.get(`https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/watchlist/${userCode}`);
+
+            console.log('Watchlist response:', response.data);
+
+            if (Array.isArray(response.data)) {
+                setWatchlistPlats(response.data);
+            } else {
+                console.error('Response data is not an array:', response.data);
+            }
+        } catch (error) {
+            console.error('Error fetching watchlist plats:', error);
+        }
+    };
+
     const handleRemoveClick = async (plat_code) => {
         try {
             const userCode = localStorage.getItem('user_code');
@@ -54,16 +60,20 @@ const Watchlist = () => {
                 }
             );
 
-            
-            setWatchlistPlats(watchlistplats.filter(plat => plat.plat_code !== plat_code));
+            // Refresh the watchlist
+            fetchWatchlistPlats();
 
-            
-            alert(t('Plat removed from watchlist!'));
+            setModalMessage(t('Plat removed from watchlist!'));
+            setIsModalOpen(true);
         } catch (error) {
             console.error('Error removing plat from watchlist:', error);
-            // Optionally, show an error message
-            alert(t('Error removing plat from watchlist'));
+            setModalMessage(t('Error removing plat from watchlist'));
+            setIsModalOpen(true);
         }
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
     };
 
     const settings = {
@@ -76,6 +86,35 @@ const Watchlist = () => {
 
     return (
         <div className="most_popular px-3 mb-6 ">
+            <Modal
+                isOpen={isModalOpen}
+                onRequestClose={closeModal}
+                contentLabel="Watchlist Status"
+                style={{
+                    content: {
+                        top: '50%',
+                        left: '50%',
+                        right: 'auto',
+                        bottom: 'auto',
+                        marginRight: '-50%',
+                        transform: 'translate(-50%, -50%)',
+                        padding: '20px',
+                        borderRadius: '10px',
+                        border: '1px solid #ccc',
+                        background: '#fff',
+                    },
+                    overlay: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.75)',
+                    },
+                }}
+            >
+                <div>
+                    <h2 className="text-2xl mb-4">{modalMessage}</h2>
+                    <button onClick={closeModal} className="bg-pink-600 text-white py-2 px-4 rounded">
+                        {t('Close')}
+                    </button>
+                </div>
+            </Modal>
             {watchlistplats.length === 0 ? (
                 <div className="no-plats-container flex flex-col items-center justify-center h-full">
                     <img
@@ -92,7 +131,9 @@ const Watchlist = () => {
                             <div className="list-card bg-white h-full rounded overflow-hidden relative shadow-lg">
                                 <div className="list-card-image relative">
                                     <div className="favourite-heart absolute top-2 right-2">
-                                        <p className="cursor-pointer"><FontAwesomeIcon icon="fa-regular fa-star" /></p>
+                                        <p className="cursor-pointer">
+                                            <FontAwesomeIcon icon="fa-regular fa-star" />
+                                        </p>
                                     </div>
                                     <div className="member-plan absolute bottom-2 left-2">
                                         <span className="badge badge-danger">{t('hot')}</span>
@@ -109,8 +150,8 @@ const Watchlist = () => {
                                                         />
                                                     </div>
                                                 )) || (
-                                                        <p>{t('noImages')}</p>
-                                                    )}
+                                                    <p>{t('noImages')}</p>
+                                                )}
                                             </Slider>
                                         </div>
                                     </a>
@@ -142,7 +183,8 @@ const Watchlist = () => {
                                             className="btn btn-outline-danger"
                                             onClick={() => handleRemoveClick(watchlistplat.plat?.plat_code)}
                                         >
-                                            {t('Remove from Watchlist')}
+                                            <FontAwesomeIcon icon={faTrash} className="text-red-500 mr-2" />
+                                            {t('Delete')}
                                         </button>
                                     </div>
                                 </div>
