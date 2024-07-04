@@ -88,16 +88,17 @@ const LoginWithEmail = () => {
                             <img src="img/search.svg" alt="Google" className="inline-block mr-2" /> Google
                         </button>
                     </div>
-                </div>
-                <div className="mb-3 d-flex align-items-center justify-content-center p-3">
+                    <div className="mb-3 d-flex align-items-center justify-content-center p-3">
                     <Link to="/register-email">
                         <p className="text-center text-white text-xs"> Create account?<span className='cursor-pointer ml-1 text-pink-500'>Sign up</span></p>
                     </Link>
                 </div>
+                </div>
+                
             </div>
 
             {/* Footer with links */}
-            <div className="absolute bottom-0 w-full text-center p-3">
+            <div className="absolute bottom-0 w-full text-center p-3 mt-16">
                 <p className="text-white mb-1 text-xm">By continuing, you agree to our</p>
                 <p className="small">
                     <a className="text-white opacity-75 border-b border-white-50 text-xs" href="terms.html">Terms of Service</a>

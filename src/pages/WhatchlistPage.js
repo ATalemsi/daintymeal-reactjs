@@ -71,6 +71,7 @@ const WatchlistPage = () => {
 
                 
             </div>
+            <div className="mb-16" /> 
             <Footer />
             <Navbar />
 

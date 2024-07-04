@@ -262,12 +262,12 @@ const Profile = () => {
                         <HistoricTrans />
 
                         <button 
-                            className="bg-red-600 text-white py-2 px-4 rounded mt-4" 
+                            className="bg-pink-600 text-white py-2 px-4 rounded mt-4 w-1/2 " 
                             onClick={logout}
                         >
                             Logout
                         </button>
-
+                        <div className="mb-24" /> 
                         <Navbar />
                         <Footer />
                     </div>

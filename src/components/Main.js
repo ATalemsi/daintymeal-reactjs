@@ -186,6 +186,7 @@ const Main = ({ selectedLanguage }) => {
                     )}
                 </>
             )}
+            <div className="mb-16" /> 
         </div>
     );
 };
