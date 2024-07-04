@@ -111,8 +111,8 @@ const Header = ({ onLanguageChange }) => {
       >
         <h2>Allow location access</h2>
         <p>We need your permission to access your location to provide better services.</p>
-        <button onClick={handleAllowLocation} className="btn btn-primary">Allow</button>
-        <button onClick={handleDenyLocation} className="btn btn-secondary">Deny</button>
+        <button onClick={handleAllowLocation} className="btn btn-primary mx-1.5">Allow</button>
+        <button onClick={handleDenyLocation} className="btn btn-secondary mx-1.5">Deny</button>
       </Modal>
 
       <div className="title d-flex align-items-center">

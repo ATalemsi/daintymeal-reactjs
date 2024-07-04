@@ -66,9 +66,6 @@ const Restos = ({ selectedCategory, selectedLanguage }) => {
                         <div className="osahan-slider-item py-3 px-1 mx-2">
                             <div className="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-lg">
                                 <div className="list-card-image">
-                                    <div className="star position-absolute">
-                                        <span className="badge badge-success"><i className="feather-star" />{resto.rating}</span>
-                                    </div>
                                     <Slider {...settings}>
                                         {resto.image.map((imgSrc, imgIndex) => (
                                             <div key={imgIndex}>
@@ -76,6 +73,11 @@ const Restos = ({ selectedCategory, selectedLanguage }) => {
                                             </div>
                                         ))}
                                     </Slider>
+                                    <div className="star position-absolute">
+                                        <span className="badge badge-success"><i className="feather-star" />{resto.rating}</span>
+                                    </div>
+                                    <div className="favourite-heart position-absolute"><a href="#"><i className="feather-bookmark" /></a>
+                                    </div>
                                 </div>
                                 <div className="p-3 position-relative">
                                     <div className="list-card-body">
@@ -94,8 +96,7 @@ const Restos = ({ selectedCategory, selectedLanguage }) => {
                                     <div className="list-card-badge d-flex align-items-center">
                                         <span className="badge badge-danger mr-2"> {t('offer')} </span>
                                     </div>
-                                    <div className="favourite-heart position-absolute"><a href="#"><i className="feather-bookmark" /></a>
-                                    </div>
+                                   
                                 </div>
                             </div>
                         </div>
