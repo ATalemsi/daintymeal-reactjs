@@ -49,11 +49,11 @@ const Watchlist = () => {
     };
 
     return (
-        <div className="most_popular px-3">
+        <div className="most_popular px-3 my-6">
             {watchlistplats.length === 0 ? (
                 <div className="no-plats-container flex flex-col items-center justify-center h-full">
                     <img 
-                        src="/path/to/no-plats-image.png"  // Replace with the path to your no-plats image
+                        src="https://res.cloudinary.com/dz4pww2qv/image/upload/v1717851494/ep4bkvb42vi3jhixixww.jpg"  // Replace with the path to your no-plats image
                         alt="No Plats Available"
                         className="no-plats-image mb-4"
                     />

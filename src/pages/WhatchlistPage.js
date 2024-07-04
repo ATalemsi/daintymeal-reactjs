@@ -69,8 +69,9 @@ const WatchlistPage = () => {
 
                 <Watchlist />
 
-                <Footer />
+                
             </div>
+            <Footer />
             <Navbar />
 
         </>
