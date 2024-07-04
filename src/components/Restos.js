@@ -63,7 +63,7 @@ const Restos = ({ selectedCategory, selectedLanguage }) => {
             {filteredRestos.length > 0 ? (
                 filteredRestos.map((resto, index) => (
                     <div key={index} className="carte rounded-lg ">
-                        <div className="osahan-slider-item py-3 px-1 mx-2">
+                        <div className="osahan-slider-item py-3 px-1 mx-2x">
                             <div className="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-lg">
                                 <div className="list-card-image">
                                     <div className="star position-absolute">

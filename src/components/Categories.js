@@ -42,7 +42,7 @@ const Categories = ({ onCategorySelect, selectedLanguage }) => {
         <div className="scrolling-wrapper h-full">
             <div className="cat-item px-1 py-3 mx-2" onClick={() => onCategorySelect(null)}>
                 <a className="d-block text-center">
-                    <div style={{ width: 48, height: 48, overflow: 'hidden', display: 'block', margin: '10px auto' }}>
+                    <div style={{ width: 40, height: 40, overflow: 'hidden', display: 'block', margin: '10px auto' }}>
                         <img src="https://res.cloudinary.com/dz4pww2qv/image/upload/v1718113062/Category/k9k2harclh3zvrhxr5vt.svg" alt={getAllTranslation()} />
                     </div>
                     <p className="m-0 small">{getAllTranslation()}</p>
