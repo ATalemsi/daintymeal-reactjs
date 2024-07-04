@@ -63,13 +63,12 @@ const Restos = ({ selectedCategory, selectedLanguage }) => {
             {filteredRestos.length > 0 ? (
                 filteredRestos.map((resto, index) => (
                     <div key={index} className="carte rounded-lg ">
-                        <div className="osahan-slider-item py-3 px-1 mx-2x">
+                        <div className="osahan-slider-item py-3 px-1 mx-2">
                             <div className="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-lg">
                                 <div className="list-card-image">
                                     <div className="star position-absolute">
                                         <span className="badge badge-success"><i className="feather-star" />{resto.rating}</span>
                                     </div>
-                                    <div className="favourite-heart position-absolute"><p className="cursor-pointer"><FontAwesomeIcon icon="fa-regular fa-star" /></p></div>
                                     <Slider {...settings}>
                                         {resto.image.map((imgSrc, imgIndex) => (
                                             <div key={imgIndex}>
@@ -95,6 +94,7 @@ const Restos = ({ selectedCategory, selectedLanguage }) => {
                                     <div className="list-card-badge d-flex align-items-center">
                                         <span className="badge badge-danger mr-2"> {t('offer')} </span>
                                     </div>
+                                    <div className="favourite-heart position-absolute text-right"><p className="cursor-pointer"><FontAwesomeIcon icon="fa-regular fa-star" /></p></div>
                                 </div>
                             </div>
                         </div>
