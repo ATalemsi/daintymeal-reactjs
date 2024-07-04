@@ -96,17 +96,22 @@ const Restos = ({ selectedCategory, selectedLanguage }) => {
                                     <div className="list-card-badge d-flex align-items-center">
                                         <span className="badge badge-danger mr-2"> {t('offer')} </span>
                                     </div>
-                                   
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 ))
             ) : (
-                <div className="no-restos">
-                    <img src="https://res.cloudinary.com/dz4pww2qv/image/upload/v1719225646/kt3uezwvl66oifbmnlpy.png" alt="No Restaurants" className="img-fluid" />
+                <div className="flex flex-col justify-center items-center h-full text-center">
+                    <img
+                        src="https://res.cloudinary.com/dz4pww2qv/image/upload/v1719225646/kt3uezwvl66oifbmnlpy.png"
+                        alt="No Restaurants"
+                        className="img-fluid w-48 h-32"
+                    />
                     <p>{t('noRestosForCategory')}</p>
                 </div>
+
             )}
         </div>
     );

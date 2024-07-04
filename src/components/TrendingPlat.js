@@ -132,12 +132,12 @@ const TrendingPlat = () => {
                                     </Slider>
                                     <div className="favourite-heart absolute top-2 right-2">
                                     <p
-                                        className="cursor-pointer text-3xl p-2 bg-white rounded-full shadow-md"
+                                        className="cursor-pointer text-2xl "
                                         onClick={() => handleBookmarkClick(trendingplat.plat_code)}
                                     >
                                         <FontAwesomeIcon
                                             icon={favorites[trendingplat.plat_code] ? faBookmark : faBookmarkOutline}
-                                            className={favorites[trendingplat.plat_code] ? 'text-red-500' : 'text-gray-500'}
+                                            className={favorites[trendingplat.plat_code] ? 'text-red-500' : 'text-slate-50'}
                                         />
                                     </p>
                                 </div>
