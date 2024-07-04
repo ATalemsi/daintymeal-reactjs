@@ -20,8 +20,6 @@ const LoginWithEmail = () => {
             localStorage.setItem('refresh_token', response.data.refresh_token);
             localStorage.setItem('user_code', response.data.user.user_code);
 
-
-            
             navigate('/'); 
         } catch (error) {
             console.error('Login failed:', error.response ? error.response.data : error.message);
@@ -30,7 +28,7 @@ const LoginWithEmail = () => {
     };
     return (
         <div className="login-page vh-100 relative overflow-hidden">
-            {/* Background image with shadow */}
+            
             <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://res.cloudinary.com/dz4pww2qv/image/upload/v1719502244/mznp6bdxtpogogt9wucf.jpg')" }}>
                 <div className="absolute inset-0 bg-black opacity-50"></div>
             </div>
@@ -41,7 +39,7 @@ const LoginWithEmail = () => {
                 <form className="mt-5 mb-4" onSubmit={handleLogin}>
                     <div className="form-group mb-3">
                         <input
-                            id="e"
+                            id="email"
                             className="form-control form-control-lg border-0 text-xm"
                             name="name"
                             placeholder="Email Address"

@@ -21,14 +21,13 @@ const Watchlist = () => {
                 }
 
                 const response = await axios.get(`https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/watchlist/${userCode}`);
-                
-                // Check the response structure
+
+
                 console.log('Watchlist response:', response.data);
-                
-                // Assuming `response.data` contains an array of watchlist items
-                // Check if `response.data` is an array
+
+
                 if (Array.isArray(response.data)) {
-                    setWatchlistPlats(response.data);  // Set the watchlist plats to the fetched data
+                    setWatchlistPlats(response.data);
                 } else {
                     console.error('Response data is not an array:', response.data);
                 }
@@ -39,6 +38,33 @@ const Watchlist = () => {
 
         fetchWatchlistPlats();
     }, []);
+    const handleRemoveClick = async (plat_code) => {
+        try {
+            const userCode = localStorage.getItem('user_code');
+            if (!userCode) {
+                console.error('User code not found in local storage');
+                return;
+            }
+
+            await axios.delete(
+                `https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/watchlist`,
+                {
+                    headers: { 'Authorization': `Bearer ${localStorage.getItem('access_token')}` },
+                    data: { user_code: userCode, plat_code }
+                }
+            );
+
+            
+            setWatchlistPlats(watchlistplats.filter(plat => plat.plat_code !== plat_code));
+
+            
+            alert(t('Plat removed from watchlist!'));
+        } catch (error) {
+            console.error('Error removing plat from watchlist:', error);
+            // Optionally, show an error message
+            alert(t('Error removing plat from watchlist'));
+        }
+    };
 
     const settings = {
         dots: true,
@@ -49,20 +75,20 @@ const Watchlist = () => {
     };
 
     return (
-        <div className="most_popular px-3 my-6">
+        <div className="most_popular px-3 mb-6 ">
             {watchlistplats.length === 0 ? (
                 <div className="no-plats-container flex flex-col items-center justify-center h-full">
-                    <img 
-                        src="https://res.cloudinary.com/dz4pww2qv/image/upload/v1717851494/ep4bkvb42vi3jhixixww.jpg"  // Replace with the path to your no-plats image
+                    <img
+                        src="https://res.cloudinary.com/dz4pww2qv/image/upload/v1717851494/ep4bkvb42vi3jhixixww.jpg"
                         alt="No Plats Available"
                         className="no-plats-image mb-4"
                     />
-                    <p className="text-lg text-gray-500">{t('noPlatsInWatchlist')}</p>
+                    <p className="text-lg text-gray-500">{t('No Plats In Watchlist')}</p>
                 </div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {watchlistplats.map((watchlistplat, index) => (
-                        <div key={index} className="px-2 py-2">
+                        <div key={index} className="px-2 py-2 text-left">
                             <div className="list-card bg-white h-full rounded overflow-hidden relative shadow-lg">
                                 <div className="list-card-image relative">
                                     <div className="favourite-heart absolute top-2 right-2">
@@ -83,8 +109,8 @@ const Watchlist = () => {
                                                         />
                                                     </div>
                                                 )) || (
-                                                    <p>{t('noImages')}</p>  
-                                                )}
+                                                        <p>{t('noImages')}</p>
+                                                    )}
                                             </Slider>
                                         </div>
                                     </a>
@@ -110,8 +136,14 @@ const Watchlist = () => {
                                         )}
                                         <small>{watchlistplat.plat?.discount ? '60%' : ''}</small>
                                     </div>
-                                    <div className="mt-2">
+                                    <div className="mt-2 flex gap-2">
                                         <button className="btn btn-outline-primary">{t('addToCart')}</button>
+                                        <button
+                                            className="btn btn-outline-danger"
+                                            onClick={() => handleRemoveClick(watchlistplat.plat?.plat_code)}
+                                        >
+                                            {t('Remove from Watchlist')}
+                                        </button>
                                     </div>
                                 </div>
                             </div>
