@@ -8,7 +8,6 @@ import { FaPlus } from 'react-icons/fa';
 import Navbar from '../components/Navbar';
 import Footer from "../components/Footer";
 import axios from 'axios';
-
 import imageCompression from 'browser-image-compression';
 
 const Profile = () => {
@@ -55,6 +54,7 @@ const Profile = () => {
             fetchUserData();
         }
     }, [isLoggedIn]);
+
     const handleFileChange = async (event) => {
         const file = event.target.files[0];
         if (file) {
@@ -260,6 +260,14 @@ const Profile = () => {
                         <PaymentCard />
                         <AdressDetailles />
                         <HistoricTrans />
+
+                        <button 
+                            className="bg-red-600 text-white py-2 px-4 rounded mt-4" 
+                            onClick={logout}
+                        >
+                            Logout
+                        </button>
+
                         <Navbar />
                         <Footer />
                     </div>
