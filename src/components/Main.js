@@ -94,7 +94,6 @@ const Main = ({ selectedLanguage }) => {
                     <div style={{ direction: 'ltr' }}>
                         <Categories selectedLanguage={selectedLanguage} onCategorySelect={handleCategorySelect} />
                     </div>
-                    <Filter />
                     <Publicity />
                     <div className="px-3 pt-4 pb-3 title d-flex align-items-center">
                         <h6 className="m-0 font-weight-bold text-2xl"> {t('restaurant')} </h6>
