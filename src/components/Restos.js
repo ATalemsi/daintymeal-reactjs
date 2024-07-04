@@ -94,7 +94,8 @@ const Restos = ({ selectedCategory, selectedLanguage }) => {
                                     <div className="list-card-badge d-flex align-items-center">
                                         <span className="badge badge-danger mr-2"> {t('offer')} </span>
                                     </div>
-                                    <div className="favourite-heart position-absolute text-right"><p className="cursor-pointer"><FontAwesomeIcon icon="fa-regular fa-star" /></p></div>
+                                    <div className="favourite-heart position-absolute"><a href="#"><i className="feather-bookmark" /></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
