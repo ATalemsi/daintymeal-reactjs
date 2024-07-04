@@ -41,9 +41,7 @@ const Header = ({ onLanguageChange }) => {
             fetchLocation();
           } else {
             setPermissionGranted(false);
-           
             setLocationName('Geolocation permission denied');
-            return  
           }
         })
         .catch((error) => {
