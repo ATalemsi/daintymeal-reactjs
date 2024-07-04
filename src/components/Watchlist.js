@@ -177,14 +177,13 @@ const Watchlist = () => {
                                         )}
                                         <small>{watchlistplat.plat?.discount ? '60%' : ''}</small>
                                     </div>
-                                    <div className="mt-2 flex gap-2">
+                                    <div className="mt-2 flex justify-between">
                                         <button className="btn btn-outline-primary">{t('addToCart')}</button>
                                         <button
-                                            className="btn btn-outline-danger"
+                                            className="cursor-pointer text-xl "
                                             onClick={() => handleRemoveClick(watchlistplat.plat?.plat_code)}
                                         >
                                             <FontAwesomeIcon icon={faTrash} className="text-red-500 mr-2" />
-                                            {t('Delete')}
                                         </button>
                                     </div>
                                 </div>

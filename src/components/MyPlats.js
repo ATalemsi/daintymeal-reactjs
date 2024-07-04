@@ -35,20 +35,46 @@ const Myplats = () => {
     };
 
     useEffect(() => {
-        const fetchTwoPlats = async () => {
+        const fetchMyPlatsAndFavorites = async () => {
             try {
-                const response = await axios.get('https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/plats/two');
-                setMyplats(response.data);
+                const userCode = localStorage.getItem('user_code');
+                if (!userCode) {
+                    console.error('User code not found in local storage');
+                    return;
+                }
+
+                // Fetching plats
+                const platsResponse = await axios.get('https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/plats/two');
+                setMyplats(platsResponse.data);
+
+                // Fetching watchlist data
+                const watchlistResponse = await axios.get(`https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/watchlist/${userCode}`, {
+                    headers: { 'Authorization': `Bearer ${localStorage.getItem('access_token')}` }
+                });
+
+                // Fetching all plats to map plat_id to plat_code
+                const platsMappingResponse = await axios.get('https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/plats');
+                const platCodeMap = {};
+                platsMappingResponse.data.forEach(plat => {
+                    platCodeMap[plat._id] = plat.plat_code;
+                });
+
+                // Initializing favorites from watchlist response
                 const initialFavorites = {};
-                response.data.forEach(plat => {
-                    initialFavorites[plat.plat_code] = plat.isFavorite || false;
+                watchlistResponse.data.forEach(plat => {
+                    const plat_code = platCodeMap[plat.plat];
+                    if (plat_code) {
+                        initialFavorites[plat_code] = true;
+                    }
                 });
                 setFavorites(initialFavorites);
+
             } catch (error) {
-                console.error('Error fetching myplats:', error);
+                console.error('Error fetching data:', error);
             }
         };
-        fetchTwoPlats();
+
+        fetchMyPlatsAndFavorites();
     }, []);
 
     const handleBookmarkClick = async (plat_code) => {
@@ -117,7 +143,7 @@ const Myplats = () => {
                 </div>
             </Modal>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {myplats && myplats.map((myplat, index) => (
+                {myplats.map((myplat, index) => (
                     <div key={index} className="px-2 py-2">
                         <div className="list-card bg-white h-full rounded overflow-hidden relative shadow-lg">
                             <div className="list-card-image relative w-full h-48 overflow-hidden">
