@@ -41,25 +41,24 @@ const TrendingPlat = () => {
                     <div key={index} className="px-2 py-2">
                         <div className="list-card bg-white h-full rounded overflow-hidden relative shadow-lg">
                             <div className="list-card-image relative">
-                            <div className="favourite-heart position-absolute"><p className="cursor-pointer"><FontAwesomeIcon icon="fa-regular fa-star" /></p></div>
-                                <div className="member-plan absolute bottom-2 left-2">
-                                    <span className="badge badge-danger">{t('hot')}</span>
-                                </div>
-                                <a href="restaurant.html">
-                                    <div className="w-full h-48 overflow-hidden">
-                                        <Slider {...settings}>
-                                            {trendingplat.image.map((imgSrc, imgIndex) => (
-                                                <div key={imgIndex}>
-                                                    <img
-                                                        src={imgSrc}
-                                                        className="img-fluid w-full h-48 object-cover"
-                                                        alt={trendingplat.name}
-                                                    />
-                                                </div>
-                                            ))}
-                                        </Slider>
+                                <div className="w-full h-48 overflow-hidden">
+                                    <Slider {...settings}>
+                                        {trendingplat.image.map((imgSrc, imgIndex) => (
+                                            <div key={imgIndex}>
+                                                <img
+                                                    src={imgSrc}
+                                                    className="img-fluid w-full h-48 object-cover"
+                                                    alt={trendingplat.name}
+                                                />
+                                            </div>
+                                        ))}
+                                    </Slider>
+                                    <div class="favourite-heart position-absolute"><a href="#"><i class="feather-bookmark"></i></a>
                                     </div>
-                                </a>
+                                    <div className="member-plan absolute bottom-2 left-2">
+                                        <span className="badge badge-danger">{t('hot')}</span>
+                                    </div>
+                                </div>
                             </div>
                             <div className="p-3 relative">
                                 <div className="list-card-body">

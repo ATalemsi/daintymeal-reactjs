@@ -60,12 +60,7 @@ const PopularRestos = ({ selectedLanguage }) => {
                     <div key={index} className="px-2 py-2">
                         <div className="list-card bg-white h-full rounded overflow-hidden relative shadow-lg">
                             <div className="list-card-image relative">
-                                <div className="favourite-heart absolute top-2 right-2">
-                                    <a href="#"><i className="feather-bookmark" /></a>
-                                </div>
-                                <div className="member-plan absolute bottom-2 left-2">
-                                    <span className="badge badge-danger">{t('hot')}</span>
-                                </div>
+
                                 <p>
                                     <div className="w-full h-48 overflow-hidden">
                                         <Slider {...settings}>
@@ -81,7 +76,12 @@ const PopularRestos = ({ selectedLanguage }) => {
                                         </Slider>
                                     </div>
                                 </p>
-
+                                <div className="favourite-heart absolute top-2 right-2">
+                                    <a href="#"><i className="feather-bookmark" /></a>
+                                </div>
+                                <div className="member-plan absolute bottom-2 left-2">
+                                    <span className="badge badge-danger">{t('hot')}</span>
+                                </div>
                             </div>
                             <div className="p-3 relative">
                                 <div className="list-card-body">
