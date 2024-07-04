@@ -22,9 +22,9 @@ const Watchlist = () => {
                     return;
                 }
 
-                // Fetch watchlist plats using the user_code
+                
                 const response = await axios.get(`https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/wishlists/${userCode}`);
-                setWatchlistPlats(response.data.plats);  // Assuming the API returns { plats: [...] }
+                setWatchlistPlats(response.data.plats); 
             } catch (error) {
                 console.error('Error fetching watchlist plats:', error);
             }
@@ -49,7 +49,7 @@ const Watchlist = () => {
                         alt="No Plats Available"
                         className="no-plats-image mb-4"
                     />
-                    <p className="text-lg text-gray-500">{t('noPlatsInWatchlist')}</p>
+                    <p className="text-lg text-gray-500">NO Plats In Watchlist</p>
                 </div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
