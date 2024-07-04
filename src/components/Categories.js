@@ -49,7 +49,7 @@ const Categories = ({ onCategorySelect, selectedLanguage }) => {
                 </a>
             </div>
             {categories && categories.map((category, index) => (
-                <div key={index} className="cat-item px-1 py-3 mx-4" onClick={() => onCategorySelect(category.category_code)}>
+                <div key={index} className="cat-item px-1 py-3 mx-2" onClick={() => onCategorySelect(category.category_code)}>
                     <a className="d-block text-center">
                         <div style={{ width: 40, height: 40, overflow: 'hidden', display: 'block', margin: '10px auto' }}>
                             <img src={category.image} alt={getCategoryName(category)} />
