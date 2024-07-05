@@ -32,7 +32,7 @@ const AppRouter = () => {
                     <Route path="/location" element={<Location />} />
                     <Route path="/select_country" element={<SelectLocation />} />
                     <Route path="/" element={<HomePage />} />
-                    <Route path="/new-feature" component={UnderConstruction} />
+                    <Route path="/new-feature" element={<UnderConstruction />} />
                 </Routes>
                 <FilterDetaille />
             </div>
