@@ -77,7 +77,7 @@ const PopularRestos = ({ selectedLanguage }) => {
                                     </div>
                                 </p>
                                 <div className="favourite-heart absolute top-2 right-2">
-                                    <a href="#"><i className="feather-bookmark" /></a>
+                                    <p ><i className="feather-bookmark" /></p>
                                 </div>
                                 <div className="member-plan absolute bottom-2 left-2">
                                     <span className="badge badge-danger">{t('hot')}</span>

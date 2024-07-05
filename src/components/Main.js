@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { FaSpinner } from 'react-icons/fa';
 import Categories from './Categories';
-import Filter from './Filter';
 import Publicity from './Publicity';
 import Restos from './Restos';
 import PopularRestos from './PopularRestos';
@@ -12,6 +11,7 @@ import Myplats from './MyPlats';
 import FilteredPlats from './FilterePlats';
 import { useTranslation } from 'react-i18next';
 import i18n from '../i18n';
+import { Link } from 'react-router-dom';
 
 const Main = ({ selectedLanguage }) => {
     const [selectedCategory, setSelectedCategory] = useState(null);
@@ -97,7 +97,7 @@ const Main = ({ selectedLanguage }) => {
                     <Publicity />
                     <div className="px-3 pt-4 pb-3 title d-flex align-items-center">
                         <h6 className="m-0 font-weight-bold text-2xl"> {t('restaurant')} </h6>
-                        <a className="font-weight-bold ml-auto text-pink-800 text-sm" href="most_popular.html">{t('Viewall')}<i className="feather-chevrons-right" /></a>
+                        <Link className="font-weight-bold ml-auto text-pink-800 text-sm" to="/new-feature">{t('Viewall')}<i className="feather-chevrons-right" /></Link>
                     </div>
                     <Restos selectedLanguage={selectedLanguage} selectedCategory={selectedCategory} />
                     {selectedCategory ? (
@@ -108,70 +108,70 @@ const Main = ({ selectedLanguage }) => {
                         <>
                             <div className="px-3 pt-3 title d-flex align-items-center">
                                 <h6 className="m-0 font-weight-bold text-2xl"> {t('myPlats')} </h6>
-                                <a className="font-weight-bold ml-auto" href="trending.html">{t('Viewall')}<i className="feather-chevrons-right" /></a>
+                                <Link className="font-weight-bold ml-auto" to="/new-feature">{t('Viewall')}<i className="feather-chevrons-right" /></Link>
                             </div>
                             <Myplats />
                             <div className="px-3 pt-4 pb-3 title d-flex align-items-center">
                                 <h6 className="m-0 font-weight-bold text-2xl">{t('trendingPlat')}</h6>
-                                <a className="font-weight-bold ml-auto" href="most_popular.html">{t('Viewall')}<i className="feather-chevrons-right" /></a>
+                                <Link className="font-weight-bold ml-auto" to="/trending">{t('Viewall')}<i className="feather-chevrons-right" /></Link>
                             </div>
                             <TrendingPlat />
                             <div className="p-3">
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     <div className="md:hidden">
-                                        <a href="trending.html">
+                                        <Link to="/new-feature">
                                             <img src="img/banner1.png" className="w-full md:max-w-md mx-auto rounded-lg" alt="Banner 1" />
-                                        </a>
+                                        </Link>
                                     </div>
                                     <div className="hidden md:block col-span-1">
-                                        <a href="trending.html">
+                                        <Link to="/new-feature">
                                             <img src="img/banner1.png" className="max-w-md mx-auto rounded-lg" alt="Banner 1" />
-                                        </a>
+                                        </Link>
                                     </div>
                                     <div className="hidden md:block col-span-1">
-                                        <a href="trending.html">
+                                        <Link to="/new-feature">
                                             <img src="img/banner2.png" className="max-w-md mx-auto rounded-lg" alt="Banner 2" />
-                                        </a>
+                                        </Link>
                                     </div>
                                     <div className="hidden md:block col-span-1">
-                                        <a href="trending.html">
+                                        <Link to="/new-feature">
                                             <img src="img/banner.png" className="max-w-md mx-auto rounded-lg" alt="Banner 3" />
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
                             <div className="px-3 pt-4 pb-3 title d-flex align-items-center">
                                 <h6 className="m-0 font-weight-bold text-2xl "> {t('popularRestaurant')} </h6>
-                                <a className="font-weight-bold ml-auto" href="most_popular.html">{t('Viewall')}<i className="feather-chevrons-right" /></a>
+                                <Link className="font-weight-bold ml-auto" to="/new-feature">{t('Viewall')}<i className="feather-chevrons-right" /></Link>
                             </div>
                             <PopularRestos />
                             <div className="p-3">
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     <div className="md:hidden">
-                                        <a href="trending.html">
+                                        <Link to="/new-feature">
                                             <img src="img/banner1.png" className="w-full md:max-w-md mx-auto rounded-lg" alt="Banner 1" />
-                                        </a>
+                                        </Link>
                                     </div>
                                     <div className="hidden md:block col-span-1">
-                                        <a href="trending.html">
+                                        <Link to="/new-feature">
                                             <img src="img/banner1.png" className="max-w-md mx-auto rounded-lg" alt="Banner 1" />
-                                        </a>
+                                        </Link>
                                     </div>
                                     <div className="hidden md:block col-span-1">
-                                        <a href="trending.html">
+                                        <Link to="/new-feature">
                                             <img src="img/banner2.png" className="max-w-md mx-auto rounded-lg" alt="Banner 2" />
-                                        </a>
+                                        </Link>
                                     </div>
                                     <div className="hidden md:block col-span-1">
-                                        <a href="trending.html">
+                                        <Link to="/new-feature">
                                             <img src="img/banner.png" className="max-w-md mx-auto rounded-lg" alt="Banner 3" />
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
                             <div className="px-3 pt-4 pb-3 title d-flex align-items-center">
                                 <h6 className="m-0 font-weight-bold text-2xl"> {t('mostSales')} </h6>
-                                <a className="font-weight-bold ml-auto" href="most_popular.html">View all<i className="feather-chevrons-right" /></a>
+                                <Link className="font-weight-bold ml-auto" to="/new-feature">View all<i className="feather-chevrons-right" /></Link>
                             </div>
                             <MostSales />
                         </>
@@ -186,7 +186,7 @@ const Main = ({ selectedLanguage }) => {
                     )}
                 </>
             )}
-            <div className="mb-16" /> 
+            <div className="mb-16" />
         </div>
     );
 };

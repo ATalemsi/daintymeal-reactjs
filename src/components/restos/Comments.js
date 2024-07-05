@@ -31,17 +31,17 @@ const Comments = () => {
   const renderComment = (comment, index) => (
     <div key={index} className="py-3">
       <div className="flex items-start">
-        <a href="#">
+        <p>
           <img
             src={comment.createdBy.imageProfile}
             className="w-12 h-12 rounded-full mr-3"
             alt="Reviewer Profile"
           />
-        </a>
+        </p>
         <div className="flex-1">
           <div className="flex justify-between items-center">
             <h6 className="mb-0">
-              <a className="text-dark" href="#">{comment.createdBy.name}</a>
+              <p className="text-dark">{comment.createdBy.name}</p>
             </h6>
             <div className="star-rating">
               <StarRating rating={comment.rating} />
@@ -57,7 +57,7 @@ const Comments = () => {
 
   return (
     <div className="bg-white shadow-sm p-3 mb-3">
-      <a className="text-primary float-right" href="#">Top Rated</a>
+      <p className="text-primary float-right">Top Rated</p>
       <h6 className="mb-1">All Ratings and Reviews</h6>
       {comments.slice(0, 3).map(renderComment)}
       <button 

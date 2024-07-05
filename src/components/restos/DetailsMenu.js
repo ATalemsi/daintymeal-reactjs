@@ -1,6 +1,5 @@
 import React from "react";
 import Menu from "./Menu";
-import Rating from "./Rating";
 import Review from "./Review";
 
 

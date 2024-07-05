@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import './slick-custom.css';
 import { useTranslation } from 'react-i18next';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 const Restos = ({ selectedCategory, selectedLanguage }) => {
     const [restos, setRestos] = useState([]);
@@ -76,7 +76,7 @@ const Restos = ({ selectedCategory, selectedLanguage }) => {
                                     <div className="star position-absolute">
                                         <span className="badge badge-success"><i className="feather-star" />{resto.rating}</span>
                                     </div>
-                                    <div className="favourite-heart position-absolute"><a href="#"><i className="feather-bookmark" /></a>
+                                    <div className="favourite-heart position-absolute"><p className='cursor-pointer'><i className="feather-bookmark" /></p>
                                     </div>
                                 </div>
                                 <div className="p-3 position-relative">

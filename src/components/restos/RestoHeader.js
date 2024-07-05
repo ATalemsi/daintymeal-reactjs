@@ -17,7 +17,6 @@ const RestoHeader = () => {
                     <a className="text-white mx-2 top-nav-btn top-nav-btn-cart fs-18 position-relative" href="#ratings-and-reviews"><i className="feather-message-square" /> <span className="border">3</span></a>
                     <a className="text-white mx-2 top-nav-btn top-nav-btn-cart fs-18 position-relative" href="#ratings-and-reviews"><i className="feather-star" /></a>
                     <a className="text-white mx-2 top-nav-btn top-nav-btn-cart fs-18 position-relative" href="#ratings-and-reviews"><i className="feather-map-pin" /></a>
-                    <a className="text-white mx-2 top-nav-btn top-nav-btn-cart fs-18 position-relative" href="contact-us.html"><i className="feather-phone" /></a>
                     <a className="toggle ml-2 text-white hc-nav-trigger hc-nav-1" href="#" role="button" aria-controls="hc-nav-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} fill="currentColor" className="bi bi-list" viewBox="0 0 16 16">
                             <path fillRule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">

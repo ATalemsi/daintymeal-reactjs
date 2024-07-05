@@ -72,7 +72,7 @@ const TrendingPlat = () => {
             if (newFavoriteStatus) {
                 setModalMessage(t('Plat added to watchlist!'));
                 
-            } else if (response.status == 409) {
+            } else if (response.status === 409) {
                 setModalMessage(t('Plat is already in watchlist'));
             } else {
                 setModalMessage(t('Plat removed from watchlist!'));

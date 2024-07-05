@@ -13,6 +13,7 @@ import LoginWithPhone from '../pages/Login/LoginWithPhone';
 import LoginWithEmail from '../pages/Login/LoginWithEmail';
 import RegisterWithEmail from '../pages/Register/RegisterWithEmail';
 import RegisterWithPhone from '../pages/Register/RegisterWithPhone';
+import UnderConstruction from '../pages/UnderConstruction';
 
 const AppRouter = () => {
     return (
@@ -31,6 +32,7 @@ const AppRouter = () => {
                     <Route path="/location" element={<Location />} />
                     <Route path="/select_country" element={<SelectLocation />} />
                     <Route path="/" element={<HomePage />} />
+                    <Route path="/new-feature" component={UnderConstruction} />
                 </Routes>
                 <FilterDetaille />
             </div>

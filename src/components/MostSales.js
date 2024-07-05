@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Modal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookmark, faBookmark as faBookmarkOutline } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 
 
@@ -67,7 +68,7 @@ const MostSales = () => {
             if (newFavoriteStatus) {
                 setModalMessage(t('Plat added to watchlist!'));
                 
-            } else if (response.status == 409) {
+            } else if (response.status === 409) {
                 setModalMessage(t('Plat is already in watchlist'));
             } else {
                 setModalMessage(t('Plat removed from watchlist!'));
@@ -103,7 +104,7 @@ const MostSales = () => {
                 {mostsaleplats && mostsaleplats.map((mostsaleplat, index) => (
                     <div key={index} className="col-12 pt-2">
                         <div className="d-flex align-items-center list-card bg-white h-100 rounded overflow-hidden position-relative shadow-lg homepage-osahan-list-items">
-                            <div className="list-card-image">
+                            <Link  to="/new-feature" className="list-card-image">
                                 <div className="star position-absolute"><span className="badge badge-success"><i className="feather-star" />{mostsaleplat.rating}</span></div>
                                 <div className="favourite-heart absolute top-2 right-2">
                                     <p
@@ -119,14 +120,14 @@ const MostSales = () => {
                                 <div className="member-plan position-absolute">
                                         <span className="badge badge-danger mr-2">{mostsaleplat.category[0].name}</span>
                                 </div>
-                                <a href="restaurant.html">
+                                <p >
                                     <img src={mostsaleplat.image[0]} alt={mostsaleplat.name} className="img-fluid item-img w-100" />
-                                </a>
-                            </div>
-                            <div className="p-3 position-relative">
+                                </p>
+                            </Link>
+                            <Link  to="/new-feature" className="p-3 position-relative">
                                 <div className="list-card-body">
-                                    <h6 className="mb-1"><a href="restaurant.html" className="text-black">{mostsaleplat.name}
-                                    </a>
+                                    <h6 className="mb-1"><p className="text-black">{mostsaleplat.name}
+                                    </p>
                                     </h6>
                                     <p className="text-gray mb-3 time"><span className="bg-light text-dark font-bold rounded-sm pl-2 pb-1 pt-1 pr-2"> </span> {mostsaleplat.plat_price} {mostsaleplat.currency} <span className="float-right text-black-50"></span>  :{t('price')}</p>
                                 </div>
@@ -138,7 +139,7 @@ const MostSales = () => {
                                     )}
                                     <small>{mostsaleplat.discount ? '-60% ' : 'No Discount'}</small>
                                 </div>
-                            </div>
+                            </Link>
                         </div>
                     </div>
 

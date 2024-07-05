@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import StarRating from './startRating/StarRating';
 import './slick-custom.css';
+import { Link } from 'react-router-dom';
 
 const FilteredPlats = ({ selectedCategory }) => {
     const [plats, setPlats] = useState([]);
@@ -29,7 +30,7 @@ const FilteredPlats = ({ selectedCategory }) => {
             <h6 className="m-0 font-weight-bold text-2xl">
                     {plats.filter(plat => plat.category[0].category_code === selectedCategory).length} {t('filteredPlats')}
                 </h6>
-                <a className="font-weight-bold ml-auto" href="trending.html">{t('Viewall')} <i className="feather-chevrons-right" /></a>
+                <Link className="font-weight-bold ml-auto" to="trending.html">{t('Viewall')} <i className="feather-chevrons-right" /></Link>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {plats && plats.map((plat, index) => (
@@ -37,7 +38,7 @@ const FilteredPlats = ({ selectedCategory }) => {
                         <div className="list-card bg-white h-full rounded overflow-hidden relative shadow-lg">
                             <div className="list-card-image relative">
                                 <div className="favourite-heart absolute top-2 right-2">
-                                    <a href="#"><i className="feather-bookmark" /></a>
+                                    <p><i className="feather-bookmark" /></p>
                                 </div>
                                 <div className="member-plan absolute bottom-2 left-2">
                                     <span className="badge badge-danger">{t('hot')}</span>
@@ -55,7 +56,7 @@ const FilteredPlats = ({ selectedCategory }) => {
                                     </h6>
                                     <p className="text-gray mb-1 text-lg">{plat.category[0].name}</p>
                                     <StarRating rating={plat.rating} />
-                                    <p className="text-gray mb-1 text-sm font-bold">{plat.plat_price} {plat.currency}</p> {/* Add the price here */}
+                                    <p className="text-gray mb-1 text-sm font-bold">{plat.plat_price} {plat.currency}</p> 
                                 </div>
                                 <div className="list-card-badge flex items-center">
                                     {plat.discount ? (

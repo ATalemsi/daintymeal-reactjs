@@ -31,7 +31,7 @@ const RestoPlats = () => {
                                 <div className="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-lg">
                                     <div className="list-card-image">
                                         <div className="star position-absolute"><span className="badge badge-success"><i className="feather-star" />{plat.rating}</span></div>
-                                        <div className="favourite-heart position-absolute"><a href="#"><i className="feather-bookmark" /></a></div>
+                                        <div className="favourite-heart position-absolute"><p><i className="feather-bookmark" /></p></div>
                                         <div className="member-plan position-absolute"><span className="badge badge-danger">{plat.category[0].name}</span></div>
                                         <a href="#">
                                             <img src={plat.image[0]} className="img-fluid item-img" style={{ width: '280px', height: '100px' }} alt={plat.name} />
