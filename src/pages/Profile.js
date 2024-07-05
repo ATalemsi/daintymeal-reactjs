@@ -18,8 +18,10 @@ const Profile = () => {
 
     const logout = async () => {
         const accessToken = localStorage.getItem('access_token');
+        const refreshToken = localStorage.getItem('refresh_token');
+
         try {
-            await axios.post('https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/auth/logout', {}, {
+            await axios.post('https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/auth/logout', { refreshToken }, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }
