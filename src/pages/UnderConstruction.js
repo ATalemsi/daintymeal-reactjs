@@ -8,11 +8,11 @@ const UnderConstruction = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded shadow-md text-center">
-        <h1 className="text-4xl font-bold mb-4 text-red-500">Page Under Construction</h1>
+        <h1 className="text-4xl font-bold mb-4 text-pink-500">Page Under Construction</h1>
         <p className="text-lg text-gray-700">We're working hard to bring this page to you soon. Stay tuned!</p>
         <div className="mt-8">
           <svg
-            className="animate-spin h-8 w-8 text-gray-500 mx-auto"
+            className="animate-spin h-8 w-8 text-pink-500 mx-auto"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -32,13 +32,13 @@ const UnderConstruction = () => {
             ></path>
           </svg>
         </div>
-        <Link
+      </div>
+      <Link
          to="/"
-          className="mt-6 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
+          className="mt-2 bg-pink-500 text-white py-2 px-4 rounded hover:bg-blue-700"
         >
           Return to Home
         </Link>
-      </div>
     </div>
   );
 };

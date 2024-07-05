@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom'; // Import Navigate for navigation
+import { useNavigate } from 'react-router-dom';
 
 Modal.setAppElement('#root');
 
@@ -32,27 +32,36 @@ const Header = ({ onLanguageChange }) => {
   };
 
   useEffect(() => {
-    if ("geolocation" in navigator) {
-      navigator.permissions.query({ name: 'geolocation' })
-        .then((permissionStatus) => {
-          if (permissionStatus.state === 'granted') {
-            setPermissionGranted(true);
-            fetchLocation();
-          } else if (permissionStatus.state === 'prompt') {
-            setShowModal(true);
-          } else {
-            setPermissionGranted(false);
-            setLocationName('Geolocation permission denied');
-          }
-        })
-        .catch((error) => {
-          console.error('Error checking geolocation permission:', error);
-          setPermissionGranted(false);
-          setLocationName('Geolocation not available');
-        });
-    } else {
+    const storedPermission = localStorage.getItem('geolocation_permission');
+    if (storedPermission === 'granted') {
+      setPermissionGranted(true);
+      fetchLocation();
+    } else if (storedPermission === 'denied') {
       setPermissionGranted(false);
-      setLocationName('Geolocation not supported by this browser');
+      setLocationName('Geolocation permission denied');
+    } else {
+      if ("geolocation" in navigator) {
+        navigator.permissions.query({ name: 'geolocation' })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === 'granted') {
+              setPermissionGranted(true);
+              fetchLocation();
+            } else if (permissionStatus.state === 'prompt') {
+              setShowModal(true);
+            } else {
+              setPermissionGranted(false);
+              setLocationName('Geolocation permission denied');
+            }
+          })
+          .catch((error) => {
+            console.error('Error checking geolocation permission:', error);
+            setPermissionGranted(false);
+            setLocationName('Geolocation not available');
+          });
+      } else {
+        setPermissionGranted(false);
+        setLocationName('Geolocation not supported by this browser');
+      }
     }
   }, []);
 
@@ -93,11 +102,13 @@ const Header = ({ onLanguageChange }) => {
 
   const handleAllowLocation = () => {
     setShowModal(false);
+    localStorage.setItem('geolocation_permission', 'granted');
     fetchLocation();
   };
 
   const handleDenyLocation = () => {
     setShowModal(false);
+    localStorage.setItem('geolocation_permission', 'denied');
     setLocationName('Geolocation permission denied');
   };
 

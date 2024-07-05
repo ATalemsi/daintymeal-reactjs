@@ -32,6 +32,7 @@ const Profile = () => {
             localStorage.removeItem('access_token');
             localStorage.removeItem('refresh_token');
             localStorage.removeItem('user_code');
+            localStorage.removeItem('geolocation_permission');
             navigate('/login-email');
         }
     };

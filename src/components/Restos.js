@@ -79,25 +79,28 @@ const Restos = ({ selectedCategory, selectedLanguage }) => {
                                     <div className="favourite-heart position-absolute"><p className='cursor-pointer'><i className="feather-bookmark" /></p>
                                     </div>
                                 </div>
-                                <div className="p-3 position-relative">
-                                    <div className="list-card-body">
-                                        <h6 className="mb-1">
-                                            <Link to={`/restaurant/${resto.resto_code}`} className="text-black">
-                                                {getName(resto)}
-                                            </Link>
-                                        </h6>
-                                        <p className="text-gray mb-3">
-                                            <span className="text-gray-500">{getAddress(resto.address[0])}</span>
-                                        </p>
-                                        <p className="text-gray text-xs mb-3 time">
-                                            <span className="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"> {resto.workingTime}</span> : {t('timeWork')}
-                                        </p>
-                                    </div>
-                                    <div className="list-card-badge d-flex align-items-center">
-                                        <span className="badge badge-danger mr-2"> {t('offer')} </span>
-                                    </div>
+                                <Link to={`/restaurant/${resto.resto_code}`}  >
+                                    <div className="p-3 position-relative">
+                                        <div className="list-card-body">
+                                            <h6 className="mb-1">
+                                                <Link to={`/restaurant/${resto.resto_code}`} className="text-black">
+                                                    {getName(resto)}
+                                                </Link>
+                                            </h6>
+                                            <p className="text-gray mb-3">
+                                                <span className="text-gray-500">{getAddress(resto.address[0])}</span>
+                                            </p>
+                                            <p className="text-gray text-xs mb-3 time">
+                                                <span className="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"> {resto.workingTime}</span> : {t('timeWork')}
+                                            </p>
+                                        </div>
+                                        <div className="list-card-badge d-flex align-items-center">
+                                            <span className="badge badge-danger mr-2"> {t('offer')} </span>
+                                        </div>
 
-                                </div>
+                                    </div>
+                                </Link>
+
                             </div>
                         </div>
                     </div>
