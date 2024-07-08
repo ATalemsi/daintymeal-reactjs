@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import OpenAppButton from './OpenAppButton';
 
 Modal.setAppElement('#root');
 
@@ -10,8 +11,10 @@ const Header = ({ onLanguageChange }) => {
   const [locationName, setLocationName] = useState('Location not available');
   const [showModal, setShowModal] = useState(false);
   const [permissionGranted, setPermissionGranted] = useState(false);
+  const [showSearchBar, setShowSearchBar] = useState(false); // State to manage search bar visibility
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+  const headerRef = useRef(null);
 
   const customStyles = {
     content: {
@@ -118,8 +121,25 @@ const Header = ({ onLanguageChange }) => {
     setLocationName('Geolocation permission denied');
   };
 
+  const toggleSearchBar = () => {
+    setShowSearchBar(!showSearchBar);
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (headerRef.current) {
+        const scrollTop = window.scrollY;
+        headerRef.current.style.top = `${scrollTop}px`;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <div className="shadow p-3 homepage-osahan-header bg-white">
+    <div className="shadow p-3 bg-white">
+      <OpenAppButton />
       <Modal
         isOpen={showModal}
         onRequestClose={handleDenyLocation}
@@ -131,33 +151,32 @@ const Header = ({ onLanguageChange }) => {
         <button onClick={handleAllowLocation} className="btn btn-primary mx-1.5">Allow</button>
         <button onClick={handleDenyLocation} className="btn btn-secondary mx-1.5">Deny</button>
       </Modal>
-
-      <div className="title d-flex align-items-center">
-        <div className="mr-auto">
+      <div className="title d-flex align-items-center justify-between mt-2" ref={headerRef}>
+        <div className="d-flex align-items-center bg-white z-10 py-2 px-3 border-b border-gray-200">
           <a className="text-dark d-flex align-items-center" href="#">
             <i className="feather-map-pin fs-18 mr-2" />
             <h6 className="m-0 border-dashed-bottom">{locationName}</h6>
           </a>
         </div>
-        <div className="ml-auto d-flex align-items-center">
+        <div className="d-flex align-items-center">
           <select className="btn border-2 border-pink-600 text-pink-600 rounded-lg btn-sm mx-1 text-gray-200" onChange={handleLanguageChange} value={i18n.language}>
             <option value="en">EN</option>
             <option value="ar">AR</option>
             <option value="fr">FR</option>
           </select>
-          <a className="toggle ml-2 text-dark hc-nav-trigger hc-nav-1" href="#" role="button" aria-controls="hc-nav-1">
-            <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} fill="currentColor" className="bi bi-list" viewBox="0 0 16 16">
-              <path fillRule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
-            </svg>
-          </a>
+          <button onClick={toggleSearchBar} className="ml-2 focus:outline-none">
+            <i className="feather-search text-xl"></i>
+          </button>
         </div>
       </div>
-      <div className="input-group border osahan-search mt-3 rounded-lg shadow-lg overflow-hidden">
-        <div className="input-group-prepend">
-          <button className="border-0 btn btn-outline-secondary text-primary bg-white btn-block"><i className="feather-search" /></button>
+      {showSearchBar && (
+        <div className="input-group border osahan-search mt-3 rounded-lg shadow-lg overflow-hidden">
+          <div className="input-group-prepend">
+            <button className="border-0 btn btn-outline-secondary text-primary bg-white btn-block"><i className="feather-search" /></button>
+          </div>
+          <input type="text" className="shadow-none border-0 form-control pl-0" placeholder={t('searchPlaceholder')} aria-label="search" aria-describedby="basic-addon1" />
         </div>
-        <input type="text" className="shadow-none border-0 form-control pl-0" placeholder={t('searchPlaceholder')} aria-label aria-describedby="basic-addon1" />
-      </div>
+      )}
     </div>
   );
 };

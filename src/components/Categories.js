@@ -39,7 +39,7 @@ const Categories = ({ onCategorySelect, selectedLanguage }) => {
     };
 
     return (
-        <div className="scrolling-wrapper h-full">
+        <div className="scrolling-wrapper h-full my-2" > 
             <div className="cat-item px-1 py-3 mx-1.5" onClick={() => onCategorySelect(null)}>
                 <p className="d-block text-center cursor-pointer">
                     <div style={{ width: 40, height: 40, overflow: 'hidden', display: 'block', margin: '10px auto' }}>

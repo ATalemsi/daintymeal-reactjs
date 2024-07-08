@@ -109,10 +109,12 @@ const Main = ({ selectedLanguage }) => {
                 </div>
             ) : (
                 <>
-                    <div style={{ direction: 'ltr' }}>
+                    <div className="mb-2"  style={{ direction: 'ltr' }}>
                         <Categories selectedLanguage={selectedLanguage} onCategorySelect={handleCategorySelect} />
                     </div>
-                    <Publicity />
+                    <div className="flex-grow">
+                        <Publicity />
+                    </div>
                     <div className="px-3 pt-4 pb-3 title d-flex align-items-center">
                         <h6 className="m-0 font-weight-bold text-2xl"> {t('restaurant')} </h6>
                         <Link className="font-weight-bold ml-auto text-pink-800 text-sm" to="/new-feature">{t('Viewall')}<i className="feather-chevrons-right" /></Link>
