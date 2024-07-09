@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-
 const RestoPlats = () => {
     const { resto_code } = useParams();
     const [plats, setPlats] = useState([]);
@@ -19,56 +18,47 @@ const RestoPlats = () => {
     }, [resto_code]);
 
     if (!plats) return <p>Loading...</p>;
-    return (
-        <div>
-            <p class="font-weight-bold px-3 pt-3 m-0">FEATURED ITEMS</p>
-            <div className="scrolling-wrapper2">
 
+    return (
+        <div className="px-3 py-3 bg-white">
+            <h2 className="font-bold text-xl mb-4">Featured Items</h2>
+            <div className="flex overflow-x-scroll space-x-4 ">
                 {plats.length > 0 ? (
                     plats.map((plat, index) => (
-                        <div key={index} className="carte rounded-lg">
-                            <div className="osahan-slider-item py-3 px-1">
-                                <div className="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-lg">
-                                    <div className="list-card-image">
-                                        <div className="star position-absolute"><span className="badge badge-success"><i className="feather-star" />{plat.rating}</span></div>
-                                        <div className="favourite-heart position-absolute"><p><i className="feather-bookmark" /></p></div>
-                                        <div className="member-plan position-absolute"><span className="badge badge-danger">{plat.category[0].name}</span></div>
-                                        <a href="#">
-                                            <img src={plat.image[0]} className="img-fluid item-img" style={{ width: '280px', height: '100px' }} alt={plat.name} />
-                                        </a>
-                                    </div>
-                                    <div className="p-3 position-relative">
-                                        <div className="list-card-body">
-                                            <h6 className="mb-1">
-                                                <p className="text-black">
-                                                    {plat.name}
-                                                </p>
-                                            </h6>
-                                            <p className="text-gray mb-3 time"><span className="float-right text-xs text-pink-500 font-bold"> {plat.plat_price} {plat.currency}</span></p>
-                                        </div>
-                                        <div className="list-card-badge d-flex align-items-center">
-                                            {plat.discount ? (
-                                                <span className="badge badge-danger mr-2">OFFER</span>
-                                            ) : (
-                                                <span className="badge badge-secondary mr-2">NO OFFER</span>
-                                            )}
-                                            <small>{plat.discount ? "Use Coupon" : "No discounts available"}</small>
-                                        </div>
-                                    </div>
+                        <div key={index} className="flex-none w-64 bg-white rounded-lg shadow-lg">
+                            <div className="relative">
+                                <img src={plat.image[0]} className="w-full h-32 object-cover rounded-t-lg" alt={plat.name} />
+                                {plat.rating && (
+                                    <div className="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full">{plat.rating}</div>
+                                )}
+                                <div className="absolute top-2 right-2">
+                                    <button className="bg-white p-1 rounded-full shadow-md">
+                                        <i className="feather-bookmark text-gray-800" />
+                                    </button>
                                 </div>
+                                <div className="absolute bottom-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">{plat.category[0].name}</div>
+                            </div>
+                            <div className="p-3">
+                                <h3 className="text-black font-semibold text-sm mb-1">{plat.name}</h3>
+                                <p className="text-pink-500 text-xs font-bold mb-2">{plat.plat_price} {plat.currency}</p>
+                                {plat.discount ? (
+                                    <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full">OFFER</span>
+                                ) : (
+                                    <span className="bg-gray-400 text-white text-xs px-2 py-1 rounded-full">NO OFFER</span>
+                                )}
+                                <p className="text-gray-500 text-xs mt-1">{plat.discount ? "Use Coupon" : "No discounts available"}</p>
                             </div>
                         </div>
                     ))
                 ) : (
-                    <div className="no-plats text-center mt-5">
+                    <div className="text-center mt-5">
                         <img src="https://res.cloudinary.com/dz4pww2qv/image/upload/v1717851494/ep4bkvb42vi3jhixixww.jpg" alt="No plats available" className="w-32 h-auto mx-auto" />
                         <p className="mt-2">No plats available at this restaurant</p>
                     </div>
                 )}
             </div>
-
         </div>
-    )
+    );
 };
 
 export default RestoPlats;

@@ -56,16 +56,24 @@ const Comments = () => {
   );
 
   return (
+
     <div className="bg-white shadow-sm p-3 mb-3">
-      <p className="text-primary float-right">Top Rated</p>
-      <h6 className="mb-1">All Ratings and Reviews</h6>
-      {comments.slice(0, 3).map(renderComment)}
-      <button 
-        className="text-center w-full block mt-3 font-bold text-blue-600" 
-        onClick={handleOpenModal}
-      >
-        See All Reviews
-      </button>
+      <h2 className="text-xl mb-4">All Comments</h2>
+      {comments.length === 0 ? (
+        <p className="text-center text-gray-500 mt-10">This restaurant has no comments yet.</p>
+      ) : (
+        <>
+          <p className="text-primary float-right">Top Rated</p>
+          <h6 className="mb-1">All Ratings and Reviews</h6>
+          {comments.slice(0, 3).map(renderComment)}
+          <button
+            className="text-center w-full block mt-3 font-bold text-blue-600"
+            onClick={handleOpenModal}
+          >
+            See All Reviews
+          </button>
+        </>
+      )}
 
       <div className="bg-white shadow-sm p-3 rating-review-select-page mt-3">
         <h6 className="mb-3">Leave Comment</h6>
@@ -102,8 +110,8 @@ const Comments = () => {
         contentLabel="All Comments"
       >
         <div className="relative bg-white p-4 rounded shadow-lg max-w-md w-full max-h-[80vh] overflow-y-auto">
-          <button 
-            onClick={handleCloseModal} 
+          <button
+            onClick={handleCloseModal}
             className="absolute top-4 right-4 bg-transparent text-gray-600 hover:text-gray-900"
           >
             <XIcon className="h-6 w-6" />
