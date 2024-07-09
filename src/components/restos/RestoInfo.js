@@ -10,7 +10,10 @@ const RestoInfo = () => {
     return (
         <div className="osahan-restaurant-detail">
             <RestoHeader />
+            <div className="mt-12">
             <RestoDetails />
+            </div>
+            
             <RestoPlats />
         </div>
     );

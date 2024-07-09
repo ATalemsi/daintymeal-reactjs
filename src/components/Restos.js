@@ -108,7 +108,7 @@ const Restos = ({ selectedCategory, selectedLanguage }) => {
             ) : (
                 <div className="flex flex-col justify-center items-center h-full text-center">
                     <img
-                        src="https://res.cloudinary.com/dz4pww2qv/image/upload/v1719225646/kt3uezwvl66oifbmnlpy.png"
+                        src="https://res.cloudinary.com/dz4pww2qv/image/upload/v1720546321/uwd8hlq2ffryixpuyipp.jpg"
                         alt="No Restaurants"
                         className="img-fluid w-48 h-32"
                     />

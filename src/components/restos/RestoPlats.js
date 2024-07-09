@@ -5,19 +5,48 @@ import { useParams } from 'react-router-dom';
 const RestoPlats = () => {
     const { resto_code } = useParams();
     const [plats, setPlats] = useState([]);
+    const [loading, setLoading] = useState(true);  // Add loading state
+
     useEffect(() => {
         const fetchPlats = async () => {
             try {
-                const response = await axios.get(` https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/restos/${resto_code}/plats`);
+                const response = await axios.get(`https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/restos/${resto_code}/plats`);
                 setPlats(response.data);
             } catch (error) {
                 console.error('Error fetching plats:', error);
+            } finally {
+                setLoading(false);  // Set loading to false after data fetching is complete
             }
         };
         fetchPlats();
     }, [resto_code]);
 
-    if (!plats) return <p>Loading...</p>;
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center h-64">
+                <svg
+                    className="animate-spin h-8 w-8 text-pink-500"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                >
+                    <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                    ></circle>
+                    <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291l-3.709 3.71A9.974 9.974 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-3.647z"
+                    ></path>
+                </svg>
+            </div>
+        );
+    }
 
     return (
         <div className="px-3 py-3 bg-white">
@@ -51,9 +80,13 @@ const RestoPlats = () => {
                         </div>
                     ))
                 ) : (
-                    <div className="text-center mt-5">
-                        <img src="https://res.cloudinary.com/dz4pww2qv/image/upload/v1717851494/ep4bkvb42vi3jhixixww.jpg" alt="No plats available" className="w-32 h-auto mx-auto" />
-                        <p className="mt-2">No plats available at this restaurant</p>
+                    <div className="flex flex-col items-center justify-center h-64">
+                        <img
+                            src="https://res.cloudinary.com/dz4pww2qv/image/upload/v1717851494/ep4bkvb42vi3jhixixww.jpg"
+                            alt="No plats available"
+                            className="w-32 h-auto mb-2"
+                        />
+                        <p className="text-gray-500 text-center">No plats available at this restaurant</p>
                     </div>
                 )}
             </div>

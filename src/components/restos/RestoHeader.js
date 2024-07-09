@@ -33,13 +33,18 @@ const RestoHeader = () => {
     const handleQuantityChange = (platCode, change) => {
         const updatedCartItems = cartItems.map(item => {
             if (item.plat_code === platCode) {
+                const newQuantity = Math.max(0, item.quantity + change);
+                if (newQuantity === 0) {
+                    handleRemoveFromCart(platCode);
+                    return null;  // Remove the item from the list
+                }
                 return {
                     ...item,
-                    quantity: Math.max(1, item.quantity + change)
+                    quantity: newQuantity
                 };
             }
             return item;
-        });
+        }).filter(item => item !== null);  // Filter out removed items
 
         setCartItems(updatedCartItems);
         localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
@@ -51,7 +56,7 @@ const RestoHeader = () => {
     };
 
     return (
-        <div className="bg-white shadow-md p-3 flex justify-between items-center sticky top-0 z-50">
+        <div className="fixed top-0 left-0 right-0 bg-white shadow-md p-3 flex justify-between items-center z-50">
             <Link className="text-gray-800 flex items-center" to="/">
                 <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} fill="currentColor" className="bi bi-chevron-left" viewBox="0 0 16 16">
                     <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path>
@@ -92,23 +97,23 @@ const RestoHeader = () => {
                                     onClick={handleCloseCart}
                                     aria-label="Close"
                                 >
-                                    <i className="feather-x text-xl text-red-500" />
+                                    <XIcon className="h-5 w-5" />
                                 </button>
                             </div>
-                            <div className="modal-body px-4 py-5">
+                            <div className="modal-body px-4 py-5 max-h-90 overflow-y-auto">
                                 {cartItems.length === 0 ? (
                                     <p className="text-gray-500 text-center">Your cart is empty.</p>
                                 ) : (
                                     <>
                                         <ul className="list-unstyled">
                                             {cartItems.map(item => (
-                                                <li key={item.plat_code} className="media mb-3">
-                                                    <img src={item.image[0]} className="mr-3 rounded-lg" alt={item.name} style={{ width: '50px', height: '50px' }} />
-                                                    <div className="media-body">
-                                                        <h5 className="mt-0 mb-1">{item.name}</h5>
-                                                        <p className="text-gray-500">{item.plat_price} {item.currency}</p>
-                                                        <div className="input-group input-group-sm mt-2">
-                                                            <div className="input-group-prepend">
+                                                <li key={item.plat_code} className="flex justify-between items-center mb-3">
+                                                    <div className="flex items-center">
+                                                        <img src={item.image[0]} className="mr-3 rounded-lg" alt={item.name} style={{ width: '50px', height: '50px' }} />
+                                                        <div>
+                                                            <h5 className="mt-0 mb-1">{item.name}</h5>
+                                                            <p className="text-gray-500">{item.plat_price} {item.currency}</p>
+                                                            <div className="input-group input-group-sm mt-2">
                                                                 <button
                                                                     className="btn btn-outline-secondary"
                                                                     type="button"
@@ -116,14 +121,12 @@ const RestoHeader = () => {
                                                                 >
                                                                     -
                                                                 </button>
-                                                            </div>
-                                                            <input
-                                                                type="text"
-                                                                className="form-control text-center"
-                                                                value={item.quantity}
-                                                                readOnly
-                                                            />
-                                                            <div className="input-group-append">
+                                                                <input
+                                                                    type="text"
+                                                                    className="form-control text-center"
+                                                                    value={item.quantity}
+                                                                    readOnly
+                                                                />
                                                                 <button
                                                                     className="btn btn-outline-secondary"
                                                                     type="button"
@@ -133,26 +136,25 @@ const RestoHeader = () => {
                                                                 </button>
                                                             </div>
                                                         </div>
-                                                        <button
-                                                            className="btn btn-link text-danger btn-sm mt-2"
-                                                            onClick={() => handleRemoveFromCart(item.plat_code)}
-                                                        >
-                                                            Remove
-                                                        </button>
                                                     </div>
+                                                    <button
+                                                        className="btn btn-link text-danger btn-sm"
+                                                        onClick={() => handleRemoveFromCart(item.plat_code)}
+                                                    >
+                                                        Remove
+                                                    </button>
                                                 </li>
                                             ))}
                                         </ul>
-                                        <div className="d-flex justify-content-between align-items-center mt-4">
-                                            <span className="font-semibold">Total:</span>
-                                            <span className="text-rose-700">{getTotalPrice()} {cartItems.length > 0 && cartItems[0].currency}</span>
-                                        </div>
                                     </>
                                 )}
                             </div>
-                            <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" onClick={handleCloseCart}>Close</button>
-                                <button type="button" className="btn btn-primary">Checkout</button>
+                            <div className="modal-footer flex justify-between items-center">
+                                <span className="font-semibold">Total: {getTotalPrice()} {cartItems.length > 0 && cartItems[0].currency}</span>
+                                <div>
+                                    <button type="button" className="btn btn-secondary mr-2" onClick={handleCloseCart}>Close</button>
+                                    <button type="button" className="btn btn-primary">Checkout</button>
+                                </div>
                             </div>
                         </div>
                     </div>
