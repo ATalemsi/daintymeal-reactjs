@@ -4,7 +4,7 @@ import ProfilHeader from '../components/profile/Profilheader';
 import PaymentCard from '../components/profile/PaymentCard';
 import AdressDetailles from '../components/profile/AdressDetailles';
 import HistoricTrans from '../components/profile/HistoricTrans';
-import { FaFileExport, FaPlus} from 'react-icons/fa';
+import { FaFileExport, FaPlus } from 'react-icons/fa';
 import Navbar from '../components/Navbar';
 import Footer from "../components/Footer";
 import axios from 'axios';
@@ -189,7 +189,7 @@ const Profile = () => {
                     </div>
                 </div>
 
-                <div className="bg-white shadow mt-3 profile-details">
+                <div className="bg-white shadow mt-3 profile-details mb-12">
                     <a data-toggle="modal" data-target="#paycard" className="flex w-full items-center border-b p-3 text-left">
                         <div className="mr-3 flex-1">
                             <h6 className="font-bold text-lg mb-1 text-dark">Payment Cards</h6>
@@ -271,9 +271,9 @@ const Profile = () => {
                             <h6 className="font-weight-bold m-0"><i className="feather-chevron-right" /></h6>
                         </div>
                     </a>
-                    <Navbar />
-                    <Footer />
                 </div>
+                <Navbar />
+                <Footer />
             </div>
         </>
     );
