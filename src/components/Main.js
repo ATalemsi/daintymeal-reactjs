@@ -86,7 +86,6 @@ const Main = ({ selectedLanguage }) => {
             <div className="" style={{ direction: 'ltr' }}>
                 <Categories selectedLanguage={selectedLanguage} onCategorySelect={handleCategorySelect} />
             </div>
-            {/* Main Content with Padding to Avoid Overlapping Fixed Categories */}
             <div className="pt-32">
                 {isLoadingInitial ? (
                     <div className="flex items-center justify-center h-screen">

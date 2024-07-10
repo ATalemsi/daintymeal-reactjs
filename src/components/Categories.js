@@ -41,7 +41,7 @@ const Categories = ({ onCategorySelect, selectedLanguage }) => {
     return (
         <div className="fixed top-0 w-full bg-white z-50  mt-28">
             <div className="scrolling-wrapper h-full my-2 overflow-x-auto">
-                <div className="cat-item px-1 py-3 mx-1.5 inline-block" onClick={() => onCategorySelect(null)}>
+                <div className="cat-item  mx-1.5 inline-block" onClick={() => onCategorySelect(null)}>
                     <div className="d-block text-center cursor-pointer">
                         <div style={{ width: 40, height: 40, overflow: 'hidden', display: 'block', margin: '10px auto' }}>
                             <img src="https://res.cloudinary.com/dz4pww2qv/image/upload/v1718113062/Category/k9k2harclh3zvrhxr5vt.svg" alt={getAllTranslation()} />
