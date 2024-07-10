@@ -12,12 +12,8 @@ const Footer = () => {
         return location.pathname === path ? 'text-danger' : 'text-dark';
     };
 
-    const getIconClass = (path) => {
-        return location.pathname === path ? 'feather-home text-danger' : 'feather-home';
-    };
-
     return (
-        <div className={`osahan-menu-fotter border rounded shadow fixed-bottom bg-white m-3 px-3 py-2 text-center ${isRTL ? 'text-right' : 'text-left'}`}>
+        <div className={`osahan-menu-fotter border rounded shadow fixed-bottom bg-white m-3 px-3 py-2 text-center ${isRTL ? 'text-right' : 'text-left'} z-10`}>
             <div className="row">
                 <div className="col">
                     <Link to="/" className={`${getLinkClass('/')} small font-weight-bold text-decoration-none`}>

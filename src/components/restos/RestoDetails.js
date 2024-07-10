@@ -47,12 +47,12 @@ const RestoDetails = () => {
                 <img src={restoDetails.image[1]} alt="Restaurant Cover" className="w-full h-64 object-cover" />
             </div>
             <div className="p-4">
-                <div className="flex items-center mb-2">
+                <div className="flex mb-2">
                     <img src={restoDetails.image[0]} alt={restoDetails.en.name} className="w-20 h-20 rounded-full mr-4" />
                     <div>
                         <h2 className="font-bold text-2xl">{restoDetails.en.name}</h2>
                         <p className="text-gray-600">{restoDetails.categories[0].name} • {restoDetails.address[0].city}</p>
-                        <div className="flex items-center mt-2">
+                        <div className="flex  mt-2">
                             <StarRating rating={restoDetails.rating} />
                             <p className="rating ml-2 text-sm text-gray-600">({restoDetails.statics.contRatings} ratings)</p>
                         </div>

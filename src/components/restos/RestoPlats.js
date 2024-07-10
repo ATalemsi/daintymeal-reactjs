@@ -15,7 +15,7 @@ const RestoPlats = () => {
             } catch (error) {
                 console.error('Error fetching plats:', error);
             } finally {
-                setLoading(false);  // Set loading to false after data fetching is complete
+                setLoading(false); 
             }
         };
         fetchPlats();
@@ -54,7 +54,7 @@ const RestoPlats = () => {
             <div className="flex overflow-x-scroll space-x-4 ">
                 {plats.length > 0 ? (
                     plats.map((plat, index) => (
-                        <div key={index} className="flex-none w-64 bg-white rounded-lg shadow-lg">
+                        <div key={index} className="flex-none w-64 bg-white rounded-lg">
                             <div className="relative">
                                 <img src={plat.image[0]} className="w-full h-32 object-cover rounded-t-lg" alt={plat.name} />
                                 {plat.rating && (

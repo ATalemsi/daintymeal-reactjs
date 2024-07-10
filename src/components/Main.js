@@ -109,7 +109,7 @@ const Main = ({ selectedLanguage }) => {
                 </div>
             ) : (
                 <>
-                    <div className="mb-2"  style={{ direction: 'ltr' }}>
+                    <div className="mt-32 "  style={{ direction: 'ltr' }}>
                         <Categories selectedLanguage={selectedLanguage} onCategorySelect={handleCategorySelect} />
                     </div>
                     <div className="flex-grow">
@@ -128,7 +128,7 @@ const Main = ({ selectedLanguage }) => {
                         <>
                             <div className="px-3 pt-3 title d-flex align-items-center">
                                 <h6 className="m-0 font-weight-bold text-2xl"> {t('myPlats')} </h6>
-                                <Link className="font-weight-bold ml-auto" to="/new-feature">{t('Viewall')}<i className="feather-chevrons-right" /></Link>
+                                <Link className="font-weight-bold ml-auto" to="/view-all">{t('Viewall')}<i className="feather-chevrons-right" /></Link>
                             </div>
                             <Myplats />
                             <div className="px-3 pt-4 pb-3 title d-flex align-items-center">
@@ -162,7 +162,7 @@ const Main = ({ selectedLanguage }) => {
                             </div>
                             <div className="px-3 pt-4 pb-3 title d-flex align-items-center">
                                 <h6 className="m-0 font-weight-bold text-2xl "> {t('popularRestaurant')} </h6>
-                                <Link className="font-weight-bold ml-auto" to="/new-feature">{t('Viewall')}<i className="feather-chevrons-right" /></Link>
+                                <Link className="font-weight-bold ml-auto" to="/view-all">{t('Viewall')}<i className="feather-chevrons-right" /></Link>
                             </div>
                             <PopularRestos />
                             <div className="p-3">
@@ -191,17 +191,15 @@ const Main = ({ selectedLanguage }) => {
                             </div>
                             <div className="px-3 pt-4 pb-3 title d-flex align-items-center">
                                 <h6 className="m-0 font-weight-bold text-2xl"> {t('mostSales')} </h6>
-                                <Link className="font-weight-bold ml-auto" to="/new-feature">View all<i className="feather-chevrons-right" /></Link>
+                                <Link className="font-weight-bold ml-auto" to="/view-all">View all<i className="feather-chevrons-right" /></Link>
                             </div>
                             <MostSales />
                         </>
                     )}
-                    {/* Add a hidden element that will trigger the fetching of additional data */}
                     <div id="load-trigger" className="w-full h-1"></div>
                     {isLoadingAdditional && (
                         <div className="flex items-center justify-center py-4">
                             <FaSpinner className="animate-spin text-4xl text-gray-500" />
-                            <h3 className="ml-2">Loading...</h3>
                         </div>
                     )}
                 </>

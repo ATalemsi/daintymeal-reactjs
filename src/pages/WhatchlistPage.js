@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar';
 import Footer from "../components/Footer";
 import Watchlist from "../components/Watchlist";
 import { Link , useNavigate } from "react-router-dom";
+import Cart from "../components/Cart";
 
 
 const WatchlistPage = () => {
@@ -57,7 +58,7 @@ const WatchlistPage = () => {
                         </Link>
                         <span class="ml-3 h6 mb-0">Favorites</span>
                         <div class="ml-auto d-flex align-items-center">
-                            <a class="text-dark mx-2 top-nav-btn top-nav-btn-cart fs-18 position-relative" href="checkout.html"><i class="feather-shopping-bag"></i></a>
+                           <Cart />
                             <a class="toggle ml-2 text-dark hc-nav-trigger hc-nav-1" href="#" role="button" aria-controls="hc-nav-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"></path>

@@ -3,16 +3,13 @@ import axios from 'axios';
 import StarRating from './startRating/StarRating';
 import { useTranslation } from 'react-i18next';
 import Slider from 'react-slick';
+import './slick-custom.css';
 import Modal from 'react-modal';
-import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookmark, faBookmark as faBookmarkOutline } from '@fortawesome/free-solid-svg-icons';
 
-// React-Modal setup
-Modal.setAppElement('#root');
-
-const Myplats = () => {
-    const [myplats, setMyplats] = useState([]);
+const AllPlats = () => {
+    const [allplats, setAllPlats] = useState([]);
     const [favorites, setFavorites] = useState({});
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalMessage, setModalMessage] = useState('');
@@ -36,48 +33,16 @@ const Myplats = () => {
     };
 
     useEffect(() => {
-        const fetchMyPlatsAndFavorites = async () => {
+        const fetchAllPlats = async () => {
             try {
-                const userCode = localStorage.getItem('user_code');
-                if (!userCode) {
-                    console.error('User code not found in local storage');
-                    return;
-                }
-
-                // Fetching plats
-                const platsResponse = await axios.get('https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/plats/two');
-                setMyplats(platsResponse.data);
-
-                
-                const watchlistResponse = await axios.get(`https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/watchlist/${userCode}`, {
-                    headers: { 'Authorization': `Bearer ${localStorage.getItem('access_token')}` }
-                });
-
-                // Fetching all plats to map plat_id to plat_code
-                const platsMappingResponse = await axios.get('https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/plats');
-                const platCodeMap = {};
-                platsMappingResponse.data.forEach(plat => {
-                    platCodeMap[plat._id] = plat.plat_code;
-                });
-
-                // Initializing favorites from watchlist response
-                const initialFavorites = {};
-                watchlistResponse.data.forEach(plat => {
-                    const plat_code = platCodeMap[plat.plat];
-                    if (plat_code) {
-                        initialFavorites[plat_code] = true;
-                    }
-                });
-                setFavorites(initialFavorites);
-
+                const response = await axios.get('https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/plats');
+                setAllPlats(response.data);
             } catch (error) {
-                console.error('Error fetching data:', error);
+                console.error('Error fetching trending plats:', error);
             }
         };
-
-        fetchMyPlatsAndFavorites();
+        fetchAllPlats();
     }, []);
-
     const handleBookmarkClick = async (plat_code) => {
         try {
             const userCode = localStorage.getItem('user_code');
@@ -100,10 +65,11 @@ const Myplats = () => {
                 headers: { 'Authorization': `Bearer ${localStorage.getItem('access_token')}` }
             });
 
-            if (response.status === 409) {
-                setModalMessage(t('Plat is already in watchlist'));
-            } else if (newFavoriteStatus) {
+            if (newFavoriteStatus) {
                 setModalMessage(t('Plat added to watchlist!'));
+                
+            } else if (response.status === 409) {
+                setModalMessage(t('Plat is already in watchlist'));
             } else {
                 setModalMessage(t('Plat removed from watchlist!'));
             }
@@ -129,7 +95,7 @@ const Myplats = () => {
 
     return (
         <div className="most_popular px-3">
-            <Modal
+             <Modal
                 isOpen={isModalOpen}
                 onRequestClose={closeModal}
                 contentLabel="Watchlist Status"
@@ -144,60 +110,67 @@ const Myplats = () => {
                 </div>
             </Modal>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {myplats.map((myplat, index) => (
+                {allplats && allplats.map((allplat, index) => (
                     <div key={index} className="px-2 py-2">
                         <div className="list-card bg-white h-full rounded overflow-hidden relative shadow-lg">
-                            <div className="list-card-image relative w-full h-48 overflow-hidden">
-                                <Slider {...settings}>
-                                    {myplat.image.map((imgSrc, imgIndex) => (
-                                        <div key={imgIndex}>
-                                            <img
-                                                src={imgSrc}
-                                                className="w-full h-48 object-cover"
-                                                alt={myplat.name}
-                                            />
-                                        </div>
-                                    ))}
-                                </Slider>
-                                <div className="favourite-heart absolute top-2 right-2">
+                            <div className="list-card-image relative">
+                                <div className="w-full h-48 overflow-hidden">
+                                    <Slider {...settings}>
+                                        {allplat.image.map((imgSrc, imgIndex) => (
+                                            <div key={imgIndex}>
+                                                <img
+                                                    src={imgSrc}
+                                                    className="img-fluid w-full h-48 object-cover"
+                                                    alt={allplat.name}
+                                                />
+                                            </div>
+                                        ))}
+                                    </Slider>
+                                    <div className="favourite-heart absolute top-2 right-2">
                                     <p
                                         className="cursor-pointer text-2xl "
-                                        onClick={() => handleBookmarkClick(myplat.plat_code)}
+                                        onClick={() => handleBookmarkClick(allplat.plat_code)}
                                     >
                                         <FontAwesomeIcon
-                                            icon={favorites[myplat.plat_code] ? faBookmark : faBookmarkOutline}
-                                            className={favorites[myplat.plat_code] ? 'text-red-500' : 'text-slate-50'}
+                                            icon={favorites[allplat.plat_code] ? faBookmark : faBookmarkOutline}
+                                            className={favorites[allplat.plat_code] ? 'text-red-500' : 'text-slate-50'}
                                         />
                                     </p>
                                 </div>
-                                <div className="member-plan absolute bottom-2 left-2">
-                                    <span className="bg-green-500 text-white text-xs px-2 py-1 rounded">{t('hot')}</span>
+                                    <div className="member-plan absolute bottom-2 left-2">
+                                        <span className="badge badge-danger">{t('hot')}</span>
+                                    </div>
                                 </div>
                             </div>
                             <div className="p-3 relative">
                                 <div className="list-card-body">
                                     <h6 className="mb-1 text-3xl text-gray-600">
-                                        <Link to="/new-feature">{myplat.name}</Link>
+                                        <a href="restaurant.html">{allplat.name}</a>
                                     </h6>
-                                    <p className="text-gray mb-1 text-lg">{myplat.category[0].name}</p>
-                                    <StarRating rating={myplat.rating} />
-                                    <p className="text-gray mb-1 text-sm font-bold">{myplat.plat_price} {myplat.currency}</p>
+                                    <p className="text-gray mb-1 text-lg">{allplat.category[0].name}</p>
+                                    <StarRating rating={allplat.rating} />
+                                    <p className="text-gray mb-1 text-sm font-bold">{allplat.plat_price} {allplat.currency}</p> {/* Add the price here */}
                                 </div>
                                 <div className="list-card-badge flex items-center">
-                                    {myplat.discount ? (
-                                        <span className="bg-red-500 text-white text-xs px-2 py-1 rounded mr-2">{t('offer')}</span>
+                                    {allplat.discount ? (
+                                        <span className="badge badge-danger mr-2">{t('offer')}</span>
                                     ) : (
-                                        <span className="bg-gray-300 text-gray-800 text-xs px-2 py-1 rounded mr-2">{t('noOffer')}</span>
+                                        <span className="badge badge-secondary mr-2">{t('noOffer')}</span>
                                     )}
-                                    <small>{myplat.discount ? '-60% ' : ''}</small>
+                                    <small>{allplat.discount ? '60%' : ''}</small>
+                                </div>
+                                <div className="mt-2">
+                                    <button className="btn btn-outline-primary">Add To Cart</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 ))}
             </div>
-        </div>
-    );
-};
 
-export default Myplats;
+        </div>
+
+    );
+}
+
+export default AllPlats

@@ -138,46 +138,48 @@ const Header = ({ onLanguageChange }) => {
   }, []);
 
   return (
-    <div className="shadow p-3 bg-white">
+    <>
       <OpenAppButton />
-      <Modal
-        isOpen={showModal}
-        onRequestClose={handleDenyLocation}
-        contentLabel="Geolocation Permission"
-        style={customStyles}
-      >
-        <h2>Allow location access</h2>
-        <p>We need your permission to access your location to provide better services.</p>
-        <button onClick={handleAllowLocation} className="btn btn-primary mx-1.5">Allow</button>
-        <button onClick={handleDenyLocation} className="btn btn-secondary mx-1.5">Deny</button>
-      </Modal>
-      <div className="title d-flex align-items-center justify-between mt-2" ref={headerRef}>
-        <div className="d-flex align-items-center bg-white z-10 py-2 px-3 border-b border-gray-200">
-          <a className="text-dark d-flex align-items-center" href="#">
-            <i className="feather-map-pin fs-18 mr-2" />
-            <h6 className="m-0 border-dashed-bottom">{locationName}</h6>
-          </a>
-        </div>
-        <div className="d-flex align-items-center">
-          <select className="btn border-2 border-pink-600 text-pink-600 rounded-lg btn-sm mx-1 text-gray-200" onChange={handleLanguageChange} value={i18n.language}>
-            <option value="en">EN</option>
-            <option value="ar">AR</option>
-            <option value="fr">FR</option>
-          </select>
-          <button onClick={toggleSearchBar} className="ml-2 focus:outline-none">
-            <i className="feather-search text-xl"></i>
-          </button>
-        </div>
-      </div>
-      {showSearchBar && (
-        <div className="input-group border osahan-search mt-3 rounded-lg shadow-lg overflow-hidden">
-          <div className="input-group-prepend">
-            <button className="border-0 btn btn-outline-secondary text-primary bg-white btn-block"><i className="feather-search" /></button>
+      <div className="fixed top-0 w-full shadow p-3 bg-white z-50 mt-12">
+        <Modal
+          isOpen={showModal}
+          onRequestClose={handleDenyLocation}
+          contentLabel="Geolocation Permission"
+          style={customStyles}
+        >
+          <h2>Allow location access</h2>
+          <p>We need your permission to access your location to provide better services.</p>
+          <button onClick={handleAllowLocation} className="btn btn-primary mx-1.5">Allow</button>
+          <button onClick={handleDenyLocation} className="btn btn-secondary mx-1.5">Deny</button>
+        </Modal>
+        <div className="title d-flex align-items-center justify-between mt-2" ref={headerRef}>
+          <div className="d-flex align-items-center bg-white z-10 py-2 px-3 border-b border-gray-200">
+            <a className="text-dark d-flex align-items-center" href="#">
+              <i className="feather-map-pin fs-18 mr-2" />
+              <h6 className="m-0 border-dashed-bottom">{locationName}</h6>
+            </a>
           </div>
-          <input type="text" className="shadow-none border-0 form-control pl-0" placeholder={t('searchPlaceholder')} aria-label="search" aria-describedby="basic-addon1" />
+          <div className="d-flex align-items-center">
+            <select className="btn border-2 border-pink-600 text-pink-600 rounded-lg btn-sm mx-1 text-gray-200" onChange={handleLanguageChange} value={i18n.language}>
+              <option value="en">EN</option>
+              <option value="ar">AR</option>
+              <option value="fr">FR</option>
+            </select>
+            <button onClick={toggleSearchBar} className="ml-2 focus:outline-none">
+              <i className="feather-search text-xl"></i>
+            </button>
+          </div>
         </div>
-      )}
-    </div>
+        {showSearchBar && (
+          <div className="input-group border osahan-search mt-3 rounded-lg shadow-lg overflow-hidden">
+            <div className="input-group-prepend">
+              <button className="border-0 btn btn-outline-secondary text-primary bg-white btn-block"><i className="feather-search" /></button>
+            </div>
+            <input type="text" className="shadow-none border-0 form-control pl-0" placeholder={t('searchPlaceholder')} aria-label="search" aria-describedby="basic-addon1" />
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 

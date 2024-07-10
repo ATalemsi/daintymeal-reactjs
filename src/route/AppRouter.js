@@ -14,8 +14,12 @@ import LoginWithEmail from '../pages/Login/LoginWithEmail';
 import RegisterWithEmail from '../pages/Register/RegisterWithEmail';
 import RegisterWithPhone from '../pages/Register/RegisterWithPhone';
 import UnderConstruction from '../pages/UnderConstruction';
+import ViewAll from '../pages/ViewAll';
+import useBackButtonHandler from './useBackButtonHandler'; // Import the custom hook
 
 const AppRouter = () => {
+    useBackButtonHandler();  // Use the custom hook
+
     return (
         <Router>
             <div className="app">
@@ -33,6 +37,7 @@ const AppRouter = () => {
                     <Route path="/select_country" element={<SelectLocation />} />
                     <Route path="/" element={<HomePage />} />
                     <Route path="/new-feature" element={<UnderConstruction />} />
+                    <Route path="/view-all" element={<ViewAll />} />
                 </Routes>
                 <FilterDetaille />
             </div>

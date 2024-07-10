@@ -3,19 +3,19 @@ import React from 'react';
 const OpenAppButton = () => {
   const openApp = () => {
     const appScheme = 'daintymeal://';
-    const fallbackUrl = 'http://16.171.249.243/daintymeal-betaApk/beta15.0.apk'; // Replace with your app's website or store link
+    const fallbackUrl = 'http://16.171.249.243/daintymeal-betaApk/beta15.0.apk'; 
 
-    // Try to open the app using the URL scheme
+    
     window.location.href = appScheme;
 
-    // Fallback to the app website/store after a short delay
+    
     setTimeout(() => {
       window.location.href = fallbackUrl;
     }, 500);
   };
 
   return (
-    <div className=" top-0 w-full flex justify-between items-center p-2 bg-white shadow z-50 sticky top-0 z-9">
+    <div className="fixed top-0 w-full flex justify-between items-center p-2 bg-white shadow z-50">
       <div className="flex items-center">
       <a className="toggle text-dark hc-nav-trigger hc-nav-1" href="#" role="button" aria-controls="hc-nav-1">
           <svg xmlns="http://www.w3.org/2000/svg" width={32} height={32} fill="currentColor" className="bi bi-list" viewBox="0 0 16 16">

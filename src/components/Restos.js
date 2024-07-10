@@ -5,7 +5,6 @@ import Slider from 'react-slick';
 import './slick-custom.css';
 import { useTranslation } from 'react-i18next';
 
-
 const Restos = ({ selectedCategory, selectedLanguage }) => {
     const [restos, setRestos] = useState([]);
     const { t, i18n } = useTranslation();
@@ -62,7 +61,7 @@ const Restos = ({ selectedCategory, selectedLanguage }) => {
         <div className="scrolling-wrapper2" style={{ direction }}>
             {filteredRestos.length > 0 ? (
                 filteredRestos.map((resto, index) => (
-                    <div key={index} className="carte rounded-lg ">
+                    <Link key={index} to={`/restaurant/${resto.resto_code}`} className="carte rounded-lg no-underline text-black">
                         <div className="osahan-slider-item py-3 px-1 mx-2">
                             <div className="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-lg">
                                 <div className="list-card-image">
@@ -79,31 +78,25 @@ const Restos = ({ selectedCategory, selectedLanguage }) => {
                                     <div className="favourite-heart position-absolute"><p className='cursor-pointer'><i className="feather-bookmark" /></p>
                                     </div>
                                 </div>
-                                <Link to={`/restaurant/${resto.resto_code}`}  >
-                                    <div className="p-3 position-relative">
-                                        <div className="list-card-body">
-                                            <h6 className="mb-1">
-                                                <Link to={`/restaurant/${resto.resto_code}`} className="text-black">
-                                                    {getName(resto)}
-                                                </Link>
-                                            </h6>
-                                            <p className="text-gray mb-3">
-                                                <span className="text-gray-500">{getAddress(resto.address[0])}</span>
-                                            </p>
-                                            <p className="text-gray text-xs mb-3 time">
-                                                <span className="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"> {resto.workingTime}</span> : {t('timeWork')}
-                                            </p>
-                                        </div>
-                                        <div className="list-card-badge d-flex align-items-center">
-                                            <span className="badge badge-danger mr-2"> {t('offer')} </span>
-                                        </div>
-
+                                <div className="p-3 position-relative">
+                                    <div className="list-card-body">
+                                        <h6 className="mb-1">
+                                            {getName(resto)}
+                                        </h6>
+                                        <p className="text-gray mb-3">
+                                            <span className="text-gray-500">{getAddress(resto.address[0])}</span>
+                                        </p>
+                                        <p className="text-gray text-xs mb-3 time">
+                                            <span className="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"> {resto.workingTime}</span> : {t('timeWork')}
+                                        </p>
                                     </div>
-                                </Link>
-
+                                    <div className="list-card-badge d-flex align-items-center">
+                                        <span className="badge badge-danger mr-2"> {t('offer')} </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 ))
             ) : (
                 <div className="flex flex-col justify-center items-center h-full text-center">
@@ -114,7 +107,6 @@ const Restos = ({ selectedCategory, selectedLanguage }) => {
                     />
                     <p>{t('noRestosForCategory')}</p>
                 </div>
-
             )}
         </div>
     );
