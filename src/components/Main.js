@@ -81,130 +81,149 @@ const Main = ({ selectedLanguage }) => {
     };
 
     return (
-        <div className="osahan-main">
-            {isLoadingInitial ? (
-                <div className="flex items-center justify-center h-screen">
-                    <div className="text-center">
-                        <svg
-                            className="animate-spin h-8 w-8 text-gray-500 mx-auto"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                        >
-                            <circle
-                                className="opacity-25"
-                                cx="12"
-                                cy="12"
-                                r="10"
-                                stroke="currentColor"
-                                strokeWidth="4"
-                            ></circle>
-                            <path
-                                className="opacity-75"
-                                fill="currentColor"
-                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291l-3.709 3.71A9.974 9.974 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-3.647z"
-                            ></path>
-                        </svg>
-                    </div>
-                </div>
-            ) : (
-                <>
-                    <div className="mt-32 "  style={{ direction: 'ltr' }}>
-                        <Categories selectedLanguage={selectedLanguage} onCategorySelect={handleCategorySelect} />
-                    </div>
-                    <div className="flex-grow">
-                        <Publicity />
-                    </div>
-                    <div className="px-3 pt-4 pb-3 title d-flex align-items-center">
-                        <h6 className="m-0 font-weight-bold text-2xl"> {t('restaurant')} </h6>
-                        <Link className="font-weight-bold ml-auto text-pink-800 text-sm" to="/new-feature">{t('Viewall')}<i className="feather-chevrons-right" /></Link>
-                    </div>
-                    <Restos selectedLanguage={selectedLanguage} selectedCategory={selectedCategory} />
-                    {selectedCategory ? (
-                        <>
-                            <FilteredPlats selectedCategory={selectedCategory} />
-                        </>
-                    ) : (
-                        <>
-                            <div className="px-3 pt-3 title d-flex align-items-center">
-                                <h6 className="m-0 font-weight-bold text-2xl"> {t('myPlats')} </h6>
-                                <Link className="font-weight-bold ml-auto" to="/view-all">{t('Viewall')}<i className="feather-chevrons-right" /></Link>
-                            </div>
-                            <Myplats />
-                            <div className="px-3 pt-4 pb-3 title d-flex align-items-center">
-                                <h6 className="m-0 font-weight-bold text-2xl">{t('trendingPlat')}</h6>
-                                <Link className="font-weight-bold ml-auto" to="/trending">{t('Viewall')}<i className="feather-chevrons-right" /></Link>
-                            </div>
-                            <TrendingPlat />
-                            <div className="p-3">
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                    <div className="md:hidden">
-                                        <Link to="/new-feature">
-                                            <img src="img/banner1.png" className="w-full md:max-w-md mx-auto rounded-lg" alt="Banner 1" />
-                                        </Link>
-                                    </div>
-                                    <div className="hidden md:block col-span-1">
-                                        <Link to="/new-feature">
-                                            <img src="img/banner1.png" className="max-w-md mx-auto rounded-lg" alt="Banner 1" />
-                                        </Link>
-                                    </div>
-                                    <div className="hidden md:block col-span-1">
-                                        <Link to="/new-feature">
-                                            <img src="img/banner2.png" className="max-w-md mx-auto rounded-lg" alt="Banner 2" />
-                                        </Link>
-                                    </div>
-                                    <div className="hidden md:block col-span-1">
-                                        <Link to="/new-feature">
-                                            <img src="img/banner.png" className="max-w-md mx-auto rounded-lg" alt="Banner 3" />
-                                        </Link>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="px-3 pt-4 pb-3 title d-flex align-items-center">
-                                <h6 className="m-0 font-weight-bold text-2xl "> {t('popularRestaurant')} </h6>
-                                <Link className="font-weight-bold ml-auto" to="/view-all">{t('Viewall')}<i className="feather-chevrons-right" /></Link>
-                            </div>
-                            <PopularRestos />
-                            <div className="p-3">
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                    <div className="md:hidden">
-                                        <Link to="/new-feature">
-                                            <img src="img/banner1.png" className="w-full md:max-w-md mx-auto rounded-lg" alt="Banner 1" />
-                                        </Link>
-                                    </div>
-                                    <div className="hidden md:block col-span-1">
-                                        <Link to="/new-feature">
-                                            <img src="img/banner1.png" className="max-w-md mx-auto rounded-lg" alt="Banner 1" />
-                                        </Link>
-                                    </div>
-                                    <div className="hidden md:block col-span-1">
-                                        <Link to="/new-feature">
-                                            <img src="img/banner2.png" className="max-w-md mx-auto rounded-lg" alt="Banner 2" />
-                                        </Link>
-                                    </div>
-                                    <div className="hidden md:block col-span-1">
-                                        <Link to="/new-feature">
-                                            <img src="img/banner.png" className="max-w-md mx-auto rounded-lg" alt="Banner 3" />
-                                        </Link>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="px-3 pt-4 pb-3 title d-flex align-items-center">
-                                <h6 className="m-0 font-weight-bold text-2xl"> {t('mostSales')} </h6>
-                                <Link className="font-weight-bold ml-auto" to="/view-all">View all<i className="feather-chevrons-right" /></Link>
-                            </div>
-                            <MostSales />
-                        </>
-                    )}
-                    <div id="load-trigger" className="w-full h-1"></div>
-                    {isLoadingAdditional && (
-                        <div className="flex items-center justify-center py-4">
-                            <FaSpinner className="animate-spin text-4xl text-gray-500" />
+        <div className="relative">
+            {/* Fixed Categories Component */}
+            <div className="" style={{ direction: 'ltr' }}>
+                <Categories selectedLanguage={selectedLanguage} onCategorySelect={handleCategorySelect} />
+            </div>
+            {/* Main Content with Padding to Avoid Overlapping Fixed Categories */}
+            <div className="pt-32">
+                {isLoadingInitial ? (
+                    <div className="flex items-center justify-center h-screen">
+                        <div className="text-center">
+                            <svg
+                                className="animate-spin h-8 w-8 text-gray-500 mx-auto"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                            >
+                                <circle
+                                    className="opacity-25"
+                                    cx="12"
+                                    cy="12"
+                                    r="10"
+                                    stroke="currentColor"
+                                    strokeWidth="4"
+                                ></circle>
+                                <path
+                                    className="opacity-75"
+                                    fill="currentColor"
+                                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291l-3.709 3.71A9.974 9.974 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-3.647z"
+                                ></path>
+                            </svg>
                         </div>
-                    )}
-                </>
-            )}
-            <div className="mb-16" />
+                    </div>
+                ) : (
+                    <>
+                        <div className="mt-28">
+                            <Publicity />
+                        </div>
+                        <div className="px-3 pt-4 pb-3 title d-flex align-items-center">
+                            <h6 className="m-0 font-weight-bold text-2xl"> {t('restaurant')} </h6>
+                            <Link className="font-weight-bold ml-auto text-pink-800 text-sm" to="/new-feature">
+                                {t('Viewall')}
+                                <i className="feather-chevrons-right" />
+                            </Link>
+                        </div>
+                        <Restos selectedLanguage={selectedLanguage} selectedCategory={selectedCategory} />
+                        {selectedCategory ? (
+                            <>
+                                <FilteredPlats selectedCategory={selectedCategory} />
+                            </>
+                        ) : (
+                            <>
+                                <div className="px-3 pt-3 title d-flex align-items-center">
+                                    <h6 className="m-0 font-weight-bold text-2xl"> {t('myPlats')} </h6>
+                                    <Link className="font-weight-bold ml-auto" to="/view-all">
+                                        {t('Viewall')}
+                                        <i className="feather-chevrons-right" />
+                                    </Link>
+                                </div>
+                                <Myplats />
+                                <div className="px-3 pt-4 pb-3 title d-flex align-items-center">
+                                    <h6 className="m-0 font-weight-bold text-2xl">{t('trendingPlat')}</h6>
+                                    <Link className="font-weight-bold ml-auto" to="/trending">
+                                        {t('Viewall')}
+                                        <i className="feather-chevrons-right" />
+                                    </Link>
+                                </div>
+                                <TrendingPlat />
+                                <div className="p-3">
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        <div className="md:hidden">
+                                            <Link to="/new-feature">
+                                                <img src="img/banner1.png" className="w-full md:max-w-md mx-auto rounded-lg" alt="Banner 1" />
+                                            </Link>
+                                        </div>
+                                        <div className="hidden md:block col-span-1">
+                                            <Link to="/new-feature">
+                                                <img src="img/banner1.png" className="max-w-md mx-auto rounded-lg" alt="Banner 1" />
+                                            </Link>
+                                        </div>
+                                        <div className="hidden md:block col-span-1">
+                                            <Link to="/new-feature">
+                                                <img src="img/banner2.png" className="max-w-md mx-auto rounded-lg" alt="Banner 2" />
+                                            </Link>
+                                        </div>
+                                        <div className="hidden md:block col-span-1">
+                                            <Link to="/new-feature">
+                                                <img src="img/banner.png" className="max-w-md mx-auto rounded-lg" alt="Banner 3" />
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="px-3 pt-4 pb-3 title d-flex align-items-center">
+                                    <h6 className="m-0 font-weight-bold text-2xl "> {t('popularRestaurant')} </h6>
+                                    <Link className="font-weight-bold ml-auto" to="/view-all">
+                                        {t('Viewall')}
+                                        <i className="feather-chevrons-right" />
+                                    </Link>
+                                </div>
+                                <PopularRestos />
+                                <div className="p-3">
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        <div className="md:hidden">
+                                            <Link to="/new-feature">
+                                                <img src="img/banner1.png" className="w-full md:max-w-md mx-auto rounded-lg" alt="Banner 1" />
+                                            </Link>
+                                        </div>
+                                        <div className="hidden md:block col-span-1">
+                                            <Link to="/new-feature">
+                                                <img src="img/banner1.png" className="max-w-md mx-auto rounded-lg" alt="Banner 1" />
+                                            </Link>
+                                        </div>
+                                        <div className="hidden md:block col-span-1">
+                                            <Link to="/new-feature">
+                                                <img src="img/banner2.png" className="max-w-md mx-auto rounded-lg" alt="Banner 2" />
+                                            </Link>
+                                        </div>
+                                        <div className="hidden md:block col-span-1">
+                                            <Link to="/new-feature">
+                                                <img src="img/banner.png" className="max-w-md mx-auto rounded-lg" alt="Banner 3" />
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="px-3 pt-4 pb-3 title d-flex align-items-center">
+                                    <h6 className="m-0 font-weight-bold text-2xl"> {t('mostSales')} </h6>
+                                    <Link className="font-weight-bold ml-auto" to="/view-all">
+                                        {t('Viewall')}
+                                        <i className="feather-chevrons-right" />
+                                    </Link>
+                                </div>
+                                <MostSales />
+                            </>
+                        )}
+                        <div id="load-trigger" className="w-full h-1"></div>
+                        {isLoadingAdditional && (
+                            <div className="flex items-center justify-center py-4">
+                                <FaSpinner className="animate-spin text-4xl text-gray-500" />
+                            </div>
+                        )}
+                    </>
+                )}
+                <div className="mb-16" />
+            </div>
         </div>
     );
 };
