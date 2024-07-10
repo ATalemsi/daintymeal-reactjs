@@ -189,7 +189,7 @@ const Profile = () => {
                     </div>
                 </div>
 
-                <div className="bg-white shadow mt-3 profile-details mb-12">
+                <div className="bg-white shadow mt-3 profile-details mb-18">
                     <a data-toggle="modal" data-target="#paycard" className="flex w-full items-center border-b p-3 text-left">
                         <div className="mr-3 flex-1">
                             <h6 className="font-bold text-lg mb-1 text-dark">Payment Cards</h6>
