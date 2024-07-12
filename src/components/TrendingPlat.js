@@ -3,6 +3,7 @@ import axios from 'axios';
 import StarRating from './startRating/StarRating';
 import { useTranslation } from 'react-i18next';
 import Slider from 'react-slick';
+import { Link } from 'react-router-dom';
 import './slick-custom.css';
 import Modal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -174,7 +175,7 @@ const TrendingPlat = () => {
                                 <div className="p-3 relative">
                                     <div className="list-card-body">
                                         <h6 className="mb-1 text-3xl text-gray-600">
-                                            <a href="restaurant.html">{trendingplat.name}</a>
+                                            <Link to="/new-feature">{trendingplat.name}</Link>
                                         </h6>
                                         <p className="text-gray mb-1 text-lg">{trendingplat.category[0].name}</p>
                                         <StarRating rating={trendingplat.rating} />

@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import OpenAppButton from './OpenAppButton';
+import Cart from './Cart';
 
 Modal.setAppElement('#root');
 
@@ -168,6 +169,7 @@ const Header = ({ onLanguageChange }) => {
             <button onClick={toggleSearchBar} className="ml-2 focus:outline-none">
               <i className="feather-search text-xl"></i>
             </button>
+            <Cart />
           </div>
         </div>
         {showSearchBar && (
@@ -178,6 +180,7 @@ const Header = ({ onLanguageChange }) => {
             <input type="text" className="shadow-none border-0 form-control pl-0" placeholder={t('searchPlaceholder')} aria-label="search" aria-describedby="basic-addon1" />
           </div>
         )}
+
       </div>
     </>
   );

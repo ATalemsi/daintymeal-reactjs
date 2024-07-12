@@ -4,9 +4,9 @@ import StarRating from './startRating/StarRating';
 import { useTranslation } from 'react-i18next';
 import Slider from 'react-slick';
 import Modal from 'react-modal';
-import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookmark, faBookmark as faBookmarkOutline } from '@fortawesome/free-solid-svg-icons';
+import PlatsDetailsModal from './PlatDetailsModal';
 
 // React-Modal setup
 Modal.setAppElement('#root');
@@ -16,7 +16,9 @@ const Myplats = () => {
     const [favorites, setFavorites] = useState({});
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalMessage, setModalMessage] = useState('');
+    const [selectedPlat, setSelectedPlat] = useState(null);
     const { t } = useTranslation();
+
     const customStyles = {
         content: {
             top: '50%',
@@ -48,7 +50,6 @@ const Myplats = () => {
                 const platsResponse = await axios.get('https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/plats/two');
                 setMyplats(platsResponse.data);
 
-                
                 const watchlistResponse = await axios.get(`https://x2r9rfvwwi.execute-api.eu-north-1.amazonaws.com/dev/watchlist/${userCode}`, {
                     headers: { 'Authorization': `Bearer ${localStorage.getItem('access_token')}` }
                 });
@@ -119,6 +120,15 @@ const Myplats = () => {
         setIsModalOpen(false);
     };
 
+    const handlePlatClick = (plat) => {
+        console.log('Plat clicked:', plat);
+        setSelectedPlat(plat);
+    };
+
+    const closePlatModal = () => {
+        setSelectedPlat(null);
+    };
+
     const settings = {
         dots: true,
         infinite: true,
@@ -143,6 +153,13 @@ const Myplats = () => {
                     </button>
                 </div>
             </Modal>
+            {selectedPlat && (
+                <PlatsDetailsModal
+                    isOpen={!!selectedPlat}
+                    onClose={closePlatModal}
+                    plat={selectedPlat}
+                />
+            )}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {myplats.map((myplat, index) => (
                     <div key={index} className="px-2 py-2">
@@ -176,8 +193,12 @@ const Myplats = () => {
                             </div>
                             <div className="p-3 relative">
                                 <div className="list-card-body">
-                                    <h6 className="mb-1 text-3xl text-gray-600">
-                                        <Link to="/new-feature">{myplat.name}</Link>
+                                    <h6
+                                        className="mb-1"
+                                        onClick={() => handlePlatClick(myplat)}
+                                        style={{ cursor: 'pointer' }}
+                                    >
+                                        {myplat.name}
                                     </h6>
                                     <p className="text-gray mb-1 text-lg">{myplat.category[0].name}</p>
                                     <StarRating rating={myplat.rating} />
